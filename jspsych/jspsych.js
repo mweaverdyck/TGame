@@ -76,7 +76,7 @@ var jsPsych = (function() {
       'auto_preload': true,
       'max_load_time': 60000,
       'fullscreen': false,
-      'default_iti': 1000
+      'default_iti': 0
     };
 
     // override default options if user specifies an option
