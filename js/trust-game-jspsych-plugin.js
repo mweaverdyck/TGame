@@ -1,5 +1,5 @@
 
-jsPsych.plugins['trust-game'] = (function(){
+jsPsych.plugins['trust-game'] = (function() {
 
     var plugin = {};
 

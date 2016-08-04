@@ -4,7 +4,7 @@ body {
 p {
   clear: both;
   margin: 50px;
-  margin: 3vw 4vw;
+  /*margin: 3vw 4vw;*/
   line-height: 5vh;
 }
 .hidden {
@@ -12,10 +12,10 @@ p {
 }
 .fixed-position-below {
   position: absolute;
-  width: 30em;
+  width: 90%;
   top: 80%;
   left: 50%;
-  margin-left: -15em;
+  margin-left: -45%;
   text-align: center;
 }
 .fixed-position-mid {
@@ -36,10 +36,10 @@ p {
 }
 .fixed-position-above {
   position: absolute;
-  width: 30em;
+  width: 90%;
   top: 10%;
   left: 50%;
-  margin-left: -15em;
+  margin-left: -45%;
   text-align: center;
 }
 .left-img {
@@ -110,5 +110,7 @@ p {
 .submit-btn {
   position: absolute;
   top: 90%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 

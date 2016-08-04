@@ -15,8 +15,7 @@ var ROLE_ASSIGNED_INSTR = '<p>' +
 
 var DUTY_INSTR = [
                     '<p>' + 'As Player 1, you will do stuff and make $$$...' + '</p>',
-                    '<p>' + 'Here are some more instructions.' + '</p>',
-                    '<p>' + 'and more.' + '</p>'
+                    '<p>' + 'And here are some more incomplete instructions.' + '</p>'
                 ]
 
 var beginningInstructions = [
@@ -63,8 +62,7 @@ var beginningInstructions = [
             [
                 ROLE_ASSIGNED_INSTR + CONTINUE_INSTR,
                 DUTY_INSTR[0] + CONTINUE_OR_BACK_INSTR,
-                DUTY_INSTR[1] + CONTINUE_OR_BACK_INSTR,
-                DUTY_INSTR[2] + CONTINUE_OR_BACK_INSTR
+                DUTY_INSTR[1] + CONTINUE_OR_BACK_INSTR
             ]
     }
 ];
