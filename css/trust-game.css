@@ -77,22 +77,23 @@ p {
   left: 50%;
   top: 70%;
 }
-.slider-div {
+.lower-bar-div {
   position: absolute;
   vertical-align: center;
   width: 400px;
   margin-left: -200px;
   width: 50vw;
   margin-left: -25vw;
-  height: 20px;
+  height: 24px;
   top: 80%;
   left: 50%;
+  border-radius: 5px;
 }
-.slider-div .left-num {
+.lower-bar-div .left-num {
   position: absolute;
   left: 0%;
 }
-.slider-div .right-num {
+.lower-bar-div .right-num {
   position: absolute;
   right: 0%;
 }

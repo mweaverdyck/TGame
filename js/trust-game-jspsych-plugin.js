@@ -30,10 +30,11 @@ jsPsych.plugins['trust-game'] = (function() {
         }));
         display_element.append(rightImgDiv);
 
-        display_element.append('<p class="fixed-position-mid-below">You have $' + trial.money + '.<br/>How much will you give to ' + trial.right_caption + '?</p>');
+        display_element.append('<p id="question" class="fixed-position-mid-below">You have $' + trial.money + '.<br/>How much will you give to ' + trial.right_caption + '?</p>');
 
         var sliderDiv = $('<div>', {
-            class: "slider-div"
+            id: 'sliderdiv',
+            class: "lower-bar-div"
         });
         sliderDiv.append('<span class="left-num"><b>$0</b></span>');
         sliderDiv.append($('<div>', {
@@ -63,8 +64,9 @@ jsPsych.plugins['trust-game'] = (function() {
         }));
 
         var startTime = Date.now();
+        var trial_data = {};
 
-        $("#submit").click(function() {
+        $('#submit').click(function() {
             if (!$('#slider-tooltip').hasClass("in")) {
                 // return if haven't responded
                 return;
@@ -75,17 +77,53 @@ jsPsych.plugins['trust-game'] = (function() {
             var response_time = endTime - startTime;
 
             var response = $("#slide").slider('getValue');
-            var trial_data = {
+            trial_data = {
                 response: response,
                 rt: response_time,
                 image: trial.right_img,
                 caption: trial.right_caption
             };
+
+            $('#question').remove();
+            $('#submit').remove();
+            $("#sliderdiv").remove();
+
+            // add elements
+            display_element.append($('<div>', {
+                id: 'progress-bar',
+                class: "progress-bar progress-bar-striped active lower-bar-div",
+                role: 'progressbar',
+                "aria-valuenow": 100,
+                style: 'font-size: 16px;',
+                text: 'Waiting for the other player...'
+            }));
+
+            
+            setTimeout(function() {
+                $('#progress-bar').remove();
+
+                trial_data.reciprocation = random_int(0, 1000)/100;
+
+                display_element.append($('<p>', {
+                    class: "fixed-position-mid-below",
+                    text: trial.right_caption + ' has returned $' + trial_data.reciprocation + ' to you.'
+                }));
+
+                display_element.append($('<button>', {
+                    id: 'next',
+                    class: "autocompare btn btn-primary submit-btn",
+                    text: 'Next'
+                }));
+            }, random_int(1000, 2000));  // TODO magic number
+
+        });
+
+        $('#next').click(function() {
             console.log(trial_data);
             // goto next trial
             display_element.html('');
             jsPsych.finishTrial(trial_data);
-        });
+        })
     };
 
     return plugin;
