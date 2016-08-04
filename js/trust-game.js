@@ -24,7 +24,7 @@ $(function() {
     // EXPERIMENT TIMELINE
     //   Instructions
     for (var i in beginningInstructions) {
-        // timeline.push(beginningInstructions[i]);
+        timeline.push(beginningInstructions[i]);
     }
     timeline.push(trial);
 

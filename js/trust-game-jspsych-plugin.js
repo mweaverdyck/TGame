@@ -91,21 +91,3 @@ jsPsych.plugins['trust-game'] = (function(){
     return plugin;
 
 })();
-        // stimulus: '<div>'+
-        //         '<img class="left-img" src="img/p0.png">'+
-        //         '<div class="right-img-div">'+
-        //             '<p class="right-img-text">Player 2</p>'+
-        //             '<img class="right-img" src="img/p1.jpg">'+
-        //         '</div>'+
-        //         '<p class="fixed-position-mid-below">You have $10.<br/>How much will you give to Player 2?</p>'+
-        //         '<div class="slider-div">'+
-        //             '<span class="left-num"><b>$0</b></span>'+
-        //             '<div class="slider-inner-div">'+
-        //                 '<input id="slide" data-slider-id="slider" type="text" data-slider-min="0" data-slider-max="10" data-slider-step="0.01" data-slider-value="0"/>'+
-        //             '</div>'+
-        //             '<span class="right-num"><b>$10</b></span>'+
-        //         '</div>'+
-        //     '</div>'+
-        //     '<script type="text/javascript">'+
-        //         '$("#slide").slider({ formatter: function(value) { return "Give $" + value; } });'+
-        //     '</script>',
