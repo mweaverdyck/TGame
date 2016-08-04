@@ -67,4 +67,4 @@ var beginningInstructions = [
                 DUTY_INSTR[2] + CONTINUE_OR_BACK_INSTR
             ]
     }
-]
+];
