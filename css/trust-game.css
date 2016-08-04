@@ -1,0 +1,114 @@
+body {
+  font-size: 2.3vmax;
+}
+p {
+  clear: both;
+  margin: 50px;
+  margin: 3vw 4vw;
+  line-height: 5vh;
+}
+.hidden {
+  visibility: hidden;
+}
+.fixed-position-below {
+  position: absolute;
+  width: 30em;
+  top: 80%;
+  left: 50%;
+  margin-left: -15em;
+  text-align: center;
+}
+.fixed-position-mid {
+  position: absolute;
+  width: 90%;
+  top: 35%;
+  left: 50%;
+  margin-left: -45%;
+  text-align: center;
+}
+.fixed-position-mid-below {
+  position: absolute;
+  width: 90%;
+  top: 55%;
+  left: 50%;
+  margin-left: -45%;
+  text-align: center;
+}
+.fixed-position-above {
+  position: absolute;
+  width: 30em;
+  top: 10%;
+  left: 50%;
+  margin-left: -15em;
+  text-align: center;
+}
+.left-img {
+  position: absolute;
+  width: 120px;
+  width: 15vw;
+  left: 20%;
+  top: 30%;
+}
+.right-img-div {
+  position: absolute;
+  width: 120px;
+  width: 15vw;
+  right: 20%;
+  top: 30%;
+}
+.right-img-text {
+  position: absolute;
+  width: 15vw;
+  top: -70px;
+  top: -7vw;
+  text-align: center;
+}
+.right-img {
+  height: 15vw;
+}
+.slider {
+  position: absolute;
+  width: 800px;
+  height: 20px;
+  margin-left: -400px;
+  width: 50vw;
+  height: 5vw;
+  margin-left: -25vw;
+  left: 50%;
+  top: 70%;
+}
+.slider-div {
+  position: absolute;
+  vertical-align: center;
+  width: 400px;
+  margin-left: -200px;
+  width: 50vw;
+  margin-left: -25vw;
+  height: 20px;
+  top: 80%;
+  left: 50%;
+}
+.slider-div .left-num {
+  position: absolute;
+  left: 0%;
+}
+.slider-div .right-num {
+  position: absolute;
+  right: 0%;
+}
+.slider-inner-div {
+  position: absolute;
+  width: 70%;
+  left: 30%;
+}
+.slider .slider-selection {
+  background: #5bc0de;
+}
+.slider .tooltip {
+  font-size: 18px;
+}
+.submit-btn {
+  position: absolute;
+  top: 90%;
+}
+
