@@ -98,11 +98,11 @@ jsPsych.plugins['trust-game'] = (function() {
                 text: 'Waiting for the other player...'
             }));
 
-            
+
             setTimeout(function() {
                 $('#progress-bar').remove();
 
-                trial_data.reciprocation = random_int(0, 1000)/100;
+                trial_data.reciprocation = random_int(0, 1000)/100;  // TODO magic number
 
                 display_element.append($('<p>', {
                     class: "fixed-position-mid-below",
@@ -114,16 +114,18 @@ jsPsych.plugins['trust-game'] = (function() {
                     class: "autocompare btn btn-primary submit-btn",
                     text: 'Next'
                 }));
+
+
+                $('#next').click(function() {
+                    console.log(trial_data);
+                    // goto next trial
+                    display_element.html('');
+                    jsPsych.finishTrial(trial_data);
+                })
             }, random_int(1000, 2000));  // TODO magic number
 
         });
 
-        $('#next').click(function() {
-            console.log(trial_data);
-            // goto next trial
-            display_element.html('');
-            jsPsych.finishTrial(trial_data);
-        })
     };
 
     return plugin;
