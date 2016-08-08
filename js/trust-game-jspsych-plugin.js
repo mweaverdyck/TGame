@@ -8,6 +8,8 @@ jsPsych.plugins['trust-game'] = (function() {
         trial.left_caption = trial.left_caption || '';
         trial.right_caption = trial.right_caption || '';
         trial.money = trial.money || 10;
+        trial.wait_time_min = trial.wait_time_min || 0;
+        trial.wait_time_max = trial.wait_time_max || 0;
 
         trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
 
@@ -126,7 +128,7 @@ jsPsych.plugins['trust-game'] = (function() {
                     display_element.html('');
                     jsPsych.finishTrial(trial_data);
                 })
-            }, random_int(1000, 2000));  // TODO magic number
+            }, random_int(trial.wait_time_min, trial.wait_time_max));  // TODO magic number
 
         });
 

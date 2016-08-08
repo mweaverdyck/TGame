@@ -13,21 +13,40 @@ $(function() {
     }
 
     // TRIALS
+    var trainingTrial = {
+        type: 'trust-game',
+        left_img: "img/p0.png",
+        right_img: "img/default.png",
+        right_caption: "Player 2",
+        money: 10
+    };
+
     var trial = {
         type: 'trust-game',
         left_img: "img/p0.png",
         right_img: "img/p1.jpg",
         right_caption: "Player 2",
-        money: 10
+        money: 10,
+        wait_time_min: 1500,
+        wait_time_max: 2500
     };
+
 
     // EXPERIMENT TIMELINE
     //   Instructions
     for (var i in beginningInstructions) {
         timeline.push(beginningInstructions[i]);
     }
-    //   Trials
+    //   Training Trials
+    timeline.push(trainingTrial);
+    timeline.push(trainingTrial);
+    //   More Instructions
+    for (var i in middleInstructions) {
+        timeline.push(middleInstructions[i]);
+    }
+    //   Actual Trials
     timeline.push(waitScreen);
+    timeline.push(trial);
     timeline.push(trial);
 
     function startExperiment() {

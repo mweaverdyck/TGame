@@ -20,6 +20,7 @@ var DUTY_INSTR = [
 
 var WAIT_INSTR = 'Waiting for other players...'
 
+
 var beginningInstructions = [
     {
         type: 'instructions',
@@ -50,11 +51,9 @@ var beginningInstructions = [
                 DUTY_INSTR[0] + CONTINUE_OR_BACK_INSTR,
                 DUTY_INSTR[1] + CONTINUE_OR_BACK_INSTR
             ]
-    },
-    {
-        type: 'ready'
     }
 ];
+
 
 var waitScreen = {
     type: 'timed-instr',
@@ -62,3 +61,13 @@ var waitScreen = {
     time_min: 1000,
     time_max: 2000
 };
+
+var middleInstructions = [
+    {
+        type: 'instructions',
+        pages: ['<p>End of training</p>' + CONTINUE_INSTR]
+    },
+    {
+        type: 'ready'
+    }
+]
