@@ -77,23 +77,23 @@ p {
   left: 50%;
   top: 70%;
 }
-.lower-bar-div {
+.slider-div {
   position: absolute;
   vertical-align: center;
+  left: 50%;
   width: 400px;
   margin-left: -200px;
   width: 50vw;
   margin-left: -25vw;
   height: 24px;
-  top: 80%;
-  left: 50%;
   border-radius: 5px;
+  top: 80%;
 }
-.lower-bar-div .left-num {
+.slider-div .left-num {
   position: absolute;
   left: 0%;
 }
-.lower-bar-div .right-num {
+.slider-div .right-num {
   position: absolute;
   right: 0%;
 }
@@ -107,6 +107,23 @@ p {
 }
 .slider .tooltip {
   font-size: 18px;
+}
+.bar-div {
+  position: absolute;
+  vertical-align: center;
+  left: 50%;
+  width: 400px;
+  margin-left: -200px;
+  width: 50vw;
+  margin-left: -25vw;
+  height: 24px;
+  border-radius: 5px;
+}
+.middle {
+  top: 60%;
+}
+.lower {
+  top: 80%;
 }
 .submit-btn {
   position: absolute;

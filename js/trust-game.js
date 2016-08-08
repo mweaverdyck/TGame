@@ -26,6 +26,8 @@ $(function() {
     for (var i in beginningInstructions) {
         timeline.push(beginningInstructions[i]);
     }
+    //   Trials
+    timeline.push(waitScreen);
     timeline.push(trial);
 
     function startExperiment() {

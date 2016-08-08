@@ -30,11 +30,12 @@ jsPsych.plugins['trust-game'] = (function() {
         }));
         display_element.append(rightImgDiv);
 
-        display_element.append('<p id="question" class="fixed-position-mid-below">You have $' + trial.money + '.<br/>How much will you give to ' + trial.right_caption + '?</p>');
+        display_element.append('<p id="question" class="fixed-position-mid-below">You have $' +
+            trial.money + '.<br/>How much will you give to ' + trial.right_caption + '?</p>');
 
         var sliderDiv = $('<div>', {
             id: 'sliderdiv',
-            class: "lower-bar-div"
+            class: "slider-div"
         });
         sliderDiv.append('<span class="left-num"><b>$0</b></span>');
         sliderDiv.append($('<div>', {
@@ -88,10 +89,14 @@ jsPsych.plugins['trust-game'] = (function() {
             $('#submit').remove();
             $("#sliderdiv").remove();
 
-            // add elements
+            // add new elements
+            display_element.append('<p id="result-text" class="fixed-position-mid-below">' +
+                'You gave ' + trial.right_caption + ' <b>$' + response + '</b>, which were tripled before being passed on.<br/>' +
+                trial.right_caption + ' received <b>$' + response * 3 + '</b>.</p>'
+            );
             display_element.append($('<div>', {
                 id: 'progress-bar',
-                class: "progress-bar progress-bar-striped active lower-bar-div",
+                class: "progress-bar progress-bar-info progress-bar-striped active bar-div lower",
                 role: 'progressbar',
                 "aria-valuenow": 100,
                 style: 'font-size: 16px;',
@@ -102,12 +107,11 @@ jsPsych.plugins['trust-game'] = (function() {
             setTimeout(function() {
                 $('#progress-bar').remove();
 
-                trial_data.reciprocation = random_int(0, 1000)/100;  // TODO magic number
+                trial_data.reciprocation = random_int(0, response * 300)/100;
 
-                display_element.append($('<p>', {
-                    class: "fixed-position-mid-below",
-                    text: trial.right_caption + ' has returned $' + trial_data.reciprocation + ' to you.'
-                }));
+                var resultText = "You ";
+
+                $('#result-text').append('<br/>' + trial.right_caption + ' has returned <b>$' + trial_data.reciprocation + '</b> to you.');
 
                 display_element.append($('<button>', {
                     id: 'next',

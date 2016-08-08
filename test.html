@@ -18,19 +18,66 @@
                 <p class="right-img-text">Player 2</p>
                 <img class="right-img" src="img/p1.jpg">
             </div>
-            <p class="fixed-position-mid-below">You have $10.<br/>How much will you give to Player 2?</p>
-            <div class="slider-div">
+            <p id="question" class="fixed-position-mid-below">You have $10.<br/>How much will you give to Player 2?</p>
+            <div id="sliderdiv" class="slider-div">
                 <span class="left-num"><b>$0</b></span>
                 <div class="slider-inner-div">
                     <input id="slide" data-slider-id="slider" type="text" data-slider-min="0" data-slider-max="10" data-slider-step="0.01" data-slider-value="0"/>
                 </div>
                 <span class="right-num"><b>$10</b></span>
             </div>
-            <button id="submitBtn" class="autocompare btn btn-primary submit-btn">Submit</button>
+            <button id="submit" class="autocompare btn btn-primary submit-btn">Submit</button>
         </div>
+
+        <script type="text/javascript" src="js/globals.js"></script>
         <script type="text/javascript">
             $('#slide').slider({
                 formatter: function(value) { return 'Give $' + value; }
+            });
+
+            $('#submit').click(function() {
+                if (!$('#slider-tooltip').hasClass("in")) {
+                    // return if haven't responded
+                    return;
+                }
+
+                $('#question').remove();
+                $('#submit').remove();
+                $("#sliderdiv").remove();
+
+                // add elements
+                $('body').append($('<div>', {
+                    id: 'progress-bar',
+                    class: "progress-bar progress-bar-striped active bar-div lower",
+                    role: 'progressbar',
+                    "aria-valuenow": 100,
+                    style: 'font-size: 16px;',
+                    text: 'Waiting for the other player...'
+                }));
+
+                $('body').append('<p id="result-text" class="fixed-position-mid-below">' +
+                    'You gave Player 2 <b>$$$</b>, which were tripled before being passed on.<br/>' +
+                    'Player 2 received <b>$$$$$$$</b>.</p>'
+                );
+
+
+                setTimeout(function() {
+                    $('#progress-bar').remove();
+
+                    $('#result-text').append('<br/>Player 2 has returned <b>$$$$$</b> to you.');
+
+                    $('body').append($('<button>', {
+                        id: 'next',
+                        class: "autocompare btn btn-primary submit-btn",
+                        text: 'Next'
+                    }));
+
+
+                    $('#next').click(function() {
+                        console.log('next');
+                    })
+                }, random_int(1000, 2000));  // TODO magic number
+
             });
         </script>
     </body>
