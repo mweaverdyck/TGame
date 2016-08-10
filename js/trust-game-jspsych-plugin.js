@@ -1,3 +1,4 @@
+var trial_index = 0;
 
 jsPsych.plugins['trust-game'] = (function() {
 
@@ -14,22 +15,20 @@ jsPsych.plugins['trust-game'] = (function() {
         trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
 
         // add elements
-        display_element.append($('<img>', {
-            class: "left-img",
-            src: trial.left_img
-        }));
-
         var rightImgDiv = $('<div>', {
-            class: "right-img-div"
+            class: "center-img-div"
         });
-        rightImgDiv.append($('<img>', {
-            class: "right-img",
-            src: trial.right_img
-        }));
         rightImgDiv.append($('<p>', {
-            class:"right-img-text",
+            class:"center-img-text",
             text: trial.right_caption
         }));
+        rightImgDiv.append($('<div>', {
+                class: "image-cropper"
+            })
+            .append($('<img>', {
+                class: "center-img",
+                src: trial.right_img
+        })));
         display_element.append(rightImgDiv);
 
         display_element.append('<p id="question" class="fixed-position-mid-below">You have $' +
@@ -41,16 +40,16 @@ jsPsych.plugins['trust-game'] = (function() {
         });
         sliderDiv.append('<span class="left-num"><b>$0</b></span>');
         sliderDiv.append($('<div>', {
-            class: "slider-inner-div"
-        })
-        .append($('<input>', {
-            id: "slide",
-            'data-slider-id': "slider",
-            type: "text",
-            'data-slider-min': 0,
-            'data-slider-max': trial.money,
-            'data-slider-step': 0.01,
-            'data-slider-value': 0
+                class: "slider-inner-div"
+            })
+            .append($('<input>', {
+                id: "slide",
+                'data-slider-id': "slider",
+                type: "text",
+                'data-slider-min': 0,
+                'data-slider-max': trial.money,
+                'data-slider-step': 0.01,
+                'data-slider-value': 0
         })));
         sliderDiv.append('<span class="right-num"><b>$' + trial.money + '</b></span>');
         display_element.append(sliderDiv);
@@ -80,8 +79,11 @@ jsPsych.plugins['trust-game'] = (function() {
             var response_time = endTime - startTime;
 
             var response = $("#slide").slider('getValue');
+            trial_index += 1;
             trial_data = {
+                trial_index: trial_index,
                 response: response,
+                received: Math.round(response * 300)/100,
                 rt: response_time,
                 image: trial.right_img,
                 caption: trial.right_caption
@@ -94,7 +96,7 @@ jsPsych.plugins['trust-game'] = (function() {
             // add new elements
             display_element.append('<p id="result-text" class="fixed-position-mid-below">' +
                 'You gave ' + trial.right_caption + ' <b>$' + response + '</b>, which were tripled before being passed on.<br/>' +
-                trial.right_caption + ' received <b>$' + response * 3 + '</b>.</p>'
+                trial.right_caption + ' received <b>$' + trial_data.received + '</b>.<br/></p>'
             );
             display_element.append($('<div>', {
                 id: 'progress-bar',
@@ -109,7 +111,7 @@ jsPsych.plugins['trust-game'] = (function() {
             setTimeout(function() {
                 $('#progress-bar').remove();
 
-                trial_data.reciprocation = random_int(0, response * 300)/100;
+                trial_data.reciprocation = Math.round(random_int(0, response * 300))/100;
 
                 var resultText = "You ";
 
