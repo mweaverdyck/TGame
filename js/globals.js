@@ -1,6 +1,3 @@
-var trials = [
-    {}
-]
 
 var hookWindow = false;
 

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Game</title>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="js/bootstrap-slider.js"></script>
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link type="text/css" href="css/bootstrap-slider.min.css" rel="stylesheet"></link>
+        <link type="text/css" href="css/trust-game.css" rel="stylesheet"></link>
+    </head>
+    <style>
+        #container {
+            position: relative;
+            width: 400px;
+            height: 500px;
+            border: 1px solid #000;
+        }
+        #container div {
+            position: absolute;
+            bottom: 0;
+            width: 2px;
+        }
+    </style>
+    <body>
+        <div id="container" style=""></div>
+
+        <script type="text/javascript" src="js/gaussian.js"></script>
+        <script type="text/javascript">
+            function rnd() {
+                var distribution = gaussian(0, 0.08);
+                return distribution.ppf(Math.random());
+                // return ((Math.random() + Math.random() + Math.random() + Math.random() + Math.random() + Math.random()) - 3) / 3;
+            }
+
+            function draw(f, cnt, color) {
+                var numbers = [];
+                for (var i = 0; i < 200; i++) numbers[i] = 0;
+                for (var i = 0; i < cnt; i++) {
+                    var num = f();
+                    // console.log(num);
+                    numbers[100 + Math.round(100 * num)]++;
+                }
+                for (var i = 0; i < 200; i++) {
+                    $('#container').append($('<div>').css({
+                        left: i * 2 + 'px',
+                        height: numbers[i] / 25 + 'px',
+                        background: color
+                    }));
+                }
+            }
+            
+            draw(rnd, 600000, 'rgba(0,128,0,.6)');
+        </script>
+    </body>
+</html>

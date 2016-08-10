@@ -18,7 +18,7 @@ var DUTY_INSTR = [
                     '<p>' + 'And here are some more incomplete instructions.' + '</p>'
                 ];
 
-var WAIT_INSTR = 'Waiting for other players...'
+var WAIT_INSTR = 'Waiting for the other players...'
 
 
 var beginningInstructions = [

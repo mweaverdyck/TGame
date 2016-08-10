@@ -11,6 +11,8 @@ jsPsych.plugins['trust-game'] = (function() {
         trial.money = trial.money || 10;
         trial.wait_time_min = trial.wait_time_min || 0;
         trial.wait_time_max = trial.wait_time_max || 0;
+        trial.recip_dist_mean = trial.recip_dist_mean || 0.33334;    // default: 33% of the received $$$
+        trial.recip_dist_var = trial.recip_dist_var || 0;
 
         trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
 
@@ -65,9 +67,11 @@ jsPsych.plugins['trust-game'] = (function() {
             text: 'Submit'
         }));
 
+        // data
         var startTime = Date.now();
         var trial_data = {};
 
+        // submit button
         $('#submit').click(function() {
             if (!$('#slider-tooltip').hasClass("in")) {
                 // return if haven't responded
@@ -89,6 +93,7 @@ jsPsych.plugins['trust-game'] = (function() {
                 caption: trial.right_caption
             };
 
+            // remove some elements
             $('#question').remove();
             $('#submit').remove();
             $("#sliderdiv").remove();
@@ -107,12 +112,26 @@ jsPsych.plugins['trust-game'] = (function() {
                 text: 'Waiting for the other player...'
             }));
 
-
+            // the other "player" responds
             setTimeout(function() {
                 $('#progress-bar').remove();
 
-                trial_data.reciprocation = Math.round(random_int(0, response * 300))/100;
+                // reciprocate
+                if (trial.recip_dist_var === 0) {
+                    trial_data.reciprocation = Math.round(100 * trial_data.received * trial.recip_dist_mean)/100;
+                } else {
+                    // get a random number from the distribution
+                    var distribution = gaussian(trial.recip_dist_mean, trial.recip_dist_var);
+                    trial_data.reciprocation = Math.round(100 * trial_data.received * distribution.ppf(Math.random()))/100;
+                    if (trial_data.reciprocation < 0) {
+                        trial_data.reciprocation = 0;
+                    }
+                    if (trial_data.reciprocation > trial_data.received) {
+                        trial_data.reciprocation = trial_data.received;
+                    }
+                }
 
+                // add new html elements
                 var resultText = "You ";
 
                 $('#result-text').append('<br/>' + trial.right_caption + ' has returned <b>$' + trial_data.reciprocation + '</b> to you.');
