@@ -6,7 +6,6 @@ jsPsych.plugins['trust-game'] = (function() {
 
     plugin.trial = function(display_element, trial) {
         // set default values for parameters
-        trial.left_caption = trial.left_caption || '';
         trial.right_caption = trial.right_caption || '';
         trial.money = trial.money || 10;
         trial.wait_time_min = trial.wait_time_min || 0;
@@ -17,21 +16,21 @@ jsPsych.plugins['trust-game'] = (function() {
         trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
 
         // add elements
-        var rightImgDiv = $('<div>', {
+        var centerImgDiv = $('<div>', {
             class: "center-img-div"
         });
-        rightImgDiv.append($('<p>', {
+        centerImgDiv.append($('<p>', {
             class:"center-img-text",
             text: trial.right_caption
         }));
-        rightImgDiv.append($('<div>', {
+        centerImgDiv.append($('<div>', {
                 class: "image-cropper"
             })
             .append($('<img>', {
                 class: "center-img",
-                src: trial.right_img
+                src: trial.center_img
         })));
-        display_element.append(rightImgDiv);
+        display_element.append(centerImgDiv);
 
         display_element.append('<p id="question" class="fixed-position-mid-below">You have $' +
             trial.money + '.<br/>How much will you give to ' + trial.right_caption + '?</p>');
@@ -89,7 +88,7 @@ jsPsych.plugins['trust-game'] = (function() {
                 response: response,
                 received: Math.round(response * 300)/100,
                 rt: response_time,
-                image: trial.right_img,
+                image: trial.center_img,
                 caption: trial.right_caption
             };
 

@@ -15,17 +15,15 @@ $(function() {
     // TRIALS
     var trainingTrial = {
         type: 'trust-game',
-        left_img: "img/p0.png",
-        right_img: "img/default.png",
-        right_caption: "Player 2",
+        center_img: "img/default.png",
+        center_caption: "Player 2",
         money: 10
     };
 
     var trial = {
         type: 'trust-game',
-        left_img: "img/p0.png",
-        right_img: "img/p1.jpg",
-        right_caption: "Player 2",
+        center_img: "img/p1.jpg",
+        center_caption: "Player 2",
         money: 10,
         wait_time_min: 1500,
         wait_time_max: 2500,
