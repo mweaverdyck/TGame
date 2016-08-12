@@ -6,7 +6,7 @@ jsPsych.plugins['trust-game'] = (function() {
 
     plugin.trial = function(display_element, trial) {
         // set default values for parameters
-        trial.right_caption = trial.right_caption || '';
+        trial.center_caption = trial.center_caption || '';
         trial.money = trial.money || 10;
         trial.wait_time_min = trial.wait_time_min || 0;
         trial.wait_time_max = trial.wait_time_max || 0;
@@ -21,7 +21,7 @@ jsPsych.plugins['trust-game'] = (function() {
         });
         centerImgDiv.append($('<p>', {
             class:"center-img-text",
-            text: trial.right_caption
+            text: trial.center_caption
         }));
         centerImgDiv.append($('<div>', {
                 class: "image-cropper"
@@ -33,7 +33,7 @@ jsPsych.plugins['trust-game'] = (function() {
         display_element.append(centerImgDiv);
 
         display_element.append('<p id="question" class="fixed-position-mid-below">You have $' +
-            trial.money + '.<br/>How much will you give to ' + trial.right_caption + '?</p>');
+            trial.money + '.<br/>How much will you give to ' + trial.center_caption + '?</p>');
 
         var sliderDiv = $('<div>', {
             id: 'sliderdiv',
@@ -89,7 +89,7 @@ jsPsych.plugins['trust-game'] = (function() {
                 received: Math.round(response * 300)/100,
                 rt: response_time,
                 image: trial.center_img,
-                caption: trial.right_caption
+                caption: trial.center_caption
             };
 
             // remove some elements
@@ -99,8 +99,8 @@ jsPsych.plugins['trust-game'] = (function() {
 
             // add new elements
             display_element.append('<p id="result-text" class="fixed-position-mid-below">' +
-                'You gave ' + trial.right_caption + ' <b>$' + response + '</b>, which were tripled before being passed on.<br/>' +
-                trial.right_caption + ' received <b>$' + trial_data.received + '</b>.<br/></p>'
+                'You gave ' + trial.center_caption + ' <b>$' + response + '</b>, which were tripled before being passed on.<br/>' +
+                trial.center_caption + ' received <b>$' + trial_data.received + '</b>.<br/></p>'
             );
             display_element.append($('<div>', {
                 id: 'progress-bar',
@@ -133,7 +133,7 @@ jsPsych.plugins['trust-game'] = (function() {
                 // add new html elements
                 var resultText = "You ";
 
-                $('#result-text').append('<br/>' + trial.right_caption + ' has returned <b>$' + trial_data.reciprocation + '</b> to you.');
+                $('#result-text').append('<br/>' + trial.center_caption + ' has returned <b>$' + trial_data.reciprocation + '</b> to you.');
 
                 display_element.append($('<button>', {
                     id: 'next',

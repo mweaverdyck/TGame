@@ -1,30 +1,42 @@
 // Instruction texts
-var CONTINUE_INSTR = '<p class="fixed-position-below small">' + 'Press right arrow to continue' + '</p>';
-var CONTINUE_OR_BACK_INSTR = '<p class="fixed-position-below small">' + 'Press right arrow to continue, or left arrow to go back' + '</p>';
+var INSTR_CONTINUE = '<p class="fixed-position-below small">' + 'Press right arrow to continue' + '</p>';
+var INSTR_CONTINUE_OR_BACK = '<p class="fixed-position-below small">' + 'Press right arrow to continue, or left arrow to go back' + '</p>';
 
-var WELCOME_INSTR = '<p class="center-content">' + 'Welcome to the study!' + '<br/><br/></p>'
-var FIND_PARTNER_INSTR = 'Please wait while we look for your partners...';
-var PARTNER_FOUND_INSTR = '<p class="center-content">' + 'You are now connected to your study partners\' computers.<br/><br/>' +
+var INSTR_WELCOME = '<p class="center-content">' +
+                'Welcome! We\'re studying how various factors, like the amount of reward that’s at stake, ' +
+                'impact players\' enjoyment of simple online games.' +
+                 '</p>'
+var INSTR_FIND_PARTNER_INSTR = 'Please wait while we look for your partners...';
+var INSTR_PARTNER_FOUND = '<p class="center-content">' + 'You are now connected to your study partners\' computers.<br/><br/>' +
                 'Please press the space bar to find out your role.' + '</p>';
 
-var ASSIGN_ROLE_INSTR = 'Assigning your role. Please wait...';
+var INSTR_ASSIGN_ROLE = 'Assigning your role. Please wait...';
 
-var ROLE_ASSIGNED_INSTR = '<p>' +
+var INSTR_ROLE_ASSIGNED = '<p>' +
                 'You have been assigned the role of: <b>Player 1</b><br/>' +
                 '</p>';
 
-var DUTY_INSTR = [
-                    '<p>' + 'As Player 1, you will do stuff and make $$$...' + '</p>',
-                    '<p>' + 'And here are some more incomplete instructions.' + '</p>'
+var INSTR_WEBGAME = ['<p>' + 'You\'ll be playing a series of simple games with other people on this website.' + '</p>',
+                '<p>' + 'This website is recently built for social gaming<br/>and currently being tested at college campuses nationwide.' + '</p>',
+                '<p>' + 'The players you\'ll be partnered with today are members of our website who regularly use the site and its ' +
+                'associated social network.' + '</p>',
+                '<p>' + 'Players can choose their "Top 5" friends on the site, whose pictures are displayed alongside their own profile ' +
+                'picture, like this:' + '</p>LIKE WHAT?',
                 ];
 
-var WAIT_INSTR = 'Waiting for the other players...'
+var INSTR_GAME = ['<p>' + 'You\'ll be playing a series of simple games with other people.' + '</p>',
+                '<p>' + 'You\'ll be using this new social gaming website that\'s currently being tested at college campuses nationwide.' + '</p>',
+                '<p>' + 'The players you\'ll be partnered with today are members of our website who regularly use the site and its ' +
+                'associated social network.' + '</p>'
+                ];
+
+var INSTR_WAIT = 'Waiting for the other players...'
 
 
 var beginningInstructions = [
     {
         type: 'instructions',
-        pages: [WELCOME_INSTR + CONTINUE_INSTR]
+        pages: [WELCOME_INSTR + INSTR_CONTINUE]
     },
     {
         type: 'timed-instr',
@@ -47,9 +59,9 @@ var beginningInstructions = [
         type: 'instructions',
         pages:
             [
-                ROLE_ASSIGNED_INSTR + CONTINUE_INSTR,
-                DUTY_INSTR[0] + CONTINUE_OR_BACK_INSTR,
-                DUTY_INSTR[1] + CONTINUE_OR_BACK_INSTR
+                ROLE_ASSIGNED_INSTR + INSTR_CONTINUE,
+                DUTY_INSTR[0] + INSTR_CONTINUE_OR_BACK,
+                DUTY_INSTR[1] + INSTR_CONTINUE_OR_BACK
             ]
     }
 ];
@@ -65,7 +77,7 @@ var waitScreen = {
 var middleInstructions = [
     {
         type: 'instructions',
-        pages: ['<p>End of training</p>' + CONTINUE_INSTR]
+        pages: ['<p>End of training</p>' + INSTR_CONTINUE]
     },
     {
         type: 'ready'

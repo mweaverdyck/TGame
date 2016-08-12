@@ -2,7 +2,7 @@
 https://metad.github.io/InvestmentGame/
 
 ### TODO
-- 5 surrounding pics
+- 5 pics
 - Instructions
 - Pick pictures (and add backgrounds?)
 - Trials -> blocks: record known/unknown people etc.
