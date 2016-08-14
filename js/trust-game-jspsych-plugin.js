@@ -12,29 +12,65 @@ jsPsych.plugins['trust-game'] = (function() {
         trial.wait_time_max = trial.wait_time_max || 0;
         trial.recip_dist_mean = trial.recip_dist_mean || 0.33334;    // default: 33% of the received $$$
         trial.recip_dist_var = trial.recip_dist_var || 0;
+        trial.friends_imgs = trial.friends_imgs || [];
 
         trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
 
         // add elements
+        //   player image
         var centerImgDiv = $('<div>', {
             class: "center-img-div"
-        });
-        centerImgDiv.append($('<p>', {
+        }).append($('<div>', {
+            class: "image-cropper"
+        }));
+        var centerImgCropper = centerImgDiv.children();
+        centerImgCropper.append($('<p>', {
             class:"center-img-text",
             text: trial.center_caption
         }));
-        centerImgDiv.append($('<div>', {
-                class: "image-cropper"
-            })
-            .append($('<img>', {
-                class: "center-img",
-                src: trial.center_img
-        })));
+        centerImgCropper.append($('<img>', {
+            src: trial.center_img
+        }));
         display_element.append(centerImgDiv);
 
+        //   friends images
+        var friendsImgDiv = $('<div>', {
+            class: "friends-img-div"
+        });
+        friendsImgDiv.append($('<div>', {
+            id: 'friend-text',
+            text: 'Top Friends'
+        }));
+        var imgTable = $('<table>', {
+            id: "friends-img-table"
+        }).append('<tr>');
+        var imgTableRow = imgTable.children();
+        for (var i = 0; i < trial.friends_imgs.length; ++i) {
+            var friendImgDiv = $('<div>', {
+                class: "friend-img image-cropper"
+            });
+            if (trial.friends_imgs[i] === 'unknown') {
+                friendImgDiv.append($('<div>', {
+                    class: "unknown-friend"
+                })
+                .append($('<img>', {
+                    src: 'img/unknown.png'
+                })));
+            } else {
+                friendImgDiv.append($('<img>', {
+                    src: trial.friends_imgs[i]
+                }));
+            }
+            imgTableRow.append($('<th>').append(friendImgDiv));
+        }
+        friendsImgDiv.append(imgTable);
+        display_element.append(friendsImgDiv);
+
+        //   question
         display_element.append('<p id="question" class="fixed-position-mid-below">You have $' +
             trial.money + '.<br/>How much will you give to ' + trial.center_caption + '?</p>');
 
+        //   slider
         var sliderDiv = $('<div>', {
             id: 'sliderdiv',
             class: "slider-div"
@@ -60,6 +96,7 @@ jsPsych.plugins['trust-game'] = (function() {
         script.text  = '$("#slide").slider({ formatter: function(value) { return "Give $" + value; } });';
         display_element.append(script);
 
+        //   submit button
         display_element.append($('<button>', {
             id: 'submit',
             class: "autocompare btn btn-primary disabled submit-btn",

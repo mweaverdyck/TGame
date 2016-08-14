@@ -42,8 +42,8 @@ p {
   text-align: center;
 }
 .center-img-div {
-  margin: -150px auto 0 auto;
-  margin: -20vh auto 0 auto;
+  margin: -250px auto 0 auto;
+  margin: -38vh auto 0 auto;
   width: 150px;
   height: 150px;
   width: 25vmin;
@@ -77,6 +77,23 @@ img {
   margin: -5% -100% 0 -100%;
   height: 105%;
   width: auto;
+}
+.unknown-friend {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+  background-color: #5bc0de;
+  box-shadow: inset 0 0 0 5px white;
+}
+.unknown-friend p {
+  margin: 0;
+  font-size: 200%;
+  color: white;
 }
 .friends-img-div {
   margin-top: 40px;

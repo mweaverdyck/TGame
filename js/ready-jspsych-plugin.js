@@ -13,14 +13,11 @@ jsPsych.plugins['ready'] = (function() {
         trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
 
         // add elements
-        display_element.append($('<p>', {
-            class: "fixed-position-mid",
-            text: 'Click below when you are ready to begin.'
-        }));
+        display_element.append('<p>You are now connected to your partners\' computers.<br/>Click below when you are ready to begin.</p>');
 
         display_element.append($('<button>', {
             id: 'ready',
-            class: "autocompare btn btn-primary fixed-position-mid-below",
+            class: "autocompare btn btn-primary",
             text: 'I\'m Ready!'
         }));
 
