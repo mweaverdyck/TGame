@@ -7,7 +7,7 @@ jsPsych.plugins['trust-game'] = (function() {
     plugin.trial = function(display_element, trial) {
         // set default values for parameters
         trial.center_caption = trial.center_caption || '';
-        trial.money = trial.money || 10;
+        trial.money = trial.money || MAX_MONEY;
         trial.wait_time_min = trial.wait_time_min || 0;
         trial.wait_time_max = trial.wait_time_max || 0;
         trial.recip_dist_mean = trial.recip_dist_mean || 0.33334;    // default: 33% of the received $$$
