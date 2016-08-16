@@ -184,10 +184,14 @@ $(function() {
     for (var i = 0; i < playerImgs.length; ++i) {
         block3.push({
             type: 'survey-likert',
-            prompt: 'You may have the chance to be invited back to complete a cooperative puzzle-solving game with a partner. ' +
+            preamble: 'You may have the chance to be invited back to complete a cooperative puzzle-solving game with a partner. ' +
                     'If this happens, we\'ll do our best to follow your preferences in assigning you a partner. Please rate how ' +
                     'much you would like to be paired with each partner you played with today.',
-            questions: []
+            questions: [''],
+            image: playerImgs[i],
+            caption: "NameHere",
+            labels: [['Not at all', 'Definitely yes']],
+            num_points: 7
         });
     }
     block3.push({
@@ -203,19 +207,19 @@ $(function() {
 
     // EXPERIMENT TIMELINE
     //   Instructions
-    // timeline = timeline.concat(beginningInstructions);
+    timeline = timeline.concat(beginningInstructions);
     //   Training Trials
-    // timeline = timeline.concat(trainingTrials);
+    timeline = timeline.concat(trainingTrials);
     //   More Instructions for block 1
-    // timeline = timeline.concat(block1Instructions);
+    timeline = timeline.concat(block1Instructions);
     //   Block 1 Trials
-    // timeline.push(waitScreen);
-    // add_trials_randomly(block1Trials, BLOCK_1_NUM_TRIALS_PER_PLAYER);
+    timeline.push(waitScreen);
+    add_trials_randomly(block1Trials, BLOCK_1_NUM_TRIALS_PER_PLAYER);
     //   More Instructions for block 2
-    // timeline = timeline.concat(block2Instructions);
+    timeline = timeline.concat(block2Instructions);
     //   Block 2 Trials
-    // timeline.push(waitScreen);
-    // add_trials_randomly(block2Trials, BLOCK_2_NUM_TRIALS_PER_PLAYER);
+    timeline.push(waitScreen);
+    add_trials_randomly(block2Trials, BLOCK_2_NUM_TRIALS_PER_PLAYER);
     //   More Instructions for block 3
     timeline = timeline.concat(block3Instructions);
     timeline = timeline.concat(block3);

@@ -14,14 +14,14 @@ var INSTR_WEB = [
                     'associated social network.' + '</p>',
                     '<p>' + 'Players can choose their "Top 5" friends in their social network, whose pictures are displayed alongside their ' +
                     'own profile picture, like this:' + '</p>' +
-                    '<img src="img/default.png">',
+                    '<img src="img/player_example_1.png" class="player-example">',
                     '<p>' + 'Due to most users’ privacy settings, new users like you can only see those friends\' faces if you\'ve ' +
                     'interacted with them before on the site. Players\' friends who you haven\'t encountered before will look like this:' +
                     '</p>' +
-                    '<img src="img/default.png" style="width:20%; height:20%;">',
+                    '<img src="img/unknown_friend.png" style="margin: 20px;">',
                     '<p>' + 'Therefore, when you haven\'t encountered any of your partner\'s friends before, you\'ll see something like this:' +
                     '</p>' +
-                    '<img src="img/default.png">'
+                    '<img src="img/player_example_2.png" class="player-example">'
                 ];
 
 var INSTR_ASSIGN_ROLE = 'Please wait while we assign your role...';

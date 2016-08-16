@@ -51,7 +51,7 @@ jsPsych.plugins['survey-slider'] = (function() {
 
         display_element.append($('<button>', {
             id: 'submit',
-            class: "autocompare btn btn-primary disabled lower",
+            class: "autocompare btn btn-primary disabled submit-btn",
             text: 'Submit'
         }));
 
