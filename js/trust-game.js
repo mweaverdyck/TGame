@@ -161,6 +161,37 @@ $(function() {
         }
     }
 
+    // BLOCK 3 SURVEY QUESTIONS
+    var block3 = [{
+
+    },
+    {
+        type: 'survey-text',
+        questions: ['Please indicate anything that you particularly liked about the game, ' +
+                   'and any changes that you think might make the game more enjoyable.'],
+        rows: 10
+    },
+    {
+
+    }];
+    for (var i = 0; i < playerImgs.length; ++i) {
+        block3.push({
+            type: 'survey-likert',
+            questions: ['You may have the chance to be invited back to complete a cooperative puzzle-solving game with a partner. ' +
+                        'If this happens, we’ll do our best to follow your preferences in assigning you a partner. Please rate how ' +
+                        'much you would like to be paired with each partner who you played with today']
+        });
+    }
+    block3.push({
+        type: 'survey-text',
+        questions: ['If there’s any other feedback you’d like to provide us about your experience today, please take a moment to share it now.'],
+        rows: 10
+    });
+    block3.push({
+        type: 'instructions',
+        pages: ['Thank you! You’ve now completed the session. Please notify the experimenter.']
+    });
+
     // EXPERIMENT TIMELINE
     //   Instructions
     // timeline = timeline.concat(beginningInstructions);
@@ -170,12 +201,12 @@ $(function() {
     // timeline = timeline.concat(block1Instructions);
     //   Block 1 Trials
     // timeline.push(waitScreen);
-    add_trials_randomly(block1Trials, BLOCK_1_NUM_TRIALS_PER_PLAYER);
+    // add_trials_randomly(block1Trials, BLOCK_1_NUM_TRIALS_PER_PLAYER);
     //   More Instructions for block 2
-    timeline = timeline.concat(block2Instructions);
+    // timeline = timeline.concat(block2Instructions);
     //   Block 2 Trials
-    timeline.push(waitScreen);
-    add_trials_randomly(block2Trials, BLOCK_2_NUM_TRIALS_PER_PLAYER);
+    // timeline.push(waitScreen);
+    // add_trials_randomly(block2Trials, BLOCK_2_NUM_TRIALS_PER_PLAYER);
     //   More Instructions for block 3
     timeline = timeline.concat(block3Instructions);
 
