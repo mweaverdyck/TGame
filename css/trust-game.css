@@ -130,7 +130,6 @@ img {
 }
 .slider-div {
   position: absolute;
-  vertical-align: center;
   left: 50%;
   width: 400px;
   margin-left: -200px;
@@ -138,7 +137,7 @@ img {
   margin-left: -25vw;
   height: 24px;
   border-radius: 5px;
-  top: 80%;
+  /*top: 80%;*/
 }
 .slider-div .left-num {
   position: absolute;
@@ -171,9 +170,11 @@ img {
   border-radius: 5px;
 }
 .middle {
+  position: absolute;
   top: 60%;
 }
 .lower {
+  position: absolute;
   top: 80%;
 }
 .submit-btn {
@@ -182,4 +183,6 @@ img {
   left: 50%;
   transform: translateX(-50%);
 }
-
+textarea {
+  font-size: 18px;
+}

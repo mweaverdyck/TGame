@@ -73,7 +73,7 @@ jsPsych.plugins['trust-game'] = (function() {
         //   slider
         var sliderDiv = $('<div>', {
             id: 'sliderdiv',
-            class: "slider-div"
+            class: "slider-div lower"
         });
         sliderDiv.append('<span class="left-num"><b>$0</b></span>');
         sliderDiv.append($('<div>', {
@@ -168,8 +168,6 @@ jsPsych.plugins['trust-game'] = (function() {
                 }
 
                 // add new html elements
-                var resultText = "You ";
-
                 $('#result-text').append('<br/>' + trial.center_caption + ' has returned <b>$' + trial_data.reciprocation + '</b> to you.');
 
                 display_element.append($('<button>', {

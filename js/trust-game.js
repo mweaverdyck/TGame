@@ -163,29 +163,38 @@ $(function() {
 
     // BLOCK 3 SURVEY QUESTIONS
     var block3 = [{
-
+        type: 'survey-slider',
+        question: 'How much did you enjoy playing the Investment Game?',
+        min_text: '0%',
+        max_text: '100%'
     },
     {
         type: 'survey-text',
         questions: ['Please indicate anything that you particularly liked about the game, ' +
                    'and any changes that you think might make the game more enjoyable.'],
-        rows: 10
+        rows: [5],
+        columns: [80]
     },
     {
-
+        type: 'survey-slider',
+        question: 'How likely would you play this game for a chance to win prizes (e.g. money, gift certificates) in your free time?',
+        min_text: '0%',
+        max_text: '100%'
     }];
     for (var i = 0; i < playerImgs.length; ++i) {
         block3.push({
             type: 'survey-likert',
-            questions: ['You may have the chance to be invited back to complete a cooperative puzzle-solving game with a partner. ' +
-                        'If this happens, we’ll do our best to follow your preferences in assigning you a partner. Please rate how ' +
-                        'much you would like to be paired with each partner who you played with today']
+            prompt: 'You may have the chance to be invited back to complete a cooperative puzzle-solving game with a partner. ' +
+                    'If this happens, we\'ll do our best to follow your preferences in assigning you a partner. Please rate how ' +
+                    'much you would like to be paired with each partner you played with today.',
+            questions: []
         });
     }
     block3.push({
         type: 'survey-text',
         questions: ['If there’s any other feedback you’d like to provide us about your experience today, please take a moment to share it now.'],
-        rows: 10
+        rows: [5],
+        columns: [80]
     });
     block3.push({
         type: 'instructions',
@@ -209,6 +218,7 @@ $(function() {
     // add_trials_randomly(block2Trials, BLOCK_2_NUM_TRIALS_PER_PLAYER);
     //   More Instructions for block 3
     timeline = timeline.concat(block3Instructions);
+    timeline = timeline.concat(block3);
 
     function startExperiment() {
         // hookWindow = true;
