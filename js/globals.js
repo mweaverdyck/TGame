@@ -25,7 +25,7 @@ function isTrustworthy(imgPath) {
 // Data writers
 function write_trial_data(userId, experimentId, data) {
     var block_index = data.block_index;
-    var trial_index = data.trial_index;
+    var trial_index = data.trial_idx || data.trial_index;
     delete data.block_index;
     delete data.trial_index;
     delete data.trial_type;
