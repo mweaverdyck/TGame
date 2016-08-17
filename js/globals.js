@@ -37,7 +37,8 @@ function write_trial_data(userId, experimentId, data) {
 function after_last_trial(userId, experimentId) {
     firebase.database().ref('/' + userId + '/' + experimentId).set({
         end_time: (new Date()).toUTCString()
+    }).then(function() {
+        hookWindow = false;
+        firebase.auth().currentUser.delete();
     });
-    hookWindow = false;
-    firebase.auth().currentUser.delete();
 }

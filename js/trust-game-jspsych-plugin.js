@@ -5,7 +5,7 @@ jsPsych.plugins['trust-game'] = (function() {
     plugin.trial = function(display_element, trial) {
         // set default values for parameters
         trial.block_index = trial.block_index || 0;
-        trial.trial_index = trial.trial_index || 0;
+        trial.trial_idx = trial.trial_idx || 0;
         trial.center_caption = trial.center_caption || '';
         trial.money = trial.money || MAX_MONEY;
         trial.wait_time_min = trial.wait_time_min || 0;
@@ -129,8 +129,8 @@ jsPsych.plugins['trust-game'] = (function() {
                 friends: [],
                 caption: trial.center_caption
             };
-            if (trial.trial_index !== 0) {
-                trial_data.trial_idx = trial.trial_index;
+            if (trial.trial_idx !== 0) {
+                trial_data.trial_idx = trial.trial_idx;
             }
             for (var i in trial.friends_imgs) {
                 if (trial.friends_imgs[i] !== 'unknown') {

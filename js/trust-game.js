@@ -183,7 +183,7 @@ $(function() {
                 trials[i].on_finish = function(data) {
                     write_trial_data(userId, experimentId, data);
                 };
-                trialsArray.push(trials[i]);
+                trialsArray.push($.extend(true, {}, trials[i]));
             }
         }
         trialsArray = shuffle_array(trialsArray);
@@ -194,19 +194,24 @@ $(function() {
                 time_min: 0,
                 time_max: 1000
             });
-            trialsArray[i].trial_index = i + 1;
+            trialsArray[i].trial_idx = i + 1;
             timeline.push(trialsArray[i]);
         }
     }
 
+    // BLOCK 3 HELPER
+    function block_3_on_trial_finish(data) {
+        data.block_index = 3;
+        write_trial_data(userId, experimentId, data);
+    } 
+
     // BLOCK 3 SURVEY QUESTIONS
     var block3 = [{
         type: 'survey-slider',
-        block_index: 3,
         question: 'How much did you enjoy playing the Investment Game?',
         min_text: '0%',
         max_text: '100%',
-        on_finish: function(data) { write_trial_data(userId, experimentId, data); }
+        on_finish: block_3_on_trial_finish
     },
     {
         type: 'survey-text',
@@ -215,7 +220,7 @@ $(function() {
                    'and any changes that you think might make the game more enjoyable.'],
         rows: [5],
         columns: [80],
-        on_finish: function(data) { write_trial_data(userId, experimentId, data); }
+        on_finish: block_3_on_trial_finish
     },
     {
         type: 'survey-slider',
@@ -223,21 +228,25 @@ $(function() {
         question: 'How likely would you play this game for a chance to win prizes (e.g. money, gift certificates) in your free time?',
         min_text: '0%',
         max_text: '100%',
-        on_finish: function(data) { write_trial_data(userId, experimentId, data); }
+        on_finish: block_3_on_trial_finish
     }];
     for (var i = 0; i < playerImgs.length; ++i) {
         block3.push({
             type: 'survey-likert',
-            block_index: 3,
             preamble: 'You may have the chance to be invited back to complete a cooperative puzzle-solving game with a partner. ' +
                     'If this happens, we\'ll do our best to follow your preferences in assigning you a partner. Please rate how ' +
                     'much you would like to be paired with each partner you played with today.',
             questions: [''],
             image: playerImgs[i],
+            trustworthy: isTrustworthy(playerImgs[i]),
             caption: "NameHere",
             labels: [['Not at all', 'Definitely yes']],
             num_points: 7,
-            on_finish: function(data) { write_trial_data(userId, experimentId, data); }
+            on_finish: function(data) {
+                data.block_index = 3;
+                data.trustworthy = isTrustworthy(playerImgs[i]);
+                write_trial_data(userId, experimentId, data);
+            }
         });
     }
     block3.push({
@@ -246,11 +255,14 @@ $(function() {
         questions: ['If there’s any other feedback you’d like to provide us about your experience today, please take a moment to share it now.'],
         rows: [5],
         columns: [80],
-        on_finish: function() { after_last_trial(experimentId); }
+        on_finish: function(data) {
+            block_3_on_trial_finish(data);
+            after_last_trial(experimentId);
+        }
     });
     block3.push({
         type: 'instructions',
-        pages: ['Thank you! You’ve now completed the session. Please notify the experimenter.']
+        pages: ['Thank you! You have now completed the session. Please notify the experimenter.']
     });
 
     // EXPERIMENT TIMELINE

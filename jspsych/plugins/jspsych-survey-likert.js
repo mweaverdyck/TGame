@@ -123,7 +123,6 @@ jsPsych.plugins['survey-likert'] = (function() {
         img: trial.image,
         response: response
       };
-      console.log(trial_data);
 
       display_element.html('');
 

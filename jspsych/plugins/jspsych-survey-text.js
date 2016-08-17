@@ -103,19 +103,15 @@ jsPsych.plugins['survey-text'] = (function() {
       var response_time = endTime - startTime;
 
       // create object to hold responses
-      var question_data = {};
+      var response;
       $("div.jspsych-survey-text-question").each(function(index) {
-        var id = "Q" + index;
-        var val = $(this).children('textarea').val();
-        var obje = {};
-        obje[id] = val;
-        $.extend(question_data, obje);
+        response = $(this).children('textarea').val();
       });
 
       // save data
       var trialdata = {
         "rt": response_time,
-        "responses": JSON.stringify(question_data)
+        "response": response
       };
 
       display_element.html('');
