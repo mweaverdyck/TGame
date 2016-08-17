@@ -33,11 +33,12 @@ $(function() {
 
     // Sign in
     firebase.auth().signInAnonymously().then(function(user) {
-        firebaseUid = user.uid;
+        var firebaseUid = user.uid;
         console.log('Signed in as ' + firebaseUid);
 
         firebase.database().ref('/' + userId + '/' + experimentId).set({
-            start_time: (new Date()).toUTCString()
+            start_time: (new Date()).toUTCString(),
+            firebase_uid: firebaseUid
         });
     });
 
@@ -238,11 +239,11 @@ $(function() {
                     'much you would like to be paired with each partner you played with today.',
             questions: [''],
             image: playerImgs[i],
-            trustworthy: isTrustworthy(playerImgs[i]),
             caption: "NameHere",
             labels: [['Not at all', 'Definitely yes']],
             num_points: 7,
             on_finish: function(data) {
+                data.response = parseInt(data.response);
                 data.block_index = 3;
                 data.trustworthy = isTrustworthy(playerImgs[i]);
                 write_trial_data(userId, experimentId, data);
@@ -257,7 +258,7 @@ $(function() {
         columns: [80],
         on_finish: function(data) {
             block_3_on_trial_finish(data);
-            after_last_trial(experimentId);
+            after_last_trial(userId, experimentId);
         }
     });
     block3.push({
@@ -267,21 +268,21 @@ $(function() {
 
     // EXPERIMENT TIMELINE
     //   Instructions
-    timeline = timeline.concat(beginningInstructions);
+    // timeline = timeline.concat(beginningInstructions);
     //   Training Trials
-    timeline = timeline.concat(trainingTrials);
+    // timeline = timeline.concat(trainingTrials);
     //   More Instructions for block 1
-    timeline = timeline.concat(block1Instructions);
+    // timeline = timeline.concat(block1Instructions);
     //   Block 1 Trials
-    timeline.push(waitScreen);
-    add_trials_randomly(block1Trials, BLOCK_1_NUM_TRIALS_PER_PLAYER, 1);
+    // timeline.push(waitScreen);
+    // add_trials_randomly(block1Trials, BLOCK_1_NUM_TRIALS_PER_PLAYER, 1);
     //   More Instructions for block 2
-    timeline = timeline.concat(block2Instructions);
+    // timeline = timeline.concat(block2Instructions);
     //   Block 2 Trials
-    timeline.push(waitScreen);
-    add_trials_randomly(block2Trials, BLOCK_2_NUM_TRIALS_PER_PLAYER, 2);
+    // timeline.push(waitScreen);
+    // add_trials_randomly(block2Trials, BLOCK_2_NUM_TRIALS_PER_PLAYER, 2);
     //   More Instructions for block 3
-    timeline = timeline.concat(block3Instructions);
+    // timeline = timeline.concat(block3Instructions);
     timeline = timeline.concat(block3);
 
     function startExperiment() {

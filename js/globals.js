@@ -24,20 +24,26 @@ function isTrustworthy(imgPath) {
 
 // Data writers
 function write_trial_data(userId, experimentId, data) {
+    var block_index = data.block_index;
+    var trial_index = data.trial_index;
+    delete data.block_index;
+    delete data.trial_index;
     delete data.trial_type;
     delete data.internal_node_id;
     if (typeof data.trial_idx != 'undefined') {
         data.trial_index = data.trial_idx;
     }
     delete data.trial_idx;
-    var path = '/' + userId + '/' + experimentId + '/' + data.block_index + '/' + data.trial_index;
+    var path = '/' + userId + '/' + experimentId + '/' + block_index + '/' + trial_index;
     firebase.database().ref(path).set(data);
 }
 
 function after_last_trial(userId, experimentId) {
-    firebase.database().ref('/' + userId + '/' + experimentId).set({
-        end_time: (new Date()).toUTCString()
-    }).then(function() {
+    var path = '/' + userId + '/' + experimentId + '/end_time';
+    var endTimeUpdate = {};
+    endTimeUpdate[path] = (new Date()).toUTCString();
+
+    firebase.database().ref().update(endTimeUpdate).then(function() {
         hookWindow = false;
         firebase.auth().currentUser.delete();
     });
