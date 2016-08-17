@@ -245,7 +245,7 @@ $(function() {
             on_finish: function(data) {
                 data.response = parseInt(data.response);
                 data.block_index = 3;
-                data.trustworthy = isTrustworthy(playerImgs[i]);
+                data.trustworthy = isTrustworthy(data.img);
                 write_trial_data(userId, experimentId, data);
             }
         });
@@ -268,21 +268,21 @@ $(function() {
 
     // EXPERIMENT TIMELINE
     //   Instructions
-    // timeline = timeline.concat(beginningInstructions);
+    timeline = timeline.concat(beginningInstructions);
     //   Training Trials
-    // timeline = timeline.concat(trainingTrials);
+    timeline = timeline.concat(trainingTrials);
     //   More Instructions for block 1
-    // timeline = timeline.concat(block1Instructions);
+    timeline = timeline.concat(block1Instructions);
     //   Block 1 Trials
-    // timeline.push(waitScreen);
-    // add_trials_randomly(block1Trials, BLOCK_1_NUM_TRIALS_PER_PLAYER, 1);
+    timeline.push(waitScreen);
+    add_trials_randomly(block1Trials, BLOCK_1_NUM_TRIALS_PER_PLAYER, 1);
     //   More Instructions for block 2
-    // timeline = timeline.concat(block2Instructions);
+    timeline = timeline.concat(block2Instructions);
     //   Block 2 Trials
-    // timeline.push(waitScreen);
-    // add_trials_randomly(block2Trials, BLOCK_2_NUM_TRIALS_PER_PLAYER, 2);
+    timeline.push(waitScreen);
+    add_trials_randomly(block2Trials, BLOCK_2_NUM_TRIALS_PER_PLAYER, 2);
     //   More Instructions for block 3
-    // timeline = timeline.concat(block3Instructions);
+    timeline = timeline.concat(block3Instructions);
     timeline = timeline.concat(block3);
 
     function startExperiment() {
