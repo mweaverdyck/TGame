@@ -245,7 +245,7 @@ $(function() {
             labels: [['Not at all', 'Definitely yes']],
             num_points: 7,
             on_finish: function(data) {
-                data.response = parseInt(data.response);
+                data.response = parseInt(data.response) + 1;
                 data.block_index = 3;
                 data.trustworthy = isTrustworthy(data.img);
                 write_trial_data(userId, experimentId, data);
@@ -288,7 +288,7 @@ $(function() {
     timeline = timeline.concat(block3);
 
     function startExperiment() {
-        // hookWindow = true;
+        hookWindow = true;
         // Start the experiment
         jsPsych.init({
             display_element: $('#jspsych-target'),
