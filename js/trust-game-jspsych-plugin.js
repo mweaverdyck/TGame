@@ -1,11 +1,11 @@
-var trial_index = 0;
-
 jsPsych.plugins['trust-game'] = (function() {
 
     var plugin = {};
 
     plugin.trial = function(display_element, trial) {
         // set default values for parameters
+        trial.block_index = trial.block_index || 0;
+        trial.trial_index = trial.trial_index || 0;
         trial.center_caption = trial.center_caption || '';
         trial.money = trial.money || MAX_MONEY;
         trial.wait_time_min = trial.wait_time_min || 0;
@@ -119,15 +119,27 @@ jsPsych.plugins['trust-game'] = (function() {
             var response_time = endTime - startTime;
 
             var response = $("#slide").slider('getValue');
-            trial_index += 1;
             trial_data = {
-                trial_index: trial_index,
+                block_index: trial.block_index,
                 response: response,
                 received: Math.round(response * 300)/100,
                 rt: response_time,
                 image: trial.center_img,
+                trustworthy: isTrustworthy(trial.center_img),
+                friends: [],
                 caption: trial.center_caption
             };
+            if (trial.trial_index !== 0) {
+                trial_data.trial_idx = trial.trial_index;
+            }
+            for (var i in trial.friends_imgs) {
+                if (trial.friends_imgs[i] !== 'unknown') {
+                    trial_data.friends.push({
+                        image: trial.friends_imgs[i],
+                        trustworthy: isTrustworthy(trial.friends_imgs[i])
+                    });
+                }
+            }
 
             // remove some elements
             $('#question').remove();
@@ -176,9 +188,7 @@ jsPsych.plugins['trust-game'] = (function() {
                     text: 'Next'
                 }));
 
-
                 $('#next').click(function() {
-                    console.log(trial_data);
                     // goto next trial
                     display_element.html('');
                     jsPsych.finishTrial(trial_data);

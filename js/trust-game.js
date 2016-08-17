@@ -1,10 +1,11 @@
 $(function() {
 
     var timeline = [];
-    var firebaseUid, userId;
+    var userId = 'test';
+    var experimentId = Date.now();
 
     playerImgs = shuffle_array(playerImgs);
-    
+
     // Prevent closing window
     window.onbeforeunload = function() {
         if (hookWindow) {
@@ -12,7 +13,36 @@ $(function() {
         }
     }
 
-    // TRIALS
+    // Get user ID
+    var parameters = window.location.search.substring(1);
+    if (parameters.length > 0) {
+        userId = parameters.split("=")[1];  // get id from url parameter
+    } else {
+        // $('body').html('');
+    }
+
+
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyDjvdK9WtSGel_W9E3MbFXKCcBg7c_F4WQ",
+        authDomain: "trust-game.firebaseapp.com",
+        databaseURL: "https://trust-game.firebaseio.com",
+        storageBucket: "trust-game.appspot.com",
+    };
+    firebase.initializeApp(config);
+
+    // Sign in
+    firebase.auth().signInAnonymously().then(function(user) {
+        firebaseUid = user.uid;
+        console.log('Signed in as ' + firebaseUid);
+
+        firebase.database().ref('/' + userId + '/' + experimentId).set({
+            start_time: (new Date()).toUTCString()
+        });
+    });
+
+
+    // TRAINING TRIALS
     var trainingTrials = [{
         type: 'trust-game',
         center_img: "img/practice_img/usericon4.png",
@@ -36,7 +66,7 @@ $(function() {
     {
         type: 'trust-game',
         center_img: "img/practice_img/usericon2.png",
-        center_caption: "Player 3",
+        center_caption: "Player 4",
         recip_dist_mean: 0.3,
         friends_imgs: ['img/practice_img/usericon5.png', 'img/practice_img/usericon3.png',
                        'img/practice_img/usericon4.png', 'unknown', 'unknown']
@@ -44,18 +74,21 @@ $(function() {
     {
         type: 'trust-game',
         center_img: "img/practice_img/usericon6.png",
-        center_caption: "Player 3",
+        center_caption: "Player 5",
         friends_imgs: ['img/practice_img/usericon4.png', 'img/practice_img/usericon2.png',
                        'img/practice_img/usericon3.png', 'img/practice_img/usericon5.png', 'unknown']
     },
     {
         type: 'trust-game',
         center_img: "img/practice_img/usericon1.png",
-        center_caption: "Player 3",
+        center_caption: "Player 6",
         recip_dist_mean: 0.63,
         friends_imgs: ['img/practice_img/usericon3.png', 'img/practice_img/usericon2.png',
                        'img/practice_img/usericon4.png', 'img/practice_img/usericon5.png', 'img/practice_img/usericon6.png']
     }];
+    for (var i in trainingTrials) {
+        trainingTrials[i].on_finish = function(data) { write_trial_data(userId, experimentId, data); };
+    }
 
     // BLOCK 1 TRIALS
     var block1Trials = [{    // trustworthy
@@ -142,10 +175,14 @@ $(function() {
     }];
 
     // HELPER FUNC
-    function add_trials_randomly(trials, num_per_trial) {
+    function add_trials_randomly(trials, num_per_trial, block_index) {
         var trialsArray = [];
         for (var i = 0; i < trials.length; ++i) {
             for (var j = 0; j < num_per_trial; ++j) {
+                trials[i].block_index = block_index;
+                trials[i].on_finish = function(data) {
+                    write_trial_data(userId, experimentId, data);
+                };
                 trialsArray.push(trials[i]);
             }
         }
@@ -157,6 +194,7 @@ $(function() {
                 time_min: 0,
                 time_max: 1000
             });
+            trialsArray[i].trial_index = i + 1;
             timeline.push(trialsArray[i]);
         }
     }
@@ -164,26 +202,33 @@ $(function() {
     // BLOCK 3 SURVEY QUESTIONS
     var block3 = [{
         type: 'survey-slider',
+        block_index: 3,
         question: 'How much did you enjoy playing the Investment Game?',
         min_text: '0%',
-        max_text: '100%'
+        max_text: '100%',
+        on_finish: function(data) { write_trial_data(userId, experimentId, data); }
     },
     {
         type: 'survey-text',
+        block_index: 3,
         questions: ['Please indicate anything that you particularly liked about the game, ' +
                    'and any changes that you think might make the game more enjoyable.'],
         rows: [5],
-        columns: [80]
+        columns: [80],
+        on_finish: function(data) { write_trial_data(userId, experimentId, data); }
     },
     {
         type: 'survey-slider',
+        block_index: 3,
         question: 'How likely would you play this game for a chance to win prizes (e.g. money, gift certificates) in your free time?',
         min_text: '0%',
-        max_text: '100%'
+        max_text: '100%',
+        on_finish: function(data) { write_trial_data(userId, experimentId, data); }
     }];
     for (var i = 0; i < playerImgs.length; ++i) {
         block3.push({
             type: 'survey-likert',
+            block_index: 3,
             preamble: 'You may have the chance to be invited back to complete a cooperative puzzle-solving game with a partner. ' +
                     'If this happens, we\'ll do our best to follow your preferences in assigning you a partner. Please rate how ' +
                     'much you would like to be paired with each partner you played with today.',
@@ -191,14 +236,17 @@ $(function() {
             image: playerImgs[i],
             caption: "NameHere",
             labels: [['Not at all', 'Definitely yes']],
-            num_points: 7
+            num_points: 7,
+            on_finish: function(data) { write_trial_data(userId, experimentId, data); }
         });
     }
     block3.push({
         type: 'survey-text',
+        block_index: 3,
         questions: ['If there’s any other feedback you’d like to provide us about your experience today, please take a moment to share it now.'],
         rows: [5],
-        columns: [80]
+        columns: [80],
+        on_finish: function() { after_last_trial(experimentId); }
     });
     block3.push({
         type: 'instructions',
@@ -214,12 +262,12 @@ $(function() {
     timeline = timeline.concat(block1Instructions);
     //   Block 1 Trials
     timeline.push(waitScreen);
-    add_trials_randomly(block1Trials, BLOCK_1_NUM_TRIALS_PER_PLAYER);
+    add_trials_randomly(block1Trials, BLOCK_1_NUM_TRIALS_PER_PLAYER, 1);
     //   More Instructions for block 2
     timeline = timeline.concat(block2Instructions);
     //   Block 2 Trials
     timeline.push(waitScreen);
-    add_trials_randomly(block2Trials, BLOCK_2_NUM_TRIALS_PER_PLAYER);
+    add_trials_randomly(block2Trials, BLOCK_2_NUM_TRIALS_PER_PLAYER, 2);
     //   More Instructions for block 3
     timeline = timeline.concat(block3Instructions);
     timeline = timeline.concat(block3);
