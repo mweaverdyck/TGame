@@ -181,6 +181,8 @@ $(function() {
         for (var i = 0; i < trials.length; ++i) {
             for (var j = 0; j < num_per_trial; ++j) {
                 trials[i].block_index = block_index;
+                trials[i].wait_time_min = DEFAULT_RETURN_WAIT_TIME_MIN;
+                trials[i].wait_time_max = DEFAULT_RETURN_WAIT_TIME_MAX;
                 trials[i].on_finish = function(data) {
                     write_trial_data(userId, experimentId, data);
                 };
