@@ -19,7 +19,14 @@ function shuffle_array(array) {
 }
 
 function isTrustworthy(imgPath) {
-    return trustworthyImgIndexes.indexOf(playerImgs.indexOf(imgPath)) !== -1;
+    for (var i in players) {
+        if (players[i][0] === imgPath) {
+            if (trustworthyImgIndexes.indexOf(i) !== -1) {
+                return true;
+            }
+            return false;
+        }
+    }
 }
 
 // Data writers
