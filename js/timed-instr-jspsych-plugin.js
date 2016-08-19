@@ -13,10 +13,7 @@ jsPsych.plugins['timed-instr'] = (function() {
         trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
 
         // add elements
-        display_element.append($('<p>', {
-            class: "fixed-position-mid",
-            text: trial.text
-        }));
+        display_element.append($('<p class="fixed-position-mid">' + trial.text + '</p>'));
 
         display_element.append($('<div>', {
             id: 'progress-bar',

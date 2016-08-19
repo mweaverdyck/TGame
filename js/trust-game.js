@@ -48,13 +48,13 @@ $(function() {
         type: 'trust-game',
         center_img: 'img/practice_img/usericon4.png',
         center_caption: 'Player 1',
-        recip_dist_mean: 0.4,
         friends_imgs: ['unknown', 'unknown', 'unknown', 'unknown', 'unknown']
     },
     {
         type: 'trust-game',
         center_img: 'img/practice_img/usericon3.png',
         center_caption: 'Player 2',
+        recip_dist_mean: 0.4,
         friends_imgs: ['unknown', 'unknown', 'unknown', 'unknown', 'unknown']
     },
     {
@@ -68,13 +68,13 @@ $(function() {
         type: 'trust-game',
         center_img: 'img/practice_img/usericon2.png',
         center_caption: 'Player 4',
-        recip_dist_mean: 0.3,
         friends_imgs: ['img/practice_img/usericon5.png', 'unknown', 'unknown', 'unknown', 'unknown']
     },
     {
         type: 'trust-game',
         center_img: 'img/practice_img/usericon6.png',
         center_caption: 'Player 5',
+        recip_dist_mean: 0.3,
         friends_imgs: ['img/practice_img/usericon4.png', 'unknown', 'unknown', 'unknown', 'unknown']
     },
     {
@@ -92,7 +92,7 @@ $(function() {
     var block1Trials = [{    // trustworthy
         type: 'trust-game',
         center_img: players[0][0],
-        center_caption: players[0][1],
+        center_caption: players[0][1]+'T',
         recip_dist_mean: TRUSTWORTHY_RECI_MEAN,
         recip_dist_var: TRUSTWORTHY_RECI_VAR,
         friends_imgs: ['unknown', 'unknown', 'unknown', 'unknown', 'unknown']
@@ -100,7 +100,7 @@ $(function() {
     {    // trustworthy
         type: 'trust-game',
         center_img: players[1][0],
-        center_caption: players[1][1],
+        center_caption: players[1][1]+'T',
         recip_dist_mean: TRUSTWORTHY_RECI_MEAN,
         recip_dist_var: TRUSTWORTHY_RECI_VAR,
         friends_imgs: ['unknown', 'unknown', 'unknown', 'unknown', 'unknown']
@@ -108,7 +108,7 @@ $(function() {
     {    // untrustworthy
         type: 'trust-game',
         center_img: players[2][0],
-        center_caption: players[2][1],
+        center_caption: players[2][1]+'U',
         recip_dist_mean: UNTRUSTWORTHY_RECI_MEAN,
         recip_dist_var: UNTRUSTWORTHY_RECI_VAR,
         friends_imgs: ['unknown', 'unknown', 'unknown', 'unknown', 'unknown']
@@ -116,7 +116,7 @@ $(function() {
     {    // untrustworthy
         type: 'trust-game',
         center_img: players[3][0],
-        center_caption: players[3][1],
+        center_caption: players[3][1]+'U',
         recip_dist_mean: UNTRUSTWORTHY_RECI_MEAN,
         recip_dist_var: UNTRUSTWORTHY_RECI_VAR,
         friends_imgs: ['unknown', 'unknown', 'unknown', 'unknown', 'unknown']
@@ -126,7 +126,7 @@ $(function() {
     var block2Trials = [{    // trustworthy
         type: 'trust-game',
         center_img: players[4][0],
-        center_caption: players[4][1],
+        center_caption: players[4][1]+'T',
         recip_dist_mean: TRUSTWORTHY_RECI_MEAN,
         recip_dist_var: TRUSTWORTHY_RECI_VAR,
         friends_imgs: [players[0][0], 'unknown', 'unknown', 'unknown', 'unknown']
@@ -134,7 +134,7 @@ $(function() {
     {    // trustworthy
         type: 'trust-game',
         center_img: players[5][0],
-        center_caption: players[5][1],
+        center_caption: players[5][1]+'T',
         recip_dist_mean: TRUSTWORTHY_RECI_MEAN,
         recip_dist_var: TRUSTWORTHY_RECI_VAR,
         friends_imgs: [players[2][0], 'unknown', 'unknown', 'unknown', 'unknown']
@@ -142,7 +142,7 @@ $(function() {
     {    // trustworthy
         type: 'trust-game',
         center_img: players[6][0],
-        center_caption: players[6][1],
+        center_caption: players[6][1]+'T',
         recip_dist_mean: TRUSTWORTHY_RECI_MEAN,
         recip_dist_var: TRUSTWORTHY_RECI_VAR,
         friends_imgs: ['unknown', 'unknown', 'unknown', 'unknown', 'unknown']
@@ -150,7 +150,7 @@ $(function() {
     {    // untrustworthy
         type: 'trust-game',
         center_img: players[7][0],
-        center_caption: players[7][1],
+        center_caption: players[7][1]+'U',
         recip_dist_mean: UNTRUSTWORTHY_RECI_MEAN,
         recip_dist_var: UNTRUSTWORTHY_RECI_VAR,
         friends_imgs: [players[1][0], 'unknown', 'unknown', 'unknown', 'unknown']
@@ -158,7 +158,7 @@ $(function() {
     {    // untrustworthy
         type: 'trust-game',
         center_img: players[8][0],
-        center_caption: players[8][1],
+        center_caption: players[8][1]+'U',
         recip_dist_mean: UNTRUSTWORTHY_RECI_MEAN,
         recip_dist_var: UNTRUSTWORTHY_RECI_VAR,
         friends_imgs: [players[3][0], 'unknown', 'unknown', 'unknown', 'unknown']
@@ -166,7 +166,7 @@ $(function() {
     {    // untrustworthy
         type: 'trust-game',
         center_img: players[9][0],
-        center_caption: players[9][1],
+        center_caption: players[9][1]+'U',
         recip_dist_mean: UNTRUSTWORTHY_RECI_MEAN,
         recip_dist_var: UNTRUSTWORTHY_RECI_VAR,
         friends_imgs: ['unknown', 'unknown', 'unknown', 'unknown', 'unknown']

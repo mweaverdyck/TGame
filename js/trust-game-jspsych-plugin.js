@@ -17,6 +17,15 @@ jsPsych.plugins['trust-game'] = (function() {
         trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
 
         // add elements
+        //   total earning
+        if (trial.block_index !== 0) {
+            display_element.append($('<p>', {
+                id: 'total-earning',
+                class: "fixed-position-upper-right",
+                text: 'Your earning: $' + totalEarning
+            }));
+        }
+
         //   player image
         var centerImgDiv = $('<div>', {
             class: "center-img-div"
@@ -85,7 +94,7 @@ jsPsych.plugins['trust-game'] = (function() {
                 type: "text",
                 'data-slider-min': 0,
                 'data-slider-max': trial.money,
-                'data-slider-step': 0.01,
+                'data-slider-step': 1,
                 'data-slider-value': 0
         })));
         sliderDiv.append('<span class="right-num"><b>$' + trial.money + '</b></span>');
@@ -122,7 +131,7 @@ jsPsych.plugins['trust-game'] = (function() {
             trial_data = {
                 block_index: trial.block_index,
                 response: response,
-                received: Math.round(response * 300)/100,
+                received: response * 3,
                 rt: response_time,
                 image: trial.center_img,
                 trustworthy: isTrustworthy(trial.center_img),
@@ -139,6 +148,12 @@ jsPsych.plugins['trust-game'] = (function() {
                         trustworthy: isTrustworthy(trial.friends_imgs[i])
                     });
                 }
+            }
+
+            // update earning
+            if (trial.block_index !== 0) {
+                totalEarning += trial.money - response;
+                $('#total-earning').html('Your earning: $' + totalEarning);
             }
 
             // remove some elements
@@ -166,17 +181,23 @@ jsPsych.plugins['trust-game'] = (function() {
 
                 // reciprocate
                 if (trial.recip_dist_var === 0) {
-                    trial_data.reciprocation = Math.round(100 * trial_data.received * trial.recip_dist_mean)/100;
+                    trial_data.reciprocation = Math.round(trial_data.received * trial.recip_dist_mean);
                 } else {
                     // get a random number from the distribution
                     var distribution = gaussian(trial.recip_dist_mean, trial.recip_dist_var);
-                    trial_data.reciprocation = Math.round(100 * trial_data.received * distribution.ppf(Math.random()))/100;
+                    trial_data.reciprocation = Math.round(trial_data.received * distribution.ppf(Math.random()));
                     if (trial_data.reciprocation < 0) {
                         trial_data.reciprocation = 0;
                     }
                     if (trial_data.reciprocation > trial_data.received) {
                         trial_data.reciprocation = trial_data.received;
                     }
+                }
+
+                // update earning
+                if (trial.block_index !== 0) {
+                    totalEarning += trial_data.reciprocation;
+                    $('#total-earning').html('Your earning: $' + totalEarning);
                 }
 
                 // add new html elements

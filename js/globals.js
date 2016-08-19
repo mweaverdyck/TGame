@@ -3,6 +3,8 @@ var hookWindow = false;
 
 var trustworthyImgIndexes = [0, 1, 4, 5, 6];
 
+var totalEarning = 0;
+
 
 function random_int(min, max) {  // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -27,6 +29,7 @@ function isTrustworthy(imgPath) {
             return false;
         }
     }
+    return false;
 }
 
 // Data writers
@@ -46,11 +49,12 @@ function write_trial_data(userId, experimentId, data) {
 }
 
 function after_last_trial(userId, experimentId) {
-    var path = '/' + userId + '/' + experimentId + '/end_time';
-    var endTimeUpdate = {};
-    endTimeUpdate[path] = (new Date()).toUTCString();
+    var path = '/' + userId + '/' + experimentId;
+    var update = {};
+    update[path + '/end_time'] = (new Date()).toUTCString();
+    update[path + '/total_earning'] = totalEarning;
 
-    firebase.database().ref().update(endTimeUpdate).then(function() {
+    firebase.database().ref().update(update).then(function() {
         hookWindow = false;
         firebase.auth().currentUser.delete();
     });

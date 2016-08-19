@@ -24,12 +24,16 @@ var INSTR_WEB = [
                     '<img src="img/player_example_2.png" class="player-example">'
                 ];
 
+var INSTR_ASSIGN_GAME = 'Please wait while we assign games for you...';
 var INSTR_ASSIGN_ROLE = 'Please wait while we assign your role...';
 
-var INSTR_GAME = [
+var INSTR_GAME = [[
                     '<p>' + 'Today you’ll be playing 3 blocks of games. Each block will last 5-10 minutes.' + '</p>',
                     '<p>' + 'In Block 1, you’ve been assigned to play the <b>Investment Game</b> with other players.<br/><br/>' + 
-                    'In each round of the Investment Game, you’ll be partenered one person, and start with a sum of money. ' +
+                    'In each round of the Investment Game, you’ll be partenered with one person.' + '</p>'
+                    ], [
+                    '<p>' + 'You have been assigned as the first player.' + '</p>' +
+                    '<p>' + 'As the first player, you\'ll start each round with a sum of money. ' +
                     'You\'ll have the opportunity to invest your money by giving a portion of that to your partner -- you can choose ' +
                     'any amount from $0 to $' + MAX_MONEY + '. ' +
                     'Any amount of money you choose to invest will then be <b>tripled</b> and delivered to your partner.<br/>' +
@@ -37,22 +41,30 @@ var INSTR_GAME = [
                     'If you choose not to invest anything, you’ll keep all of the money that you started with that round.' + '</p>',
                     '<p>' + 'To give you a sense of how to play the Investment Game, we’ll go through a couple of "practice rounds" now.' +
                     '</p>'
-                ];
+                ]];
 
-var INSTR_BLOCK_1 = '<p>' + 'Great, now we\'re ready to begin!<br/>If you understand these instructions, press space to start the first ' +
-                    'block of games.' + '</p>';
+var INSTR_BLOCK_1 = [
+                     '<p>' + 'Great, now we\'re ready to begin!' + '</p>',
+                     '<p>' + 'From now on, the money you earned will show in the upper right corner. Remember you will actually earn a ' +
+                     'portion of that amount at the end of your session.' + '</p>' +
+                     '<p id="total-earning" class="fixed-position-upper-right">Your earning: $0</p>' +
+                     '<script> $("#total-earning").fadeIn(200).fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200); </script>',
+                     'If you understand these instructions, press right arrow to start the first block of games.' + '</p>'
+                    ];
 
 var INSTR_FIND_PARTNER = 'Please wait while we look for your partners...';
 
 var INSTR_BLOCK_2 = [
                     '<p>' + 'You have now completed Block 1!' + '</p>',
                     '<p>' + 'In Block 2, you’ll be playing the Investment Game again.' + '</p>',
-                    '<p>' + 'In this block, you’ll be playing with a new set of partners. You might encounter your previous partners ' +
-                    'later on today, but in Block 2, you’ll be playing with all new people.' + '</p>',
-                    '<p>' + 'If one of your new partners is a friend with someone you’ve played with before, you’ll be able to see that ' +
-                    'person’s face instead of a question mark.' + '</p>',
-                    '<p>' + 'Press right arrow to start the second block of games.' + '</p>'
-                ];
+                    [
+                        '<p>' + 'You have been assigned as the first player.' + '</p>',
+                        '<p>' + 'In this block, you’ll be playing with a new set of partners. You might encounter your previous partners ' +
+                        'later on today, but in Block 2, you’ll be playing with all new people.' + '</p>',
+                        '<p>' + 'If one of your new partners is a friend with someone you’ve played with before, you’ll be able to see that ' +
+                        'person’s face instead of a question mark.' + '</p>',
+                        '<p>' + 'Press right arrow to start the second block of games.' + '</p>'
+                    ]];
 
 var INSTR_BLOCK_3 = [
                     '<p>' + 'You have now completed Block 2!' + '</p>',
@@ -66,73 +78,93 @@ INSTR_WEB[0] += INSTR_CONTINUE;
 for (var i = 1; i < INSTR_WEB.length; ++i) {
     INSTR_WEB[i] += INSTR_CONTINUE_OR_BACK;
 }
-INSTR_GAME[0] += INSTR_CONTINUE;
-for (var i = 1; i < INSTR_GAME.length; ++i) {
-    INSTR_GAME[i] += INSTR_CONTINUE_OR_BACK;
+for (var i = 0; i < INSTR_GAME.length; ++i) {
+    INSTR_GAME[i][0] += INSTR_CONTINUE;
+    for (var j = 1; j < INSTR_GAME[i].length; ++j) {
+        INSTR_GAME[i][j] += INSTR_CONTINUE_OR_BACK;
+    }
 }
+INSTR_BLOCK_1[0] += INSTR_CONTINUE;
+INSTR_BLOCK_1[1] += INSTR_CONTINUE_OR_BACK;
 INSTR_BLOCK_2[0] += INSTR_CONTINUE;
-for (var i = 1; i < INSTR_GAME.length - 1; ++i) {
-    INSTR_GAME[i] += INSTR_CONTINUE_OR_BACK;
+INSTR_BLOCK_2[1] += INSTR_CONTINUE;
+INSTR_BLOCK_2[2][0] += INSTR_CONTINUE;
+for (var i = 1; i < INSTR_BLOCK_2[2].length - 1; ++i) {
+    INSTR_BLOCK_2[2][i] += INSTR_CONTINUE_OR_BACK;
 }
 INSTR_BLOCK_3[0] += INSTR_CONTINUE;
 INSTR_BLOCK_3[1] += INSTR_CONTINUE_OR_BACK;
 
 // jsPsych trials
+var assignGameScreen = {
+    type: 'timed-instr',
+    text: INSTR_ASSIGN_GAME,
+    time_min: ASSIGNMENT_WAIT_TIME_MIN,
+    time_max: ASSIGNMENT_WAIT_TIME_MAX
+};
+var assignRoleScreen = {
+    type: 'timed-instr',
+    text: INSTR_ASSIGN_ROLE,
+    time_min: ASSIGNMENT_WAIT_TIME_MIN,
+    time_max: ASSIGNMENT_WAIT_TIME_MAX
+};
+var findPartnerScreen = {
+    type: 'timed-instr',
+    text: INSTR_FIND_PARTNER,
+    time_min: FIND_PARTNER_TIME_MIN,
+    time_max: FIND_PARTNER_TIME_MAX
+};
+
 var beginningInstructions = [
     {
         type: 'instructions',
         pages: INSTR_WEB
     },
-    {
-        type: 'timed-instr',
-        text: INSTR_ASSIGN_ROLE,
-        time_min: 2000,
-        time_max: 4000
-    },
+    assignGameScreen,
     {
         type: 'instructions',
-        pages: INSTR_GAME
-    }
+        pages: INSTR_GAME[0]
+    },
+    assignRoleScreen,
+    {
+        type: 'instructions',
+        pages: INSTR_GAME[1]
+    },
 ];
 
 var waitScreen = {
     type: 'timed-instr',
     text: INSTR_WAIT,
-    time_min: 2000,
-    time_max: 4000
+    time_min: 3000,
+    time_max: 9000
 };
 
 var block1Instructions = [
     {
         type: 'instructions',
-        pages: [INSTR_BLOCK_1],
-        key_forward: 'space'
+        pages: INSTR_BLOCK_1
     },
-    {
-        type: 'timed-instr',
-        text: INSTR_FIND_PARTNER,
-        time_min: 2000,
-        time_max: 4000
-    },
-    {
-        type: 'ready'
-    }
+    findPartnerScreen,
+    { type: 'ready' }
 ];
 
 var block2Instructions = [
     {
         type: 'instructions',
-        pages: INSTR_BLOCK_2
+        pages: [INSTR_BLOCK_2[0]]
     },
+    assignGameScreen,
     {
-        type: 'timed-instr',
-        text: INSTR_FIND_PARTNER,
-        time_min: 2000,
-        time_max: 4000
+        type: 'instructions',
+        pages: [INSTR_BLOCK_2[1]]
     },
+    assignRoleScreen,
     {
-        type: 'ready'
-    }
+        type: 'instructions',
+        pages: INSTR_BLOCK_2[2]
+    },
+    findPartnerScreen,
+    { type: 'ready' }
 ];
 
 var block3Instructions = [
