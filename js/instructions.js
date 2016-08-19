@@ -32,7 +32,7 @@ var INSTR_GAME = [[
                     '<p>' + 'In Block 1, you’ve been assigned to play the <b>Investment Game</b> with other players.<br/><br/>' + 
                     'In each round of the Investment Game, you’ll be partenered with one person.' + '</p>'
                     ], [
-                    '<p>' + 'You have been assigned as the first player.' + '</p>' +
+                    '<p>' + 'You've been assigned as the first player.' + '</p>' +
                     '<p>' + 'As the first player, you\'ll start each round with a sum of money. ' +
                     'You\'ll have the opportunity to invest your money by giving a portion of that to your partner -- you can choose ' +
                     'any amount from $0 to $' + MAX_MONEY + '. ' +
