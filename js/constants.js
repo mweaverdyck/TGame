@@ -22,8 +22,8 @@ var players = [['img/player_img/AF-209.jpg', 'Jessica'],
 
 var MAX_MONEY = 10;
 
-var BLOCK_1_NUM_TRIALS_PER_PLAYER = 1;
-var BLOCK_2_NUM_TRIALS_PER_PLAYER = 1;
+var BLOCK_1_NUM_TRIALS_PER_PLAYER = 2;
+var BLOCK_2_NUM_TRIALS_PER_PLAYER = 2;
 
 var TRUSTWORTHY_RECI_MEAN = 0.5;
 var TRUSTWORTHY_RECI_VAR = 0.05;
