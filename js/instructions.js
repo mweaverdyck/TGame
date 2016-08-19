@@ -58,7 +58,7 @@ var INSTR_BLOCK_2 = [
                     '<p>' + 'You have now completed Block 1!' + '</p>',
                     '<p>' + 'In Block 2, you’ll be playing the Investment Game again.' + '</p>',
                     [
-                        '<p>' + 'You have been assigned as the first player.' + '</p>',
+                        '<p>' + 'You've been assigned as the first player.' + '</p>',
                         '<p>' + 'In this block, you’ll be playing with a new set of partners. You might encounter your previous partners ' +
                         'later on today, but in Block 2, you’ll be playing with all new people.' + '</p>',
                         '<p>' + 'If one of your new partners is a friend with someone you’ve played with before, you’ll be able to see that ' +
