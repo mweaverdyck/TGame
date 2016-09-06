@@ -32,7 +32,7 @@ var INSTR_GAME = [[
                     '<p>' + 'In Block 1, you’ve been assigned to play the <b>Investment Game</b> with other players.<br/><br/>' + 
                     'In each round of the Investment Game, you’ll be partenered with one person.' + '</p>'
                     ], [
-                    '<p>' + 'You've been assigned as the first player.' + '</p>' +
+                    '<p>' + 'You\'ve been assigned as the first player.' + '</p>' +
                     '<p>' + 'As the first player, you\'ll start each round with a sum of money. ' +
                     'You\'ll have the opportunity to invest your money by giving a portion of that to your partner -- you can choose ' +
                     'any amount from $0 to $' + MAX_MONEY + '. ' +
@@ -58,7 +58,7 @@ var INSTR_BLOCK_2 = [
                     '<p>' + 'You have now completed Block 1!' + '</p>',
                     '<p>' + 'In Block 2, you’ll be playing the Investment Game again.' + '</p>',
                     [
-                        '<p>' + 'You've been assigned as the first player.' + '</p>',
+                        '<p>' + 'You\'ve been assigned as the first player.' + '</p>',
                         '<p>' + 'In this block, you’ll be playing with a new set of partners. You might encounter your previous partners ' +
                         'later on today, but in Block 2, you’ll be playing with all new people.' + '</p>',
                         '<p>' + 'If one of your new partners is a friend with someone you’ve played with before, you’ll be able to see that ' +
