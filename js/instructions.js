@@ -47,7 +47,7 @@ var INSTR_BLOCK_1 = [
                      '<p>' + 'Great, now we\'re ready to begin!' + '</p>',
                      '<p>' + 'From now on, the money you earned will show in the upper right corner. Remember you will actually earn a ' +
                      'portion of that amount at the end of your session.' + '</p>' +
-                     '<p id="total-earning" class="fixed-position-upper-right">Your earning: $0</p>' +
+                     '<p id="total-earning" class="fixed-position-upper-right">' + EARNING_TEXT + '0</p>' +
                      '<script> $("#total-earning").fadeIn(200).fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200); </script>',
                      'If you understand these instructions, press right arrow to start the first block of games.' + '</p>'
                     ];

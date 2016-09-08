@@ -22,7 +22,7 @@ jsPsych.plugins['trust-game'] = (function() {
             display_element.append($('<p>', {
                 id: 'total-earning',
                 class: "fixed-position-upper-right",
-                text: 'Your earning: $' + totalEarning
+                text: EARNING_TEXT + totalEarning
             }));
         }
 
@@ -153,7 +153,7 @@ jsPsych.plugins['trust-game'] = (function() {
             // update earning
             if (trial.block_index !== 0) {
                 totalEarning += trial.money - response;
-                $('#total-earning').html('Your earning: $' + totalEarning);
+                $('#total-earning').html(EARNING_TEXT + totalEarning);
             }
 
             // remove some elements
@@ -197,11 +197,12 @@ jsPsych.plugins['trust-game'] = (function() {
                 // update earning
                 if (trial.block_index !== 0) {
                     totalEarning += trial_data.reciprocation;
-                    $('#total-earning').html('Your earning: $' + totalEarning);
+                    $('#total-earning').html(EARNING_TEXT + totalEarning);
                 }
 
                 // add new html elements
-                $('#result-text').append('<br/>' + trial.center_caption + ' has returned <b>$' + trial_data.reciprocation + '</b> to you.');
+                $('#result-text').append('<br/>' + trial.center_caption + ' has returned <b>$' + trial_data.reciprocation +
+                                         '</b> of <b>$' + trial_data.received + '</b> to you.');
 
                 display_element.append($('<button>', {
                     id: 'next',

@@ -1,5 +1,7 @@
 
-var CLOSE_WINDOW_ALERT = "Do you want to leave this page? Your progress will not be saved.";
+var CLOSE_WINDOW_ALERT = 'Do you want to leave this page? Your progress will not be saved.';
+
+var EARNING_TEXT = 'Your total earnings: $';
 
 var allImgs = ['img/player_img/AF-209.jpg', 'img/player_img/BM-027.jpg', 'img/player_img/LF-203.jpg',
                'img/player_img/LF-230.jpg', 'img/player_img/WF-007.jpg', 'img/player_img/BF-013.jpg',
