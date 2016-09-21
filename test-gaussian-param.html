@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Test</title>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <style>
+        .margin {
+            margin: 10px;
+        }
+        .margin-btm {
+            margin-bottom: 10px;
+        }
+        .unbold {
+            font-weight: normal;
+        }
+        .gray {
+            color: grey;
+        }
+    </style>
+    <body>
+        <div class="margin">
+            Mean:
+            <input id="mean" type="text" value=0.5>
+            Variance:
+            <input id="variance" type="text">
+            Money received: $
+            <input id="money" type="text" value="30">
+            <button id="submit" type="button">Give me back random money for 30 times</button>
+        </div>
+        <div id="results" class="margin">
+        </div>
+
+        <script type="text/javascript" src="js/gaussian.js"></script>
+        <script type="text/javascript">
+            $('#submit').click(function() {
+                var mean = $('#mean').val();
+                var variance = $('#variance').val();
+                var money = $('#money').val();
+                if (isNaN(parseFloat(mean)) || !isFinite(mean) || isNaN(parseFloat(variance)) || !isFinite(variance) || isNaN(parseFloat(money)) || !isFinite(money) || variance == 0) {
+                    $('#results').append($('<p>', {
+                        class: 'gray',
+                        text: 'Yo there is something wrong with your input'
+                    }));
+                    return;
+                }
+                
+                $('#results').append($('<table>').append(
+                    $('<th>', {
+                        text: 'mean = ' + mean + ', variance = ' + variance + ', SD = ' + Math.sqrt(variance) + ', money_received = ' + money
+                    })
+                ));
+                $('#results').append($('<table>', {
+                    class: 'margin-btm'
+                }).append($('<tr>', {
+                    id: "nums"
+                })));
+                for (var i = 0; i < 30; ++i) {
+                    var distribution = gaussian(mean, variance);
+                    var result = Math.round(money * distribution.ppf(Math.random()));
+                    if (result < 0) {
+                        result = 0;
+                    }
+                    if (result > money) {
+                        result = money;
+                    }
+                    $('#nums').append($('<th>', {
+                        class: 'unbold',
+                        width: 50,
+                        text: result
+                    }));
+                }
+                $('#nums').removeAttr('id');
+            });
+        </script>
+    </body>
+</html>
