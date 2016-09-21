@@ -12,7 +12,7 @@ var INSTR_WEB = [
                     '<p>' + 'You\'ll be playing a series of simple games with other people on this website.' + '</p>',
                     '<p>' + 'The players you\'ll be partnered with today are members of our website who regularly use the site and its ' +
                     'associated social network.' + '</p>',
-                    '<p>' + 'Players can choose their "Top 5" friends in their social network, whose pictures are displayed alongside their ' +
+                    '<p>' + 'Players can choose their "Top 5" friends on the website\'s social network, whose pictures are displayed alongside their ' +
                     'own profile picture, like this:' + '</p>' +
                     '<img src="img/player_example_1.png" class="player-example">',
                     '<p>' + 'Due to most users’ privacy settings, new users like you can only see those friends\' faces if you\'ve ' +
@@ -30,7 +30,7 @@ var INSTR_ASSIGN_ROLE = 'Please wait while we assign your role...';
 var INSTR_GAME = [[
                     '<p>' + 'Today you’ll be playing 3 blocks of games. Each block will last 5-10 minutes.' + '</p>',
                     '<p>' + 'In Block 1, you’ve been assigned to play the <b>Investment Game</b> with other players.<br/><br/>' + 
-                    'In each round of the Investment Game, you’ll be partenered with one person.' + '</p>'
+                    'In each round of the Investment Game, you’ll be partnered with one person.' + '</p>'
                     ], [
                     '<p>' + 'You\'ve been assigned as the first player.' + '</p>' +
                     '<p>' + 'As the first player, you\'ll start each round with a sum of money. ' +
