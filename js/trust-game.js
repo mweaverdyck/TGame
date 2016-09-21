@@ -32,15 +32,15 @@ $(function() {
     firebase.initializeApp(config);
 
     // Sign in
-    firebase.auth().signInAnonymously().then(function(user) {
-        var firebaseUid = user.uid;
-        console.log('Signed in as ' + firebaseUid);
+    // firebase.auth().signInAnonymously().then(function(user) {
+    //     var firebaseUid = user.uid;
+    //     console.log('Signed in as ' + firebaseUid);
 
-        firebase.database().ref('/' + userId + '/' + experimentId).set({
-            start_time: (new Date()).toUTCString(),
-            firebase_uid: firebaseUid
-        });
-    });
+    //     firebase.database().ref('/' + userId + '/' + experimentId).set({
+    //         start_time: (new Date()).toUTCString(),
+    //         firebase_uid: firebaseUid
+    //     });
+    // });
 
 
     // TRAINING TRIALS

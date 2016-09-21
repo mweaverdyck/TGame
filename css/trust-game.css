@@ -47,9 +47,12 @@ p {
   top: 0;
   right: 0;
 }
+.zero-margin-top {
+  margin-top: 0;
+}
 .player-example {
-  height: 300px;
-  height: 40vh;
+  height: 280px;
+  height: 37vh;
   margin: 5px;
 }
 .center-img-div {
