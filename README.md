@@ -1,4 +1,4 @@
-# Trust Game
+# Investment Game
 https://metad.github.io/InvestmentGame/
 
 ### TODO
