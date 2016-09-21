@@ -13,13 +13,16 @@
             margin: 10px;
         }
         .margin-btm {
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
         .unbold {
             font-weight: normal;
         }
         .gray {
             color: grey;
+        }
+        .blue {
+            color: #1a8cff;
         }
     </style>
     <body>
@@ -37,10 +40,7 @@
 
         <script type="text/javascript" src="js/gaussian.js"></script>
         <script type="text/javascript">
-            $('#submit').click(function() {
-                var mean = $('#mean').val();
-                var variance = $('#variance').val();
-                var money = $('#money').val();
+            function do_it(mean, variance, money) {
                 if (isNaN(parseFloat(mean)) || !isFinite(mean) || isNaN(parseFloat(variance)) || !isFinite(variance) || isNaN(parseFloat(money)) || !isFinite(money) || variance == 0) {
                     $('#results').append($('<p>', {
                         class: 'gray',
@@ -50,9 +50,7 @@
                 }
                 
                 $('#results').append($('<table>').append(
-                    $('<th>', {
-                        text: 'mean = ' + mean + ', variance = ' + variance + ', SD = ' + Math.sqrt(variance) + ', money_received = ' + money
-                    })
+                    '<th>mean = <span class="blue">' + mean + '</span>, variance = <span class="blue">' + variance + '</span>, SD = ' + Math.sqrt(variance) + ', money_received = ' + money
                 ));
                 $('#results').append($('<table>', {
                     class: 'margin-btm'
@@ -75,7 +73,30 @@
                     }));
                 }
                 $('#nums').removeAttr('id');
+            }
+
+            $('#submit').click(function() {
+                var mean_ = $('#mean').val();
+                var variance_ = $('#variance').val();
+                var money_ = $('#money').val();
+                do_it(mean_, variance_, money_);
             });
+
+            var parameters = window.location.search.substring(1);
+            var auto = false;
+            if (parameters.length > 0) {
+                auto = parameters.split("=")[1];  // get id from url parameter
+            }
+
+            var means = [0, 0.05, 0.1, 0.45, 0.5, 0.55]
+            var vars = [0.004, 0.01, 0.03, 0.05, 0.07, 0.09]
+            if (auto == 'true') {
+                for (var j = 0; j < vars.length; ++j) {
+                    for (var i = 0; i < means.length; ++i) {
+                        do_it(means[i], vars[j], 30);
+                    }
+                }
+            }
         </script>
     </body>
 </html>

@@ -18,7 +18,7 @@ $(function() {
     if (parameters.length > 0) {
         userId = parameters.split("=")[1];  // get id from url parameter
     } else {
-        // $('body').html('');
+        // $('body').html(''); // TODO
     }
 
 
