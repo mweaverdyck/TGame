@@ -4,24 +4,21 @@ jsPsych.plugins['ready'] = (function() {
     var plugin = {};
 
     plugin.trial = function(display_element, trial) {
-        // set default values for parameters
-        trial.progressbar_text = trial.progressbar_text || '';
-
         trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
 
         // add elements
-        display_element.append('<p>You are now connected to your partners\' computers.<br/>Click below when you are ready to begin.</p>');
+        display_element.append('<p>Please answer a few demographic questions below:</p>');
 
         display_element.append($('<button>', {
-            id: 'ready',
+            id: 'next',
             class: "autocompare btn btn-primary",
-            text: 'I\'m Ready!'
+            text: 'Next'
         }));
 
         var startTime = Date.now();
         var trial_data = {};
 
-        $('#ready').click(function() {
+        $('#next').click(function() {
             // record time
             var response_time = Date.now() - startTime;
             trial_data = {

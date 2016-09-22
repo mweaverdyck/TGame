@@ -137,7 +137,7 @@ var beginningInstructions = [
 var waitScreen = {
     type: 'timed-instr',
     text: INSTR_WAIT,
-    time_min: 3000,
+    time_min: 1500,
     time_max: 9000
 };
 
