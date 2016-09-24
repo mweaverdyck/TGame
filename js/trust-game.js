@@ -207,6 +207,10 @@ $(function() {
 
     // BLOCK 3 SURVEY QUESTIONS
     var block3 = [{
+        type: 'demography',
+        on_finish: block_3_on_trial_finish
+    },
+    {
         type: 'survey-slider',
         question: 'How much did you enjoy playing the Investment Game?',
         min_text: '0%',
@@ -266,6 +270,7 @@ $(function() {
     });
 
     // EXPERIMENT TIMELINE
+    timeline = timeline.concat(beginningInstructions);
     //   Instructions
     timeline = timeline.concat(beginningInstructions);
     //   Training Trials
@@ -285,7 +290,7 @@ $(function() {
     timeline = timeline.concat(block3);
 
     function startExperiment() {
-        hookWindow = true;
+        // hookWindow = true;
         // Start the experiment
         jsPsych.init({
             display_element: $('#jspsych-target'),

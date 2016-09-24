@@ -15,7 +15,7 @@ var INSTR_WEB = [
                     '<p>' + 'Players can choose their "Top 5" friends on the website\'s social network, whose pictures are displayed alongside their ' +
                     'own profile picture, like this:' + '</p>' +
                     '<img src="img/player_example_1.png" class="player-example">' +
-                    '<p class="small zero-margin-top">The player images shown here are for illustration only. In the actual games, you\'ll see other ' +
+                    '<p class="small zero-space-top">The player images shown here are for illustration only. In the actual games, you\'ll see other ' +
                     'players\' actual profile pictures instead of cartoon images.</p>',
                     '<p>' + 'Due to most users’ privacy settings, new users like you can only see those friends\' faces if you\'ve ' +
                     'interacted with them before on the site. Players\' friends who you haven\'t encountered before will look like this:' +
