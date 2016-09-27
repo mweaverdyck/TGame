@@ -28,13 +28,13 @@ jsPsych.plugins['trust-game'] = (function() {
 
         //   player image
         var centerImgDiv = $('<div>', {
-            class: "center-img-div"
+            class: "center-img img-div"
         }).append($('<div>', {
             class: "image-cropper"
         }));
         var centerImgCropper = centerImgDiv.children();
         centerImgCropper.append($('<p>', {
-            class:"center-img-text",
+            class:"img-text",
             text: trial.center_caption
         }));
         centerImgCropper.append($('<img>', {

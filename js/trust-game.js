@@ -31,16 +31,16 @@ $(function() {
     };
     firebase.initializeApp(config);
 
-    // Sign in
-    firebase.auth().signInAnonymously().then(function(user) {
-        var firebaseUid = user.uid;
-        console.log('Signed in as ' + firebaseUid);
+    // // Sign in
+    // firebase.auth().signInAnonymously().then(function(user) {
+    //     var firebaseUid = user.uid;
+    //     console.log('Signed in as ' + firebaseUid);
 
-        firebase.database().ref('/' + userId + '/' + experimentId).set({
-            start_time: (new Date()).toUTCString(),
-            firebase_uid: firebaseUid
-        });
-    });
+    //     firebase.database().ref('/' + userId + '/' + experimentId).set({
+    //         start_time: (new Date()).toUTCString(),
+    //         firebase_uid: firebaseUid
+    //     });
+    // });
 
 
     // TRAINING TRIALS
@@ -206,7 +206,7 @@ $(function() {
     } 
 
     // BLOCK 3 SURVEY QUESTIONS
-    var block3 = [{
+    var block3 = [/*{
         type: 'demography',
         on_finish: block_3_on_trial_finish
     },
@@ -233,26 +233,33 @@ $(function() {
         min_text: '0%',
         max_text: '100%',
         on_finish: block_3_on_trial_finish
-    }];
-    for (var i = 0; i < players.length; ++i) {
-        block3.push({
-            type: 'survey-likert',
-            preamble: 'You may have the chance to be invited back to complete a cooperative puzzle-solving game with a partner. ' +
-                    'If this happens, we\'ll do our best to follow your preferences in assigning you a partner. Please rate how ' +
-                    'much you would like to be paired with each partner you played with today.',
-            questions: [''],
-            image: players[i][0],
-            caption: players[i][1],
-            labels: [['Not at all', 'Definitely yes']],
-            num_points: 7,
-            on_finish: function(data) {
-                data.response = parseInt(data.response) + 1;
-                data.block_index = 3;
-                data.trustworthy = isTrustworthy(data.img);
-                write_trial_data(userId, experimentId, data);
-            }
-        });
-    }
+    }*/];
+    // for (var i = 0; i < players.length; ++i) {
+    //     block3.push({
+    //         type: 'survey-likert',
+    //         preamble: 'You may have the chance to be invited back to complete a cooperative puzzle-solving game with a partner. ' +
+    //                 'If this happens, we\'ll do our best to follow your preferences in assigning you a partner. Please rate how ' +
+    //                 'much you would like to be paired with each partner you played with today.',
+    //         questions: [''],
+    //         image: players[i][0],
+    //         caption: players[i][1],
+    //         labels: [['Not at all', 'Definitely yes']],
+    //         num_points: 7,
+    //         on_finish: function(data) {
+    //             data.response = parseInt(data.response) + 1;
+    //             data.block_index = 3;
+    //             data.trustworthy = isTrustworthy(data.img);
+    //             write_trial_data(userId, experimentId, data);
+    //         }
+    //     });
+    // }
+    block3.push({
+        type: 'match-img',
+        left_img: players[8][0],
+        left_caption: players[8][1],
+        right_img: players[1][0],
+        right_caption: players[1][1]
+    });
     block3.push({
         type: 'survey-text',
         block_index: 3,
@@ -270,23 +277,23 @@ $(function() {
     });
 
     // EXPERIMENT TIMELINE
-    timeline = timeline.concat(beginningInstructions);
-    //   Instructions
-    timeline = timeline.concat(beginningInstructions);
-    //   Training Trials
-    timeline = timeline.concat(trainingTrials);
-    //   More Instructions for block 1
-    timeline = timeline.concat(block1Instructions);
-    //   Block 1 Trials
-    timeline.push(waitScreen);
-    add_trials_randomly(block1Trials, BLOCK_1_NUM_TRIALS_PER_PLAYER, 1);
-    //   More Instructions for block 2
-    timeline = timeline.concat(block2Instructions);
-    //   Block 2 Trials
-    timeline.push(waitScreen);
-    add_trials_randomly(block2Trials, BLOCK_2_NUM_TRIALS_PER_PLAYER, 2);
-    //   More Instructions for block 3
-    timeline = timeline.concat(block3Instructions);
+    // timeline = timeline.concat(beginningInstructions);
+    // //   Instructions
+    // timeline = timeline.concat(beginningInstructions);
+    // //   Training Trials
+    // timeline = timeline.concat(trainingTrials);
+    // //   More Instructions for block 1
+    // timeline = timeline.concat(block1Instructions);
+    // //   Block 1 Trials
+    // timeline.push(waitScreen);
+    // add_trials_randomly(block1Trials, BLOCK_1_NUM_TRIALS_PER_PLAYER, 1);
+    // //   More Instructions for block 2
+    // timeline = timeline.concat(block2Instructions);
+    // //   Block 2 Trials
+    // timeline.push(waitScreen);
+    // add_trials_randomly(block2Trials, BLOCK_2_NUM_TRIALS_PER_PLAYER, 2);
+    // //   More Instructions for block 3
+    // timeline = timeline.concat(block3Instructions);
     timeline = timeline.concat(block3);
 
     function startExperiment() {

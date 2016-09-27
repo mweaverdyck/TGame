@@ -59,15 +59,25 @@ p {
   height: 37vh;
   margin: 5px;
 }
-.center-img-div {
+.left-img {
+  float: left;
+  margin: 0 50px 50px 0;
+}
+.right-img {
+  float: right;
+  margin: 0 0 50px 50px;
+}
+.center-img {
   margin: -250px auto 0 auto;
   margin: -38vh auto 0 auto;
+}
+.img-div {
   width: 150px;
   height: 150px;
   width: 25vmin;
   height: 25vmin;
 }
-.center-img-text {
+.img-text {
   position: absolute;
   bottom: 0;
   width: 100%;
