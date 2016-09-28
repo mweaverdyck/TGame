@@ -129,7 +129,7 @@ $(function() {
         center_caption: players[4][1],
         recip_dist_mean: TRUSTWORTHY_RECI_MEAN,
         recip_dist_var: TRUSTWORTHY_RECI_VAR,
-        friends_imgs: [players[0][0], 'unknown', 'unknown', 'unknown', 'unknown']
+        friends_imgs: [getFriendImg(4), 'unknown', 'unknown', 'unknown', 'unknown']
     },
     {    // trustworthy
         type: 'trust-game',
@@ -137,7 +137,7 @@ $(function() {
         center_caption: players[5][1],
         recip_dist_mean: TRUSTWORTHY_RECI_MEAN,
         recip_dist_var: TRUSTWORTHY_RECI_VAR,
-        friends_imgs: [players[2][0], 'unknown', 'unknown', 'unknown', 'unknown']
+        friends_imgs: [getFriendImg(5), 'unknown', 'unknown', 'unknown', 'unknown']
     },
     {    // trustworthy
         type: 'trust-game',
@@ -145,7 +145,7 @@ $(function() {
         center_caption: players[6][1],
         recip_dist_mean: TRUSTWORTHY_RECI_MEAN,
         recip_dist_var: TRUSTWORTHY_RECI_VAR,
-        friends_imgs: ['unknown', 'unknown', 'unknown', 'unknown', 'unknown']
+        friends_imgs: [getFriendImg(6), 'unknown', 'unknown', 'unknown', 'unknown']
     },
     {    // untrustworthy
         type: 'trust-game',
@@ -153,7 +153,7 @@ $(function() {
         center_caption: players[7][1],
         recip_dist_mean: UNTRUSTWORTHY_RECI_MEAN,
         recip_dist_var: UNTRUSTWORTHY_RECI_VAR,
-        friends_imgs: [players[1][0], 'unknown', 'unknown', 'unknown', 'unknown']
+        friends_imgs: [getFriendImg(7), 'unknown', 'unknown', 'unknown', 'unknown']
     },
     {    // untrustworthy
         type: 'trust-game',
@@ -161,7 +161,7 @@ $(function() {
         center_caption: players[8][1],
         recip_dist_mean: UNTRUSTWORTHY_RECI_MEAN,
         recip_dist_var: UNTRUSTWORTHY_RECI_VAR,
-        friends_imgs: [players[3][0], 'unknown', 'unknown', 'unknown', 'unknown']
+        friends_imgs: [getFriendImg(8), 'unknown', 'unknown', 'unknown', 'unknown']
     },
     {    // untrustworthy
         type: 'trust-game',
@@ -169,7 +169,7 @@ $(function() {
         center_caption: players[9][1],
         recip_dist_mean: UNTRUSTWORTHY_RECI_MEAN,
         recip_dist_var: UNTRUSTWORTHY_RECI_VAR,
-        friends_imgs: ['unknown', 'unknown', 'unknown', 'unknown', 'unknown']
+        friends_imgs: [getFriendImg(9), 'unknown', 'unknown', 'unknown', 'unknown']
     }];
 
     // HELPER FUNC
@@ -199,14 +199,29 @@ $(function() {
         }
     }
 
-    // BLOCK 3 HELPER
+    // BLOCK 3 HELPERS
     function block_3_on_trial_finish(data) {
         data.block_index = 3;
         write_trial_data(userId, experimentId, data);
-    } 
+    }
+
+    function create_player_matching_trial(player1Index, player2Index) {
+        // random side
+        var leftIndex = random_int(0, 1) === 0 ? player1Index : player2Index;
+        var rightIndex = leftIndex === player1Index ? player2Index : player1Index;
+
+        return {
+            type: 'match-img',
+            left_img: players[leftIndex][0],
+            left_caption: players[leftIndex][1],
+            right_img: players[rightIndex][0],
+            right_caption: players[rightIndex][1],
+            on_finish: block_3_on_trial_finish
+        }
+    }
 
     // BLOCK 3 SURVEY QUESTIONS
-    var block3 = [/*{
+    var block3 = [{
         type: 'demography',
         on_finish: block_3_on_trial_finish
     },
@@ -233,33 +248,42 @@ $(function() {
         min_text: '0%',
         max_text: '100%',
         on_finish: block_3_on_trial_finish
-    }*/];
-    // for (var i = 0; i < players.length; ++i) {
-    //     block3.push({
-    //         type: 'survey-likert',
-    //         preamble: 'You may have the chance to be invited back to complete a cooperative puzzle-solving game with a partner. ' +
-    //                 'If this happens, we\'ll do our best to follow your preferences in assigning you a partner. Please rate how ' +
-    //                 'much you would like to be paired with each partner you played with today.',
-    //         questions: [''],
-    //         image: players[i][0],
-    //         caption: players[i][1],
-    //         labels: [['Not at all', 'Definitely yes']],
-    //         num_points: 7,
-    //         on_finish: function(data) {
-    //             data.response = parseInt(data.response) + 1;
-    //             data.block_index = 3;
-    //             data.trustworthy = isTrustworthy(data.img);
-    //             write_trial_data(userId, experimentId, data);
-    //         }
-    //     });
-    // }
-    block3.push({
-        type: 'match-img',
-        left_img: players[8][0],
-        left_caption: players[8][1],
-        right_img: players[1][0],
-        right_caption: players[1][1]
-    });
+    }];
+    for (var i = 0; i < players.length; ++i) {
+        block3.push({
+            type: 'survey-likert',
+            preamble: 'You may have the chance to be invited back to complete a cooperative puzzle-solving game with a partner. ' +
+                    'If this happens, we\'ll do our best to follow your preferences in assigning you a partner. Please rate how ' +
+                    'much you would like to be paired with each partner you played with today.',
+            questions: [''],
+            image: players[i][0],
+            caption: players[i][1],
+            labels: [['Not at all', 'Definitely yes']],
+            num_points: 7,
+            on_finish: function(data) {
+                data.response = parseInt(data.response) + 1;
+                data.block_index = 3;
+                data.trustworthy = isTrustworthy(data.img);
+                write_trial_data(userId, experimentId, data);
+            }
+        });
+    }
+
+    playerMatchingTrials = [
+        create_player_matching_trial(0, 4), // T
+        create_player_matching_trial(1, 2), // F
+        create_player_matching_trial(2, 5), // T
+        create_player_matching_trial(3, 8), // T
+        create_player_matching_trial(4, 7), // F
+        create_player_matching_trial(5, 0), // F
+        create_player_matching_trial(6, 9), // F
+        create_player_matching_trial(7, 1), // T
+        create_player_matching_trial(8, 6), // F
+        create_player_matching_trial(9, 3)  // F
+    ];
+    playerMatchingTrials = shuffle_array(playerMatchingTrials);
+    block3 = block3.concat(playerMatchingTrials);
+
     block3.push({
         type: 'survey-text',
         block_index: 3,
@@ -277,23 +301,23 @@ $(function() {
     });
 
     // EXPERIMENT TIMELINE
-    // timeline = timeline.concat(beginningInstructions);
-    // //   Instructions
-    // timeline = timeline.concat(beginningInstructions);
-    // //   Training Trials
-    // timeline = timeline.concat(trainingTrials);
-    // //   More Instructions for block 1
-    // timeline = timeline.concat(block1Instructions);
-    // //   Block 1 Trials
-    // timeline.push(waitScreen);
-    // add_trials_randomly(block1Trials, BLOCK_1_NUM_TRIALS_PER_PLAYER, 1);
-    // //   More Instructions for block 2
-    // timeline = timeline.concat(block2Instructions);
-    // //   Block 2 Trials
-    // timeline.push(waitScreen);
-    // add_trials_randomly(block2Trials, BLOCK_2_NUM_TRIALS_PER_PLAYER, 2);
-    // //   More Instructions for block 3
-    // timeline = timeline.concat(block3Instructions);
+    timeline = timeline.concat(beginningInstructions);
+    //   Instructions
+    timeline = timeline.concat(beginningInstructions);
+    //   Training Trials
+    timeline = timeline.concat(trainingTrials);
+    //   More Instructions for block 1
+    timeline = timeline.concat(block1Instructions);
+    //   Block 1 Trials
+    timeline.push(waitScreen);
+    add_trials_randomly(block1Trials, BLOCK_1_NUM_TRIALS_PER_PLAYER, 1);
+    //   More Instructions for block 2
+    timeline = timeline.concat(block2Instructions);
+    //   Block 2 Trials
+    timeline.push(waitScreen);
+    add_trials_randomly(block2Trials, BLOCK_2_NUM_TRIALS_PER_PLAYER, 2);
+    //   More Instructions for block 3
+    timeline = timeline.concat(block3Instructions);
     timeline = timeline.concat(block3);
 
     function startExperiment() {

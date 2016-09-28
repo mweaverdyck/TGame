@@ -3,6 +3,19 @@ var hookWindow = false;
 
 var trustworthyImgIndexes = [0, 1, 4, 5, 6];
 
+var friendPairIndexes = {
+    0: 4,   // TT
+    1: 7,   // TU
+    2: 5,   // UT
+    3: 8,   // UU
+    4: 0,   // TT
+    5: 2,   // TU
+    6: 'unknown',   // T
+    7: 1,   // UT
+    8: 3,   // UU
+    9: 'unknown'    // U
+}
+
 var totalEarning = 0;
 
 
@@ -30,6 +43,24 @@ function isTrustworthy(imgPath) {
         }
     }
     return false;
+}
+
+function areFriends(img1Path, img2Path) {
+    var img1Index = -1;
+    var img2Index = -1;
+    for (var i in players) {
+        if (players[i][0] === img1Path) {
+            img1Index = parseInt(i);
+        } else if (players[i][0] === img2Path) {
+            img2Index = parseInt(i);
+        }
+    }
+    return friendPairIndexes[img1Index] === img2Index;
+}
+
+function getFriendImg(imgIndex) {
+    var friendIndex = friendPairIndexes[imgIndex];
+    return friendIndex === 'unknown' ? 'unknown' : players[friendIndex][0];
 }
 
 // Data writers

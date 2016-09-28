@@ -47,12 +47,12 @@ jsPsych.plugins['match-img'] = (function() {
         //   question
         display_element.append($('<p>', {
             class: 'margin-top',
-            text: 'Are they friends or not?'
+            text: 'Are they friends?'
         }));
         form = display_element.append($('<form>', {
             id: 'q-form',
             action: 'javascript:next_img_match();'
-        }))
+        }));
         $('#q-form').append('<div class="radio"></div>');  // things only work with this nonsense
         $('#q-form').append($('<div>', {
             class: 'col-xs-4 radio'
@@ -80,8 +80,15 @@ jsPsych.plugins['match-img'] = (function() {
 
         // next button function
         next_img_match = function() {
-            // TODO
-            console.log('done');
+            var response_time = Date.now() - startTime;
+            var response = $("input[name='choice']:checked").val();
+            trial_data = {
+                response: response,
+                correct: areFriends(trial.left_img, trial.right_img) ? response === 'y' : response === 'n',
+                rt: response_time
+            };
+            display_element.html('');
+            jsPsych.finishTrial(trial_data);
         }
 
     };

@@ -142,7 +142,6 @@ jsPsych.plugins['demography'] = (function() {
             if ($('#ethnicity-text').length != 0) {
                 trial_data.ethnicity_spec = $('#ethnicity-text input').val();
             }
-            console.log(trial_data);
             display_element.html('');
             jsPsych.finishTrial(trial_data);
         }
