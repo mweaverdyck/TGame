@@ -54,14 +54,14 @@ jsPsych.plugins['survey-likert'] = (function() {
 
     // player image
     var centerImgDiv = $('<div>', {
-        class: "center-img-div",
+        class: "center-img img-div",
         style: 'margin: auto;'
     }).append($('<div>', {
         class: "image-cropper"
     }));
     var centerImgCropper = centerImgDiv.children();
     centerImgCropper.append($('<p>', {
-        class:"center-img-text",
+        class:"img-text",
         text: trial.caption
     }));
     centerImgCropper.append($('<img>', {

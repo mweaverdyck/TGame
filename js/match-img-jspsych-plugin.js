@@ -47,7 +47,7 @@ jsPsych.plugins['match-img'] = (function() {
         //   question
         display_element.append($('<p>', {
             class: 'margin-top',
-            text: 'Are they friends?'
+            text: 'Were they friends?'
         }));
         form = display_element.append($('<form>', {
             id: 'q-form',
@@ -65,7 +65,7 @@ jsPsych.plugins['match-img'] = (function() {
         $('#q-form').append($('<div>', {
             class: 'col-xs-4 radio'
         })
-        .append('<input name="choice" type="radio" value="i">I don\'t know'));
+        .append('<input name="choice" type="radio" value="i">I don\'t remember'));
 
         //   next button
         $('#q-form').append($('<button>', {

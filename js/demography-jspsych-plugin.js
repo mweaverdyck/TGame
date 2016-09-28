@@ -1,7 +1,7 @@
 
 function on_ethnicity_change() {
     var selected = $('#ethnicity-select').val();
-    if ((selected == 4 || selected == 5)) {
+    if ((selected == 8 || selected == 9)) {
         if ($('#ethnicity-text').length != 0) {
             return;
         }
@@ -11,6 +11,7 @@ function on_ethnicity_change() {
         }).append($('<input>', {
             type: 'text',
             class: 'form-control input-md',
+            placeholder: 'Please specify',
             required: true
         })));
     } else {
@@ -101,22 +102,38 @@ jsPsych.plugins['demography'] = (function() {
         }))
         .append($('<option>', {
             value: 1,
-            text: '1'
+            text: 'White'
         }))
         .append($('<option>', {
             value: 2,
-            text: '2'
+            text: 'Latino or Hispanic'
         }))
         .append($('<option>', {
             value: 3,
-            text: '3'
+            text: 'African'
         }))
         .append($('<option>', {
             value: 4,
-            text: '4'
+            text: 'East or South Asian'
         }))
         .append($('<option>', {
             value: 5,
+            text: 'Native Hawaiian or Other Pacific Islander'
+        }))
+        .append($('<option>', {
+            value: 6,
+            text: 'American Indian or Alaska Native'
+        }))
+        .append($('<option>', {
+            value: 7,
+            text: 'Middle Eastern'
+        }))
+        .append($('<option>', {
+            value: 8,
+            text: 'Mixed'
+        }))
+        .append($('<option>', {
+            value: 9,
             text: 'Other'
         })))));
 
