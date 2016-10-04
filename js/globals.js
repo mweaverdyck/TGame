@@ -17,6 +17,7 @@ var friendPairIndexes = {
 }
 
 var totalEarning = 0;
+var experimentStartTime = 0;
 
 
 function random_int(min, max) {  // min and max included
@@ -82,6 +83,7 @@ function write_trial_data(userId, experimentId, data) {
 function after_last_trial(userId, experimentId) {
     var path = '/' + userId + '/' + experimentId;
     var update = {};
+    update[path + '/duration'] = (Date.now() - experimentStartTime) / 1000; // in sec
     update[path + '/end_time'] = (new Date()).toUTCString();
     update[path + '/total_earning'] = totalEarning;
 

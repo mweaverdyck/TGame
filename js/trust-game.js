@@ -331,6 +331,7 @@ $(function() {
             display_element: $('#jspsych-target'),
             timeline: timeline
         });
+        experimentStartTime = Date.now();
     }
 
     // Load images and then start experiment
