@@ -11,16 +11,18 @@ var allImgs = ['img/player_img/AF-209.jpg', 'img/player_img/BM-027.jpg', 'img/pl
                'img/practice_img/usericon6.png', 'img/player_example_1.png', 'img/player_example_2.png',
                'img/unknown_friend.png', 'img/unknown.png']
 
-var players = [['img/player_img/AF-209.jpg', 'Jessica'],
-               ['img/player_img/BM-027.jpg', 'Michael'],
-               ['img/player_img/LF-203.jpg', 'Ashley'],
-               ['img/player_img/LF-230.jpg', 'Emily'],
-               ['img/player_img/WF-007.jpg', 'Sarah'],
-               ['img/player_img/BF-013.jpg', 'Samantha'],
-               ['img/player_img/BM-036.jpg', 'Chris'],
-               ['img/player_img/LF-209.jpg', 'Amanda'],
+var players = [['img/player_img/AF-234.jpg', 'Jessica'],
+               ['img/player_img/AM-228.jpg', 'Michael'],
+               ['img/player_img/AM-243.jpg', 'Ashley'],
+               ['img/player_img/BF-036.jpg', 'Emily'],
+               ['img/player_img/BF-040.jpg', 'Sarah'],
+               ['img/player_img/BM-010.jpg', 'Samantha'],
+               ['img/player_img/LF-229.jpg', 'Chris'],
+               ['img/player_img/LF-230.jpg', 'Amanda'],
                ['img/player_img/LM-211.jpg', 'Matt'],
-               ['img/player_img/WM-024.jpg', 'Josh']];
+               ['img/player_img/LM-225.jpg', 'Josh'],
+               ['img/player_img/WF-039.jpg', ''],
+               ['img/player_img/WM-230.jpg', '']];
 
 var MAX_MONEY = 10;
 
