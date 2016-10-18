@@ -32,15 +32,15 @@ $(function() {
     firebase.initializeApp(config);
 
     // Sign in
-    firebase.auth().signInAnonymously().then(function(user) {
-        var firebaseUid = user.uid;
-        console.log('Signed in as ' + firebaseUid);
+    // firebase.auth().signInAnonymously().then(function(user) {
+    //     var firebaseUid = user.uid;
+    //     console.log('Signed in as ' + firebaseUid);
 
-        firebase.database().ref('/' + userId + '/' + experimentId).set({
-            start_time: (new Date()).toUTCString(),
-            firebase_uid: firebaseUid
-        });
-    });
+    //     firebase.database().ref('/' + userId + '/' + experimentId).set({
+    //         start_time: (new Date()).toUTCString(),
+    //         firebase_uid: firebaseUid
+    //     });
+    // });
 
 
     // TRAINING TRIALS
@@ -88,91 +88,36 @@ $(function() {
         trainingTrials[i].on_finish = function(data) { write_trial_data(userId, experimentId, data); };
     }
 
-    // BLOCK 1 TRIALS
-    var block1Trials = [{    // trustworthy
-        type: 'trust-game',
-        center_img: players[0][0],
-        center_caption: players[0][1],
-        recip_dist_mean: TRUSTWORTHY_RECI_MEAN,
-        recip_dist_var: TRUSTWORTHY_RECI_VAR,
-        friends_imgs: ['unknown', 'unknown', 'unknown']
-    },
-    {    // trustworthy
-        type: 'trust-game',
-        center_img: players[1][0],
-        center_caption: players[1][1],
-        recip_dist_mean: TRUSTWORTHY_RECI_MEAN,
-        recip_dist_var: TRUSTWORTHY_RECI_VAR,
-        friends_imgs: ['unknown', 'unknown', 'unknown']
-    },
-    {    // untrustworthy
-        type: 'trust-game',
-        center_img: players[2][0],
-        center_caption: players[2][1],
-        recip_dist_mean: UNTRUSTWORTHY_RECI_MEAN,
-        recip_dist_var: UNTRUSTWORTHY_RECI_VAR,
-        friends_imgs: ['unknown', 'unknown', 'unknown']
-    },
-    {    // untrustworthy
-        type: 'trust-game',
-        center_img: players[3][0],
-        center_caption: players[3][1],
-        recip_dist_mean: UNTRUSTWORTHY_RECI_MEAN,
-        recip_dist_var: UNTRUSTWORTHY_RECI_VAR,
-        friends_imgs: ['unknown', 'unknown', 'unknown']
-    }];
+    // BLOCK 1 TRIALS (1 trial per type)
+    var block1Trials = [];
+    for (var i = 0; i < BLOCK_1_NUM_PLAYERS; ++i) {
+        block1Trials.push({
+            type: 'trust-game',
+            center_img: players[i][0],
+            center_caption: players[i][1],
+            recip_dist_mean: i < BLOCK_1_NUM_PLAYERS/2 ? TRUSTWORTHY_RECI_MEAN : UNTRUSTWORTHY_RECI_MEAN,
+            recip_dist_var: BLOCK_1_RECI_VAR,
+            friends_imgs: ['unknown', 'unknown', 'unknown']
+        });
+    }
 
-    // BLOCK 2 TRIALS
-    var block2Trials = [{    // trustworthy
-        type: 'trust-game',
-        center_img: players[4][0],
-        center_caption: players[4][1],
-        recip_dist_mean: TRUSTWORTHY_RECI_MEAN,
-        recip_dist_var: TRUSTWORTHY_RECI_VAR,
-        friends_imgs: [getFriendImg(4), 'unknown', 'unknown']
-    },
-    {    // trustworthy
-        type: 'trust-game',
-        center_img: players[5][0],
-        center_caption: players[5][1],
-        recip_dist_mean: TRUSTWORTHY_RECI_MEAN,
-        recip_dist_var: TRUSTWORTHY_RECI_VAR,
-        friends_imgs: [getFriendImg(5), 'unknown', 'unknown']
-    },
-    {    // trustworthy
-        type: 'trust-game',
-        center_img: players[6][0],
-        center_caption: players[6][1],
-        recip_dist_mean: TRUSTWORTHY_RECI_MEAN,
-        recip_dist_var: TRUSTWORTHY_RECI_VAR,
-        friends_imgs: [getFriendImg(6), 'unknown', 'unknown']
-    },
-    {    // untrustworthy
-        type: 'trust-game',
-        center_img: players[7][0],
-        center_caption: players[7][1],
-        recip_dist_mean: UNTRUSTWORTHY_RECI_MEAN,
-        recip_dist_var: UNTRUSTWORTHY_RECI_VAR,
-        friends_imgs: [getFriendImg(7), 'unknown', 'unknown']
-    },
-    {    // untrustworthy
-        type: 'trust-game',
-        center_img: players[8][0],
-        center_caption: players[8][1],
-        recip_dist_mean: UNTRUSTWORTHY_RECI_MEAN,
-        recip_dist_var: UNTRUSTWORTHY_RECI_VAR,
-        friends_imgs: [getFriendImg(8), 'unknown', 'unknown']
-    },
-    {    // untrustworthy
-        type: 'trust-game',
-        center_img: players[9][0],
-        center_caption: players[9][1],
-        recip_dist_mean: UNTRUSTWORTHY_RECI_MEAN,
-        recip_dist_var: UNTRUSTWORTHY_RECI_VAR,
-        friends_imgs: [getFriendImg(9), 'unknown', 'unknown']
-    }];
+    // BLOCK 2 TRIALS (1 trial per type)
+    var block2Trials = [];
+    for (var i = 0; i < BLOCK_2_NUM_PLAYERS; ++i) {
+        var playerIndex = i + BLOCK_1_NUM_PLAYERS;
+        block2Trials.push({
+            type: 'trust-game',
+            center_img: players[playerIndex][0],
+            center_caption: players[playerIndex][1],
+            recip_dist_mean: i < BLOCK_2_NUM_PLAYERS/2 ? TRUSTWORTHY_RECI_MEAN : UNTRUSTWORTHY_RECI_MEAN,
+            recip_dist_var: i%2 == 0 ? HIGH_RECI_VAR : LOW_RECI_VAR,
+            friends_imgs: [getFriendImg(playerIndex), 'unknown', 'unknown']
+        });
+    }
 
-    // HELPER FUNC
+
+    // HELPER FUNCTION
+    // Repeat each type of trial (given in trials) for num_per_trial times and add to the time line randomly
     function add_trials_randomly(trials, num_per_trial, block_index) {
         var trialsArray = [];
         for (var i = 0; i < trials.length; ++i) {
@@ -275,7 +220,7 @@ $(function() {
         'indicate whether they appeared as friends in your previous games. Press right arrow to start.']
     });
     playerMatchingTrials = [
-        create_player_matching_trial(0, 4), // Y
+        create_player_matching_trial(0, 4), // Y TODO
         create_player_matching_trial(1, 2), // N
         create_player_matching_trial(2, 5), // Y
         create_player_matching_trial(3, 8), // Y

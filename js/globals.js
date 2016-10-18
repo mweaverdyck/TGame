@@ -4,16 +4,18 @@ var hookWindow = false;
 var trustworthyImgIndexes = [0, 1, 4, 5, 6];
 
 var friendPairIndexes = {
-    0: 4,   // TT
-    1: 7,   // TU
-    2: 5,   // UT
-    3: 8,   // UU
-    4: 0,   // TT
-    5: 2,   // TU
-    6: 'unknown',   // T
-    7: 1,   // UT
-    8: 3,   // UU
-    9: 'unknown'    // U
+    0: [4, 8],
+    1: [5, 9],
+    2: [6, 10],
+    3: [7, 11],
+    4: [0],
+    5: [1],
+    6: [2],
+    7: [3],
+    8: [0],
+    9: [1],
+    10: [2],
+    11: [3],
 }
 
 var totalEarning = 0;
@@ -56,11 +58,11 @@ function areFriends(img1Path, img2Path) {
             img2Index = parseInt(i);
         }
     }
-    return friendPairIndexes[img1Index] === img2Index;
+    return friendPairIndexes[img1Index].indexOf(img2Index) !== -1;
 }
 
-function getFriendImg(imgIndex) {
-    var friendIndex = friendPairIndexes[imgIndex];
+function getFriendImg(playerIndex) {
+    var friendIndex = friendPairIndexes[playerIndex];
     return friendIndex === 'unknown' ? 'unknown' : players[friendIndex][0];
 }
 
