@@ -22,12 +22,16 @@ var players = [['img/player_img/AF-234.jpg', 'Jessica'],
                ['img/player_img/LM-211.jpg', 'Josh'],
                ['img/player_img/LM-225.jpg', 'Nick'],
                ['img/player_img/WF-039.jpg', 'Emily'],
-               ['img/player_img/WM-230.jpg', 'Jacob']];
+               ['img/player_img/WM-230.jpg', 'Jacob'],
+               ['img/player_img/AF-203.jpg', 'Brittany'],
+               ['img/player_img/BM-039.jpg', 'Andrew'],
+               ['img/player_img/LF-213.jpg', 'Taylor'],
+               ['img/player_img/WM-214.jpg', 'Daniel']];
 
 var MAX_MONEY = 10;
 
 var BLOCK_1_NUM_PLAYERS = 4;
-var BLOCK_2_NUM_PLAYERS = 8;
+var BLOCK_2_NUM_PLAYERS = 12;
 
 var BLOCK_1_NUM_TRIALS_PER_PLAYER = 2;
 var BLOCK_2_NUM_TRIALS_PER_PLAYER = 2;

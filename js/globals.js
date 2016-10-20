@@ -12,10 +12,14 @@ var friendPairIndexes = {
     5: [1],
     6: [2],
     7: [3],
-    8: [0],
-    9: [1],
-    10: [2],
-    11: [3],
+    8: 'unknown',
+    9: 'unknown',
+    10: [0],
+    11: [1],
+    12: [2],
+    13: [3],
+    14: 'unknown',
+    15: 'unknown'
 }
 
 var totalEarning = 0;

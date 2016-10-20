@@ -114,10 +114,11 @@ $(function() {
             friends_imgs: [getFriendImg(playerIndex), 'unknown', 'unknown']
         });
     }
+    console.log(block2Trials);
 
 
     // HELPER FUNCTION
-    // Repeat each type of trial (given in trials) for num_per_trial times and add to the time line randomly
+    // Repeat each type of trial (given in trials) for num_per_trial times and add them to the time line randomly
     function add_trials_randomly(trials, num_per_trial, block_index) {
         var trialsArray = [];
         for (var i = 0; i < trials.length; ++i) {
@@ -219,18 +220,10 @@ $(function() {
         pages: ['We\'ll test your knowledge on the relationships between your partners now. For each pair of players, please ' +
         'indicate whether they appeared as friends in your previous games. Press right arrow to start.']
     });
-    playerMatchingTrials = [
-        create_player_matching_trial(0, 4), // Y TODO
-        create_player_matching_trial(1, 2), // N
-        create_player_matching_trial(2, 5), // Y
-        create_player_matching_trial(3, 8), // Y
-        create_player_matching_trial(4, 7), // N
-        create_player_matching_trial(5, 0), // N
-        create_player_matching_trial(6, 9), // N
-        create_player_matching_trial(7, 1), // Y
-        create_player_matching_trial(8, 6), // N
-        create_player_matching_trial(9, 3)  // N
-    ];
+    playerMatchingTrials = [];
+    for (var i = 0; i < players.length; ++i) {
+        create_player_matching_trial(i, i);
+    }
     playerMatchingTrials = shuffle_array(playerMatchingTrials);
     block3 = block3.concat(playerMatchingTrials);
 
