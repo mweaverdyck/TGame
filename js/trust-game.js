@@ -32,15 +32,15 @@ $(function() {
     firebase.initializeApp(config);
 
     // Sign in
-    // firebase.auth().signInAnonymously().then(function(user) {
-    //     var firebaseUid = user.uid;
-    //     console.log('Signed in as ' + firebaseUid);
+    firebase.auth().signInAnonymously().then(function(user) {
+        var firebaseUid = user.uid;
+        console.log('Signed in as ' + firebaseUid);
 
-    //     firebase.database().ref('/' + userId + '/' + experimentId).set({
-    //         start_time: (new Date()).toUTCString(),
-    //         firebase_uid: firebaseUid
-    //     });
-    // });
+        firebase.database().ref('/' + userId + '/' + experimentId).set({
+            start_time: (new Date()).toUTCString(),
+            firebase_uid: firebaseUid
+        });
+    });
 
 
     // TRAINING TRIALS
@@ -114,7 +114,6 @@ $(function() {
             friends_imgs: [getFriendImg(playerIndex), 'unknown', 'unknown']
         });
     }
-    console.log(block2Trials);
 
 
     // HELPER FUNCTION
@@ -220,11 +219,28 @@ $(function() {
         pages: ['We\'ll test your knowledge on the relationships between your partners now. For each pair of players, please ' +
         'indicate whether they appeared as friends in your previous games. Press right arrow to start.']
     });
-    playerMatchingTrials = [];
-    for (var i = 0; i < players.length; ++i) {
-        create_player_matching_trial(i, i);
-    }
+    playerMatchingTrials = [
+        create_player_matching_trial(0, 4),
+        create_player_matching_trial(1, 5),
+        create_player_matching_trial(2, 6),
+        create_player_matching_trial(3, 7),
+        create_player_matching_trial(4, 9),
+        create_player_matching_trial(5, 15),
+        create_player_matching_trial(6, 8),
+        create_player_matching_trial(7, 14),
+        create_player_matching_trial(8, 12),
+        create_player_matching_trial(9, 10),
+        create_player_matching_trial(10, 0),
+        create_player_matching_trial(11, 1),
+        create_player_matching_trial(12, 2),
+        create_player_matching_trial(13, 3),
+        create_player_matching_trial(14, 13),
+        create_player_matching_trial(15, 11)
+    ];
     playerMatchingTrials = shuffle_array(playerMatchingTrials);
+    if (playerMatchingTrials > MAX_NUM_MATCHING_QUESTIONS) {
+        playerMatchingTrials = playerMatchingTrials.slice(0, MAX_NUM_MATCHING_QUESTIONS);
+    }
     block3 = block3.concat(playerMatchingTrials);
 
     block3.push({
@@ -246,7 +262,7 @@ $(function() {
     // EXPERIMENT TIMELINE
     //   Instructions
     timeline = timeline.concat(beginningInstructions);
-    //   Training Trials
+    // //   Training Trials
     timeline = timeline.concat(trainingTrials);
     //   More Instructions for block 1
     timeline = timeline.concat(block1Instructions);
