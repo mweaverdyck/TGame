@@ -84,7 +84,7 @@ jsPsych.plugins['match-img'] = (function() {
             var response = $("input[name='choice']:checked").val();
             trial_data = {
                 response: response,
-                correct: areFriends(trial.left_img, trial.right_img) ? response === 'y' : response === 'n',
+                correct: are_friends(trial.left_img, trial.right_img) ? response === 'y' : response === 'n',
                 rt: response_time
             };
             display_element.html('');

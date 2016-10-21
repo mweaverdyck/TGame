@@ -1,8 +1,6 @@
 
 var hookWindow = false;
 
-var trustworthyImgIndexes = [0, 1, 4, 5, 6];
-
 var friendPairIndexes = {
     0: [4, 8],
     1: [5, 9],
@@ -40,19 +38,32 @@ function shuffle_array(array) {
     return array;
 }
 
-function isTrustworthy(imgPath) {
-    for (var i in players) {
+function get_player_index(imgPath) {
+    for (var i = 0; i < players.length; ++i) {
         if (players[i][0] === imgPath) {
-            if (trustworthyImgIndexes.indexOf(i) !== -1) {
-                return true;
-            }
-            return false;
+            return i;
         }
     }
-    return false;
+    return -1;
 }
 
-function areFriends(img1Path, img2Path) {
+function is_trustworthy(playerIndex) {
+    if (playerIndex < BLOCK_1_NUM_PLAYERS) {    // Block 1 player
+        return playerIndex < BLOCK_1_NUM_PLAYERS / 2;
+    } else {                                    // Block 2 player
+        return playerIndex - BLOCK_1_NUM_PLAYERS < BLOCK_2_NUM_PLAYERS / 2;
+    }
+}
+
+function get_reciprocation_variance(playerIndex) {
+    if (playerIndex < BLOCK_1_NUM_PLAYERS) {    // Block 1 player
+        return BLOCK_1_RECI_VAR;
+    } else {                                    // Block 2 player
+        return playerIndex % 2 === 0 ? HIGH_RECI_VAR : LOW_RECI_VAR;
+    }
+}
+
+function are_friends(img1Path, img2Path) {
     var img1Index = -1;
     var img2Index = -1;
     for (var i in players) {
@@ -65,7 +76,7 @@ function areFriends(img1Path, img2Path) {
     return friendPairIndexes[img1Index].indexOf(img2Index) !== -1;
 }
 
-function getFriendImg(playerIndex) {
+function get_friend_img(playerIndex) {
     var friendIndex = friendPairIndexes[playerIndex];
     return friendIndex === 'unknown' ? 'unknown' : players[friendIndex][0];
 }

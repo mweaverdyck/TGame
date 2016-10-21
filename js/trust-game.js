@@ -95,8 +95,8 @@ $(function() {
             type: 'trust-game',
             center_img: players[i][0],
             center_caption: players[i][1],
-            recip_dist_mean: i < BLOCK_1_NUM_PLAYERS/2 ? TRUSTWORTHY_RECI_MEAN : UNTRUSTWORTHY_RECI_MEAN,
-            recip_dist_var: BLOCK_1_RECI_VAR,
+            recip_dist_mean: is_trustworthy(i) ? TRUSTWORTHY_RECI_MEAN : UNTRUSTWORTHY_RECI_MEAN,
+            recip_dist_var: get_reciprocation_variance(i),
             friends_imgs: ['unknown', 'unknown', 'unknown']
         });
     }
@@ -109,9 +109,9 @@ $(function() {
             type: 'trust-game',
             center_img: players[playerIndex][0],
             center_caption: players[playerIndex][1],
-            recip_dist_mean: i < BLOCK_2_NUM_PLAYERS/2 ? TRUSTWORTHY_RECI_MEAN : UNTRUSTWORTHY_RECI_MEAN,
-            recip_dist_var: i%2 == 0 ? HIGH_RECI_VAR : LOW_RECI_VAR,
-            friends_imgs: [getFriendImg(playerIndex), 'unknown', 'unknown']
+            recip_dist_mean: is_trustworthy(playerIndex) ? TRUSTWORTHY_RECI_MEAN : UNTRUSTWORTHY_RECI_MEAN,
+            recip_dist_var: get_reciprocation_variance(playerIndex),
+            friends_imgs: [get_friend_img(playerIndex), 'unknown', 'unknown']
         });
     }
 
@@ -208,7 +208,8 @@ $(function() {
             on_finish: function(data) {
                 data.response = parseInt(data.response) + 1;
                 data.block_index = 3;
-                data.trustworthy = isTrustworthy(data.img);
+                data.trustworthy = is_trustworthy(i);
+                data.player_variance = get_reciprocation_variance(i),
                 write_trial_data(userId, experimentId, data);
             }
         });

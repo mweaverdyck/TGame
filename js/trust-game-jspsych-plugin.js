@@ -128,13 +128,15 @@ jsPsych.plugins['trust-game'] = (function() {
             var response_time = endTime - startTime;
 
             var response = $("#slide").slider('getValue');
+            var player_index = get_player_index(trial.center_img);
             trial_data = {
                 block_index: trial.block_index,
                 response: response,
                 received: response * 3,
                 rt: response_time,
                 image: trial.center_img,
-                trustworthy: isTrustworthy(trial.center_img),
+                trustworthy: is_trustworthy(player_index),
+                player_variance: get_reciprocation_variance(player_index),
                 friends: [],
                 caption: trial.center_caption
             };
@@ -145,7 +147,7 @@ jsPsych.plugins['trust-game'] = (function() {
                 if (trial.friends_imgs[i] !== 'unknown') {
                     trial_data.friends.push({
                         image: trial.friends_imgs[i],
-                        trustworthy: isTrustworthy(trial.friends_imgs[i])
+                        trustworthy: is_trustworthy(trial.friends_imgs[i])
                     });
                 }
             }
