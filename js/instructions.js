@@ -12,7 +12,7 @@ var INSTR_WEB = [
                     '<p>' + 'You\'ll be playing a series of simple games with other people on this website.' + '</p>',
                     '<p>' + 'The players you\'ll be partnered with today are members of our website who regularly use the site and its ' +
                     'associated social network.' + '</p>',
-                    '<p>' + 'Players can choose their "Top 5" friends on the website\'s social network, whose pictures are displayed alongside their ' +
+                    '<p>' + 'Players can choose their "Top 3" friends on the website\'s social network, whose pictures are displayed alongside their ' +
                     'own profile picture, like this:' + '</p>' +
                     '<img src="img/player_example_1.png" class="player-example">' +
                     '<p class="small zero-space-top">The player images shown here are for illustration only. In the actual games, you\'ll see other ' +

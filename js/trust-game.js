@@ -217,8 +217,8 @@ $(function() {
 
     block3.push({
         type: 'instructions',
-        pages: ['We\'ll test your knowledge on the relationships between your partners now. For each pair of players, please ' +
-        'indicate whether they appeared as friends in your previous games. Press right arrow to start.']
+        pages: ['<p>' + 'We\'ll test your knowledge on the relationships between your partners now. For each pair of players, please ' +
+        'indicate whether they appeared as friends in your previous games. Press right arrow to start.' + '</p>']
     });
     playerMatchingTrials = [
         create_player_matching_trial(0, 4),
