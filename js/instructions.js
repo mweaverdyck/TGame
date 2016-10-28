@@ -16,7 +16,7 @@ var INSTR_WEB = [
                     'one another.' + '</p><p>' +
                     'Players who consistently choose one another as their favorite partners to play games with on the site are called one ' +
                     'another\’s "Top Friends". When members of this website play one another, their 3 Top Friends, are displayed below their ' +
-                    'own profile picture, as shown below:' '</p>' +
+                    'own profile picture, as shown below:' + '</p>' +
                     '<img src="img/player_example_1.png" class="player-example">' +
                     '<p class="small zero-space-top">The player images shown here are for illustration only. In the actual games, you\'ll see other ' +
                     'players\' actual profile pictures instead of cartoon images.</p>',
