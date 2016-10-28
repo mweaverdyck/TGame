@@ -10,8 +10,8 @@ var INSTR_WEB = [
                     '<p>' + 'You are participating in a study that examines how various factors, like the amount of reward that’s at stake, ' +
                     'impact players\' enjoyment of online games.' + '</p>',
                     '<p>' + 'You\'ll be playing a series of simple games with other people on this website.' + '</p>',
-                    '<p>' + 'The players you\'ll be partnered with today are members of our website who regularly use the site and its ' +
-                    'associated social network.' + '</p>',
+                    '<p>' + 'The players you\'ll be partnered with today are members of our website who regularly play a variety of games ' +
+                     'with one another for fun and the chance to earn prizes (e.g., money).' + '</p>',
                     '<p>' + 'Players can choose their "Top 3" friends on the website\'s social network, whose pictures are displayed alongside their ' +
                     'own profile picture, like this:' + '</p>' +
                     '<img src="img/player_example_1.png" class="player-example">' +
