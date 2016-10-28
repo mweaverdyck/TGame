@@ -11,9 +11,8 @@ var INSTR_WEB = [
                     'impact players\' enjoyment of online games.' + '</p>',
                     '<p>' + 'You\'ll be playing a series of simple games with other people on this website.' + '</p>',
                     '<p>' + 'The players you\'ll be partnered with today are members of our website who regularly play a variety of games ' +
-                     'with one another for fun and the chance to earn prizes (e.g., money).' + '</p>',
-                    '<p>' + 'Users of the site regularly have the chance to rate each other in terms of how much they prefer playing with ' +
-                    'one another.' + '</p><p>' +
+                     'with one another for fun and the chance to earn prizes (e.g., money).' + '</p><p>' +
+                     'Users of the site regularly have the chance to rate each other in terms of how much they prefer playing with one another.' + '</p>',
                     'Players who consistently choose one another as their favorite partners to play with on the site are called one another\'s ' +
                     '"Top Friends". When members of this website play with one another, their 3 Top Friends are displayed below their own profile ' +
                     'photo, as shown below.' + '</p>' +
