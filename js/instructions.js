@@ -19,9 +19,7 @@ var INSTR_WEB = [
                     'own profile picture, as shown below:' '</p>' +
                     '<img src="img/player_example_1.png" class="player-example">' +
                     '<p class="small zero-space-top">The player images shown here are for illustration only. In the actual games, you\'ll see other ' +
-                    'players\' actual profile pictures instead of cartoon images.</p><p>'
-                    'Since this is your first time using this website, you won\’t yet have any Top Friends displayed alongside your profile ' +
-                    'picture.' + '</p>',
+                    'players\' actual profile pictures instead of cartoon images.</p>',
                     '<p>' + 'Due to most users’ privacy settings, new users like you can only see those friends\' faces if you\'ve ' +
                     'interacted with them before on the site. Players\' friends who you haven\'t encountered before will look like this:' +
                     '</p>' +
