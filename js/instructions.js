@@ -13,7 +13,10 @@ var INSTR_WEB = [
                     '<p>' + 'The players you\'ll be partnered with today are members of our website who regularly play a variety of games ' +
                      'with one another for fun and the chance to earn prizes (e.g., money).' + '</p>',
                     '<p>' + 'Users of the site regularly have the chance to rate each other in terms of how much they prefer playing with ' +
-                    'one another.' + '</p>' +
+                    'one another.' + '</p><p>' +
+                    'Players who consistently choose one another as their favorite partners to play with on the site are called one another\'s ' +
+                    '"Top Friends". When members of this website play with one another, their 3 Top Friends are displayed below their own profile ' +
+                    'photo, as shown below.' + '</p>' +
                     '<img src="img/player_example_1.png" class="player-example">' +
                     '<p class="small zero-space-top">The player images shown here are for illustration only. In the actual games, you\'ll see other ' +
                     'players\' actual profile pictures instead of cartoon images.</p>',
