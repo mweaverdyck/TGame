@@ -9,6 +9,9 @@ p {
 .hidden {
   visibility: hidden;
 }
+.grey {
+  color: grey;
+}
 .fixed-position-below {
   position: absolute;
   width: 90%;

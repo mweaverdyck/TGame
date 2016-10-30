@@ -1,6 +1,6 @@
 // Instruction texts
-var INSTR_CONTINUE = '<p class="fixed-position-below small">' + 'Press right arrow to continue' + '</p>';
-var INSTR_CONTINUE_OR_BACK = '<p class="fixed-position-below small">' + 'Press right arrow to continue, or left arrow to go back' + '</p>';
+var INSTR_CONTINUE = '<p class="fixed-position-below small grey">' + 'Press right arrow to continue' + '</p>';
+var INSTR_CONTINUE_OR_BACK = '<p class="fixed-position-below small grey">' + 'Press right arrow to continue, or left arrow to go back' + '</p>';
 
 var INSTR_WAIT = 'Waiting for the other players to get ready...';
 
@@ -12,14 +12,15 @@ var INSTR_WEB = [
                     '<p>' + 'You\'ll be playing a series of simple games with other people on this website.' + '</p>',
                     '<p>' + 'The players you\'ll be partnered with today are members of our website who regularly play a variety of games ' +
                     'with one another for fun and the chance to earn prizes (e.g., money).' + '</p>' +
-                    '<p>' + 'Users of the site regularly have the chance to rate each other in terms of how much they prefer playing with one another.' + '</p>',
-                    '<p>' + 'Players who consistently choose one another as their favorite partners to play with on the site are called one another\'s ' +
-                    '"Top Friends". When members of this website play with one another, their 3 Top Friends are displayed below their own profile ' +
-                    'photo, as shown below:' + '</p>' +
+                    '<p>' + 'Users of the site regularly have the chance to rate each other in terms of how much they prefer playing with ' +
+                    'one another.' + '</p>',
+                    '<p>' + 'Players who consistently choose one another as their favorite partners to play with on the site are called ' +
+                    'one another\'s "Top Friends". When members of this website play with one another, their 3 Top Friends are displayed ' +
+                    'below their own profile photo, as shown below:' + '</p>' +
                     '<img src="img/player_example_1.png" class="player-example">' +
-                    '<p class="small zero-space-top">The player images shown here are for illustration only. In the actual games, you\'ll see other ' +
-                    'players\' actual profile pictures instead of cartoon images. Since this is your first time using this website, you won\'t yet have ' +
-                    'any Top Friends displayed alongside your profile picture. </p>',
+                    '<p class="small zero-space-top">The player images shown here are for illustration only. In the actual games, you\'ll ' +
+                    'see other players\' actual profile pictures instead of cartoon images. Since this is your first time using this ' +
+                    'website, you won\'t yet have any Top Friends displayed alongside your profile picture. </p>',
                     '<p>' + 'Due to most users’ privacy settings, new users like you can only see those friends\' faces if you\'ve ' +
                     'interacted with them before on the site. Players\' friends who you haven\'t encountered before will look like this:' +
                     '</p>' +
