@@ -94,7 +94,7 @@ jsPsych.plugins['trust-game'] = (function() {
                 type: "text",
                 'data-slider-min': 0,
                 'data-slider-max': trial.money,
-                'data-slider-step': 1,
+                'data-slider-step': 0.5,
                 'data-slider-value': 0
         })));
         sliderDiv.append('<span class="right-num"><b>$' + trial.money + '</b></span>');
@@ -102,7 +102,7 @@ jsPsych.plugins['trust-game'] = (function() {
 
         var script   = document.createElement('script');
         script.type  = 'text/javascript';
-        script.text  = '$("#slide").slider({ formatter: function(value) { return "Give $" + value; } });';
+        script.text  = '$("#slide").slider({ formatter: function(value) { return "Give $" + value.toFixed(2); } });';
         display_element.append(script);
 
         //   submit button
@@ -165,8 +165,9 @@ jsPsych.plugins['trust-game'] = (function() {
 
             // add new elements
             display_element.append('<p id="result-text" class="fixed-position-mid-below">' +
-                'You gave ' + trial.center_caption + ' <b>$' + response + '</b>, which were tripled before being passed on.<br/>' +
-                trial.center_caption + ' received <b>$' + trial_data.received + '</b>.<br/></p>'
+                'You gave ' + trial.center_caption + ' <b>$' + response.toFixed(2) + '</b>, which were tripled before ' +
+                'being passed on.<br/>' + trial.center_caption + ' received <b>$' + trial_data.received.toFixed(2) +
+                '</b>.<br/></p>'
             );
             display_element.append($('<div>', {
                 id: 'progress-bar',
@@ -183,11 +184,11 @@ jsPsych.plugins['trust-game'] = (function() {
 
                 // reciprocate
                 if (trial.recip_dist_var === 0) {
-                    trial_data.reciprocation = Math.round(trial_data.received * trial.recip_dist_mean);
+                    trial_data.reciprocation = Math.round(2 * trial_data.received * trial.recip_dist_mean)/2;
                 } else {
                     // get a random number from the distribution
                     var distribution = gaussian(trial.recip_dist_mean, trial.recip_dist_var);
-                    trial_data.reciprocation = Math.round(trial_data.received * distribution.ppf(Math.random()));
+                    trial_data.reciprocation = Math.round(2 * trial_data.received * distribution.ppf(Math.random()))/2;
                     if (trial_data.reciprocation < 0) {
                         trial_data.reciprocation = 0;
                     }
@@ -203,8 +204,9 @@ jsPsych.plugins['trust-game'] = (function() {
                 }
 
                 // add new html elements
-                $('#result-text').append('<br/>' + trial.center_caption + ' has returned <b>$' + trial_data.reciprocation +
-                                         '</b> of <b>$' + trial_data.received + '</b> to you.');
+                $('#result-text').append('<br/>' + trial.center_caption + ' has returned <b>$' +
+                                         trial_data.reciprocation.toFixed(2) + '</b> of <b>$' +
+                                         trial_data.received.toFixed(2) + '</b> to you.');
 
                 display_element.append($('<button>', {
                     id: 'next',
@@ -217,7 +219,7 @@ jsPsych.plugins['trust-game'] = (function() {
                     display_element.html('');
                     jsPsych.finishTrial(trial_data);
                 })
-            }, random_int(trial.wait_time_min, trial.wait_time_max));  // TODO magic number
+            }, random_int(trial.wait_time_min, trial.wait_time_max));
 
         });
 

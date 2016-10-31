@@ -263,7 +263,7 @@ $(function() {
     // EXPERIMENT TIMELINE
     //   Instructions
     timeline = timeline.concat(beginningInstructions);
-    // //   Training Trials
+    //   Training Trials
     timeline = timeline.concat(trainingTrials);
     //   More Instructions for block 1
     timeline = timeline.concat(block1Instructions);

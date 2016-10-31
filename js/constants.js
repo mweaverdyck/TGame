@@ -30,7 +30,7 @@ var players = [['img/player_img/AF-234.jpg', 'Jessica'],
                ['img/player_img/LF-213.jpg', 'Taylor'],
                ['img/player_img/WM-214.jpg', 'Daniel']];
 
-var MAX_MONEY = 10;
+var MAX_MONEY = 5;
 
 var BLOCK_1_NUM_PLAYERS = 4;
 var BLOCK_2_NUM_PLAYERS = 12;
