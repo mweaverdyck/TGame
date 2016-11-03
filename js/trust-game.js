@@ -5,6 +5,9 @@ $(function() {
     var experimentId = Date.now();
 
     players = shuffle_array(players);
+    for (var i = 0; i < players.length; ++i) {
+        players[i][1] = i;
+    }
 
     // Prevent closing window
     window.onbeforeunload = function() {
@@ -150,21 +153,6 @@ $(function() {
         write_trial_data(userId, experimentId, data);
     }
 
-    function create_player_matching_trial(player1Index, player2Index) {
-        // random side
-        var leftIndex = random_int(0, 1) === 0 ? player1Index : player2Index;
-        var rightIndex = leftIndex === player1Index ? player2Index : player1Index;
-
-        return {
-            type: 'match-img',
-            left_img: players[leftIndex][0],
-            left_caption: players[leftIndex][1],
-            right_img: players[rightIndex][0],
-            right_caption: players[rightIndex][1],
-            on_finish: block_3_on_trial_finish
-        }
-    }
-
     // BLOCK 3 SURVEY QUESTIONS
     var block3 = [{
         type: 'demography',
@@ -194,6 +182,7 @@ $(function() {
         max_text: '100%',
         on_finish: block_3_on_trial_finish
     }];
+
     for (var i = 0; i < players.length; ++i) {
         block3.push({
             type: 'survey-likert',
@@ -220,28 +209,31 @@ $(function() {
         pages: ['<p>' + 'We\'ll test your knowledge on the relationships between your partners now. For each pair of players, please ' +
         'indicate whether they appeared as friends in your previous games. Press right arrow to start.' + '</p>']
     });
-    playerMatchingTrials = [
-        create_player_matching_trial(0, 4),
-        create_player_matching_trial(1, 5),
-        create_player_matching_trial(2, 6),
-        create_player_matching_trial(3, 7),
-        create_player_matching_trial(4, 9),
-        create_player_matching_trial(5, 15),
-        create_player_matching_trial(6, 8),
-        create_player_matching_trial(7, 14),
-        create_player_matching_trial(8, 12),
-        create_player_matching_trial(9, 10),
-        create_player_matching_trial(10, 0),
-        create_player_matching_trial(11, 1),
-        create_player_matching_trial(12, 2),
-        create_player_matching_trial(13, 3),
-        create_player_matching_trial(14, 13),
-        create_player_matching_trial(15, 11)
-    ];
-    playerMatchingTrials = shuffle_array(playerMatchingTrials);
-    if (playerMatchingTrials > MAX_NUM_MATCHING_QUESTIONS) {
-        playerMatchingTrials = playerMatchingTrials.slice(0, MAX_NUM_MATCHING_QUESTIONS);
-    }
+    playerMatchingTrials = [{
+        type: 'match-friends',
+        col_player_index_begin: 15,
+        col_player_index_end: 8,
+        row_player_index_begin: 0,
+        row_player_index_end: 7,
+    }, {
+        type: 'match-friends',
+        col_player_index_begin: 8,
+        col_player_index_end: 15,
+        row_player_index_begin: 6,
+        row_player_index_end: -1,
+    }, {
+        type: 'match-friends',
+        col_player_index_begin: 7,
+        col_player_index_end: 0,
+        row_player_index_begin: 0,
+        row_player_index_end: 7,
+    }, {
+        type: 'match-friends',
+        col_player_index_begin: 15,
+        col_player_index_end: 7,
+        row_player_index_begin: 7,
+        row_player_index_end: 15,
+    }];
     block3 = block3.concat(playerMatchingTrials);
 
     block3.push({
@@ -280,7 +272,7 @@ $(function() {
     timeline = timeline.concat(block3);
 
     function startExperiment() {
-        hookWindow = true;
+        // hookWindow = true;
         // Start the experiment
         jsPsych.init({
             display_element: $('#jspsych-target'),

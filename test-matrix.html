@@ -15,7 +15,7 @@
     </head>
     <body>
         <p>Click on the intersection if two people were friends</p>
-        <div class="container">
+        <div class="">
             <table id="matrix" class="table table-bordered">
                 <thead id="matrix-head"></thead>
                 <tbody id="matrix-body"></tbody>
@@ -25,12 +25,11 @@
         <script type="text/javascript" src="js/globals.js"></script>
         <script type="text/javascript">
             function append_row(contents, isHead) {
-                // contents is an array containing contents for each cell; assuming length of contents % 4 === 0
+                // contents is an array containing jquery contents for each cell
+                // assuming length of contents % 4 === 0
                 var oneRow = $('<tr>');
                 for (var i = 0; i < players.length && i < contents.length; ++i) {
-                    oneRow.append($( (isHead || i === 0) ? '<th>' : '<td>', {
-                        text: contents[i]
-                    }));
+                    oneRow.append($( (isHead || i === 0) ? '<th>' : '<td>').append(contents[i]));
                 }
                 if (isHead) {
                     $('#matrix-head').append(oneRow);
@@ -39,15 +38,32 @@
                 }
             }
 
+            function get_player_img_div(index) {
+                var playerImgDivCropper = $('<div>', {
+                    class: 'image-cropper'
+                });
+                playerImgDivCropper.append($('<p>', {
+                    class: 'img-text',
+                    text: players[index][1]
+                }));
+                playerImgDivCropper.append($('<img>', {
+                    src: players[index][0]
+                }));
+                var playerImgDiv = $('<div>', {
+                    class: 'small-img-div'
+                }).append(playerImgDivCropper);
+                return playerImgDiv;
+            }
+
             var firstRow = [''];
-            for (var i = 0; i < players.length - 1; ++i) {
-                firstRow.push('X');
+            for (var i = players.length - 1; i >= 0; --i) {
+                firstRow.push(get_player_img_div(i));
             }
             append_row(firstRow, true);
 
             // second to last rows
             for (var i = 0; i < players.length - 1; ++i) {  // for each row
-                var row = ['Y'];
+                var row = [get_player_img_div(i)];
                 for (var j = 0; j < players.length - i - 1; ++j) {
                     row.push('')
                 }
