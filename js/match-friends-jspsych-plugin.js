@@ -100,73 +100,123 @@ jsPsych.plugins['match-friends'] = (function() {
         // interaction effects
         $('#matrix').stickyTableHeaders();
         // helper functions
-        function add_hover_class(tdElement, className) {
-            var cellRow = tdElement.closest('tr').index();
-            var cellCol = tdElement.index();
-
-            // change this cell
-            tdElement.addClass(className);
-            // change table header
+        function add_table_header_class(cellRow, cellCol, className) {
             $($('#matrix thead th')[cellCol]).addClass(className);
             $($('#matrix tbody tr th')[cellRow]).addClass(className);
         }
-        function remove_hover_class(tdElement, className) {
-            var cellRow = tdElement.closest('tr').index();
-            var cellCol = tdElement.index();
-
-            // change this cell
-            tdElement.removeClass(className);
-            // change table header
+        function remove_table_header_class(cellRow, cellCol, className) {
             $($('#matrix thead th')[cellCol]).removeClass(className);
             $($('#matrix tbody tr th')[cellRow]).removeClass(className);
         }
 
-        $('#matrix td').click(function() {
-            if ($(this).hasClass('friends-selected')) {  // was "friends"
-                $(this).removeClass('friends-selected');
-                $(this).addClass('not-friends-selected');
-                remove_hover_class($(this), 'friends-hover')
-                add_hover_class($(this), 'not-friends-hover');
-                $(this).text('Not Friends');
-            } else if ($(this).hasClass('not-friends-selected')) {  // was "not friends"
-                $(this).removeClass('not-friends-selected');
-                $(this).text('');
-                ++numCellsNeedResponse;
-            } else {    // was empty
-                --numCellsNeedResponse;
-                remove_hover_class($(this), 'not-friends-hover')
-                add_hover_class($(this), 'friends-hover');
-                $(this).addClass('friends-selected');
-                $(this).text('Friends');
-            }
+        function cell_num_check(numCellsNeedResponse) {
             if (numCellsNeedResponse === 0) {
                 $('#submit').removeClass('disabled');
             } else if (!$('#submit').hasClass('disabled')) {
                 $('#submit').addClass('disabled');
             }
-        });
+        }
 
-        $('#matrix td').mouseover(function() {
-            var cellRow = $(this).closest('tr').index();
-            var cellCol = $(this).index();
+        function add_hover_effect(tdElement) {
+            var cellRow = tdElement.closest('tr').index();
+            var cellCol = tdElement.index();
 
-            if ($(this).hasClass('not-friends-selected')) {
-                add_hover_class($(this), 'not-friends-hover');
-            } else {
-                add_hover_class($(this), 'friends-hover');
+            // change this cell
+            // tdElement.addClass(className);
+            if (false) {
+                return;
             }
-        });
+            tdElement.text('');
+            var friendsSubcell = $('<tr>').append($('<td>', {
+                id: 'friends-subcell',
+                class: tdElement.hasClass('friends-selected') ? 'friends-selected' : 'friends-hover',
+                text: 'Friends',
+                style: 'border-radius: 3px;'
+            }));
+            var notFriendsSubcell = $('<tr>').append($('<td>', {
+                id: 'not-friends-subcell',
+                class: tdElement.hasClass('not-friends-selected') ? 'not-friends-selected' : 'not-friends-hover',
+                text: 'Not Friends',
+                style: 'border-radius: 3px;'
+            }));
+            tdElement.append(friendsSubcell);
+            tdElement.append(notFriendsSubcell);
 
-        $('#matrix td').mouseout(function() {
-            var cellRow = $(this).closest('tr').index();
-            var cellCol = $(this).index();
-
-            if ($(this).hasClass('friends-hover')) {
-                remove_hover_class($(this), 'friends-hover')
+            // change table header
+            if (tdElement.hasClass('not-friends-selected')) {
+                add_table_header_class(cellRow, cellCol, 'not-friends-hover')
+            } else if (tdElement.hasClass('friends-selected')) {
+                add_table_header_class(cellRow, cellCol, 'friends-hover');
             } else {
-                remove_hover_class($(this), 'not-friends-hover')
+                add_table_header_class(cellRow, cellCol, 'neutral-hover');
             }
-        });
+
+            // subcell click functions
+            $('#friends-subcell').click(function() {
+                if (tdElement.hasClass('not-friends-selected')) {
+                    $('#friends-subcell').removeClass('friends-hover');
+                    $('#friends-subcell').addClass('friends-selected');
+                    $('#not-friends-subcell').removeClass('not-friends-selected');
+                    $('#not-friends-subcell').addClass('not-friends-hover');
+                } else if (!tdElement.hasClass('friends-selected')) {
+                    $('#friends-subcell').removeClass('friends-hover');
+                    $('#friends-subcell').addClass('friends-selected');
+                    --numCellsNeedResponse;
+                }
+                remove_table_header_class(cellRow, cellCol, 'not-friends-hover');
+                remove_table_header_class(cellRow, cellCol, 'neutral-hover');
+                add_table_header_class(cellRow, cellCol, 'friends-hover');
+                tdElement.removeClass('not-friends-selected');
+                tdElement.addClass('friends-selected');
+
+                cell_num_check(numCellsNeedResponse);
+            });
+
+            $('#not-friends-subcell').click(function() {
+                if (tdElement.hasClass('friends-selected')) {
+                    $('#not-friends-subcell').removeClass('not-friends-hover');
+                    $('#not-friends-subcell').addClass('not-friends-selected');
+                    $('#friends-subcell').removeClass('friends-selected');
+                    $('#friends-subcell').addClass('friends-hover');
+                } else if (!tdElement.hasClass('not-friends-selected')) {
+                    $('#not-friends-subcell').removeClass('not-friends-hover');
+                    $('#not-friends-subcell').addClass('not-friends-selected');
+                    --numCellsNeedResponse;
+                }
+                remove_table_header_class(cellRow, cellCol, 'friends-hover');
+                remove_table_header_class(cellRow, cellCol, 'neutral-hover');
+                add_table_header_class(cellRow, cellCol, 'not-friends-hover');
+                tdElement.removeClass('friends-selected');
+                tdElement.addClass('not-friends-selected');
+
+                cell_num_check(numCellsNeedResponse);
+            });
+        }
+
+        function remove_hover_effect(tdElement) {
+            var cellRow = tdElement.closest('tr').index();
+            var cellCol = tdElement.index();
+
+            // change this cell
+            $('#friends-subcell').remove();
+            $('#not-friends-subcell').remove();
+            if (tdElement.text() == '') {
+                if (tdElement.hasClass('friends-selected')) {
+                    tdElement.append('Friends');
+                } else if (tdElement.hasClass('not-friends-selected')) {
+                    tdElement.append('Not Friends');
+                }
+            }
+            // change table header
+            remove_table_header_class(cellRow, cellCol, 'friends-hover');
+            remove_table_header_class(cellRow, cellCol, 'not-friends-hover');
+            remove_table_header_class(cellRow, cellCol, 'neutral-hover');
+        }
+
+        $('#matrix td').hover(
+            function() { add_hover_effect($(this)); }, 
+            function() { remove_hover_effect($(this)); }
+        );
 
         // next button
         $('#matrix-div').append($('<button>', {
