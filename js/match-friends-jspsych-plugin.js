@@ -15,7 +15,7 @@ jsPsych.plugins['match-friends'] = (function() {
         // add elements
         display_element.append($('<p>', {
             class: 'fixed-position-upper-left',
-            text: 'Click on the intersection if two people were friends:'
+            text: 'Indicate if two people were friends or not by clicking on the intersections:'
         }));
         // html table
         var table = $('<table>', {
@@ -32,7 +32,8 @@ jsPsych.plugins['match-friends'] = (function() {
             id: 'matrix-div'
         }).append(table));
 
-        // table contents
+        // appending table contents
+        var numCellsNeedResponse = 0;
         // helper functions
         function append_row(contents, isHead) {
             // contents is an array containing jquery contents for each cell
@@ -40,6 +41,9 @@ jsPsych.plugins['match-friends'] = (function() {
             var oneRow = $('<tr>');
             for (var i = 0; i < players.length && i < contents.length; ++i) {
                 oneRow.append($( (isHead || i === 0) ? '<th>' : '<td>').append(contents[i]));
+                if (!isHead && i !== 0) {
+                    ++numCellsNeedResponse;
+                }
             }
             if (isHead) {
                 $('#matrix-head').append(oneRow);
@@ -66,6 +70,7 @@ jsPsych.plugins['match-friends'] = (function() {
             return playerImgDiv;
         }
 
+        // first row
         var firstRow = [''];
         var colIdxBegin = trial.col_player_index_begin;
         var colIdxEnd = trial.col_player_index_end;
@@ -94,14 +99,50 @@ jsPsych.plugins['match-friends'] = (function() {
 
         // interaction effects
         $('#matrix').stickyTableHeaders();
+        // helper functions
+        function add_hover_class(tdElement, className) {
+            var cellRow = tdElement.closest('tr').index();
+            var cellCol = tdElement.index();
+
+            // change this cell
+            tdElement.addClass(className);
+            // change table header
+            $($('#matrix thead th')[cellCol]).addClass(className);
+            $($('#matrix tbody tr th')[cellRow]).addClass(className);
+        }
+        function remove_hover_class(tdElement, className) {
+            var cellRow = tdElement.closest('tr').index();
+            var cellCol = tdElement.index();
+
+            // change this cell
+            tdElement.removeClass(className);
+            // change table header
+            $($('#matrix thead th')[cellCol]).removeClass(className);
+            $($('#matrix tbody tr th')[cellRow]).removeClass(className);
+        }
 
         $('#matrix td').click(function() {
-            if ($(this).hasClass('friends-selected')) {
+            if ($(this).hasClass('friends-selected')) {  // was "friends"
                 $(this).removeClass('friends-selected');
+                $(this).addClass('not-friends-selected');
+                remove_hover_class($(this), 'friends-hover')
+                add_hover_class($(this), 'not-friends-hover');
+                $(this).text('Not Friends');
+            } else if ($(this).hasClass('not-friends-selected')) {  // was "not friends"
+                $(this).removeClass('not-friends-selected');
                 $(this).text('');
-            } else {
+                ++numCellsNeedResponse;
+            } else {    // was empty
+                --numCellsNeedResponse;
+                remove_hover_class($(this), 'not-friends-hover')
+                add_hover_class($(this), 'friends-hover');
                 $(this).addClass('friends-selected');
                 $(this).text('Friends');
+            }
+            if (numCellsNeedResponse === 0) {
+                $('#submit').removeClass('disabled');
+            } else if (!$('#submit').hasClass('disabled')) {
+                $('#submit').addClass('disabled');
             }
         });
 
@@ -109,28 +150,28 @@ jsPsych.plugins['match-friends'] = (function() {
             var cellRow = $(this).closest('tr').index();
             var cellCol = $(this).index();
 
-            // change this cell
-            $(this).addClass('friends-hover');
-            // change table header
-            $($('#matrix thead th')[cellCol]).addClass('friends-hover');
-            $($('#matrix tbody tr th')[cellRow]).addClass('friends-hover');
+            if ($(this).hasClass('not-friends-selected')) {
+                add_hover_class($(this), 'not-friends-hover');
+            } else {
+                add_hover_class($(this), 'friends-hover');
+            }
         });
 
         $('#matrix td').mouseout(function() {
             var cellRow = $(this).closest('tr').index();
             var cellCol = $(this).index();
 
-            // change this cell
-            $(this).removeClass('friends-hover');
-            // change table header
-            $($('#matrix thead th')[cellCol]).removeClass('friends-hover');
-            $($('#matrix tbody tr th')[cellRow]).removeClass('friends-hover');
+            if ($(this).hasClass('friends-hover')) {
+                remove_hover_class($(this), 'friends-hover')
+            } else {
+                remove_hover_class($(this), 'not-friends-hover')
+            }
         });
 
         // next button
         $('#matrix-div').append($('<button>', {
             id: 'submit',
-            class: "autocompare btn btn-primary",
+            class: "autocompare btn btn-primary disabled",
             style: 'margin-bottom: 20px;',
             text: 'Next'
         }));
@@ -141,6 +182,9 @@ jsPsych.plugins['match-friends'] = (function() {
 
         // next button function
         $('#submit').click(function() {
+            if ($(this).hasClass('disabled')) {
+                return;
+            }
             // TODO
 
 
@@ -150,6 +194,7 @@ jsPsych.plugins['match-friends'] = (function() {
             };
             display_element.html('');
             jsPsych.finishTrial(trial_data);
+            window.scrollTo(0, 0);
         });
 
     };

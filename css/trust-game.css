@@ -47,6 +47,15 @@ th:nth-of-type(odd) {
   background: #b0e0ef !important;
   color: #337ab7;
 }
+.not-friends-selected {
+  background: #d9534f !important;
+  color: white;
+  font-size: 12px;
+}
+.not-friends-hover {
+  background: #eeb2b0 !important;
+  color: #b32b27;
+}
 .fixed-position-below {
   position: absolute;
   width: 90%;
