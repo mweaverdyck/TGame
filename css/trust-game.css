@@ -39,32 +39,32 @@ th:nth-of-type(odd) {
   height: 110%;
 }
 .friends-selected {
-  background: #5bc0de !important;
+  background: #4cae4c !important;
   color: white;
   font-size: 12px;
   line-height: 50px;
 }
 .friends-hover {
-  background: #b0e0ef !important;
-  color: #337ab7;
+  background: #c9e8c9 !important;
+  color: #3c8b3c;
   font-size: 12px;
   line-height: 50px;
 }
 .not-friends-selected {
-  background: #d9534f !important;
+  background: #5bc0de !important;
   color: white;
   font-size: 12px;
   line-height: 50px;
 }
 .not-friends-hover {
-  background: #f1c1bf !important;
-  color: #b32b27;
+  background: #b0e0ef !important;
+  color: #337ab7;
   font-size: 12px;
   line-height: 50px;
 }
 .neutral-hover {
-  background: #c9e8c9 !important;
-  color: #4cae4c;
+  background: #ffbb33 !important;
+  color: #ff8800;
 }
 .fixed-position-below {
   position: absolute;

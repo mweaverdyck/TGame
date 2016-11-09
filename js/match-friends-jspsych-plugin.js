@@ -70,12 +70,19 @@ jsPsych.plugins['match-friends'] = (function() {
             return playerImgDiv;
         }
 
+        // reorder player indexes
+        var newIndexes = [];
+        for (var i = 0; i < players.length; ++i) {
+            newIndexes.push(i);
+        }
+        newIndexes = shuffle_array(newIndexes);
+
         // first row
         var firstRow = [''];
         var colIdxBegin = trial.col_player_index_begin;
         var colIdxEnd = trial.col_player_index_end;
         for (var i = colIdxBegin; i != colIdxEnd; colIdxBegin > colIdxEnd ? --i : ++i) {
-            firstRow.push(get_player_img_div(i));
+            firstRow.push(get_player_img_div(newIndexes[i]));
         }
         append_row(firstRow, true);
 
@@ -84,7 +91,7 @@ jsPsych.plugins['match-friends'] = (function() {
         var rowIdxEnd = trial.row_player_index_end;
         var colCounter = 0;
         for (var i = rowIdxBegin; i != rowIdxEnd; rowIdxBegin > rowIdxEnd ? --i : ++i, ++colCounter) {  // for each row
-            var row = [get_player_img_div(i)];
+            var row = [get_player_img_div(newIndexes[i])];
             if (colIdxBegin > colIdxEnd) {
                 for (var j = colIdxBegin; j != colIdxEnd + colCounter; --j) {
                     row.push('')
@@ -122,10 +129,6 @@ jsPsych.plugins['match-friends'] = (function() {
             var cellCol = tdElement.index();
 
             // change this cell
-            // tdElement.addClass(className);
-            if (false) {
-                return;
-            }
             tdElement.text('');
             var friendsSubcell = $('<tr>').append($('<td>', {
                 id: 'friends-subcell',
@@ -235,12 +238,35 @@ jsPsych.plugins['match-friends'] = (function() {
             if ($(this).hasClass('disabled')) {
                 return;
             }
-            // TODO
 
+            var responses = [];
+            $.each($('#matrix td'), function() {
+                var cellRow = $(this).closest('tr').index();
+                var cellCol = $(this).index();
+                var player1img = $($('#matrix thead th img')[cellCol - 1]).attr('src');
+                var player2img = $($('#matrix tbody tr th img')[cellRow]).attr('src');
+                var player1index = get_player_index(player1img);
+                var player2index = get_player_index(player2img);
+                var response = $(this).text() === 'Friends' ? 'Y' : 'N';
+
+                responses.push({
+                    idx: [player1index, player2index],
+                    player_1: player1img,
+                    player_2: player2img,
+                    player_1_trustworthy: is_trustworthy(player1index),
+                    player_2_trustworthy: is_trustworthy(player2index),
+                    player_1_variance: get_reciprocation_variance(player1index),
+                    player_2_variance: get_reciprocation_variance(player2index),
+                    response: response,
+                    correct: are_friends(player1img, player2img) ? response === 'Y' : response === 'N'
+                });
+            });
+            console.log(responses);
 
             var response_time = Date.now() - startTime;
             trial_data = {
-                rt: response_time
+                rt: response_time,
+                responses: responses
             };
             display_element.html('');
             jsPsych.finishTrial(trial_data);
