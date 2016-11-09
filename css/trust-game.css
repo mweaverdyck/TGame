@@ -44,6 +44,10 @@ th:nth-of-type(odd) {
   font-size: 12px;
   line-height: 50px;
 }
+.friends-header-hover {
+  background: #4cae4c !important;
+  color: #4cae4c;
+}
 .friends-hover {
   background: #c9e8c9 !important;
   color: #3c8b3c;
@@ -55,6 +59,10 @@ th:nth-of-type(odd) {
   color: white;
   font-size: 12px;
   line-height: 50px;
+}
+.not-friends-header-hover {
+  background: #5bc0de !important;
+  color: #5bc0de;
 }
 .not-friends-hover {
   background: #b0e0ef !important;

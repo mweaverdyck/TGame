@@ -147,9 +147,9 @@ jsPsych.plugins['match-friends'] = (function() {
 
             // change table header
             if (tdElement.hasClass('not-friends-selected')) {
-                add_table_header_class(cellRow, cellCol, 'not-friends-hover')
+                add_table_header_class(cellRow, cellCol, 'not-friends-header-hover')
             } else if (tdElement.hasClass('friends-selected')) {
-                add_table_header_class(cellRow, cellCol, 'friends-hover');
+                add_table_header_class(cellRow, cellCol, 'friends-header-hover');
             } else {
                 add_table_header_class(cellRow, cellCol, 'neutral-hover');
             }
@@ -166,9 +166,9 @@ jsPsych.plugins['match-friends'] = (function() {
                     $('#friends-subcell').addClass('friends-selected');
                     --numCellsNeedResponse;
                 }
-                remove_table_header_class(cellRow, cellCol, 'not-friends-hover');
+                remove_table_header_class(cellRow, cellCol, 'not-friends-header-hover');
                 remove_table_header_class(cellRow, cellCol, 'neutral-hover');
-                add_table_header_class(cellRow, cellCol, 'friends-hover');
+                add_table_header_class(cellRow, cellCol, 'friends-header-hover');
                 tdElement.removeClass('not-friends-selected');
                 tdElement.addClass('friends-selected');
 
@@ -186,9 +186,9 @@ jsPsych.plugins['match-friends'] = (function() {
                     $('#not-friends-subcell').addClass('not-friends-selected');
                     --numCellsNeedResponse;
                 }
-                remove_table_header_class(cellRow, cellCol, 'friends-hover');
+                remove_table_header_class(cellRow, cellCol, 'friends-header-hover');
                 remove_table_header_class(cellRow, cellCol, 'neutral-hover');
-                add_table_header_class(cellRow, cellCol, 'not-friends-hover');
+                add_table_header_class(cellRow, cellCol, 'not-friends-header-hover');
                 tdElement.removeClass('friends-selected');
                 tdElement.addClass('not-friends-selected');
 
@@ -211,8 +211,8 @@ jsPsych.plugins['match-friends'] = (function() {
                 }
             }
             // change table header
-            remove_table_header_class(cellRow, cellCol, 'friends-hover');
-            remove_table_header_class(cellRow, cellCol, 'not-friends-hover');
+            remove_table_header_class(cellRow, cellCol, 'friends-header-hover');
+            remove_table_header_class(cellRow, cellCol, 'not-friends-header-hover');
             remove_table_header_class(cellRow, cellCol, 'neutral-hover');
         }
 
