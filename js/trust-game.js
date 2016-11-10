@@ -206,8 +206,9 @@ $(function() {
 
     block3.push({
         type: 'instructions',
-        pages: ['<p>' + 'We\'ll test your knowledge on the relationships between your partners now. For each pair of players, please ' +
-        'indicate whether they appeared as friends in your previous games. Press right arrow to start.' + '</p>']
+        pages: ['<p>' + 'We\'ll test your knowledge on the relationships between your partners now. You \'ll see 4 matrices ' +
+        'on the next pages. For each pair of players, please indicate whether they appeared as friends in your previous ' +
+        'games. Press right arrow to start.' + '</p>']
     });
     // reorder player indexes for friends matching
     var newIndexes = [];
@@ -215,7 +216,6 @@ $(function() {
         newIndexes.push(i);
     }
     newIndexes = shuffle_array(newIndexes);
-    console.log(newIndexes);
     playerMatchingTrials = [{
         type: 'match-friends',
         converted_indexes: newIndexes,
