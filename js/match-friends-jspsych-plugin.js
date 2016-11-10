@@ -5,6 +5,7 @@ jsPsych.plugins['match-friends'] = (function() {
     var plugin = {};
 
     plugin.trial = function(display_element, trial) {
+        trial.converted_indexes = trial.converted_indexes || [];
         trial.col_player_index_begin = trial.col_player_index_begin || 7;
         trial.col_player_index_end = trial.col_player_index_end || 0;
         trial.row_player_index_begin = trial.row_player_index_begin || 0;
@@ -70,19 +71,12 @@ jsPsych.plugins['match-friends'] = (function() {
             return playerImgDiv;
         }
 
-        // reorder player indexes
-        var newIndexes = [];
-        for (var i = 0; i < players.length; ++i) {
-            newIndexes.push(i);
-        }
-        newIndexes = shuffle_array(newIndexes);
-
         // first row
         var firstRow = [''];
         var colIdxBegin = trial.col_player_index_begin;
         var colIdxEnd = trial.col_player_index_end;
         for (var i = colIdxBegin; i != colIdxEnd; colIdxBegin > colIdxEnd ? --i : ++i) {
-            firstRow.push(get_player_img_div(newIndexes[i]));
+            firstRow.push(get_player_img_div(trial.converted_indexes[i]));
         }
         append_row(firstRow, true);
 
@@ -91,7 +85,7 @@ jsPsych.plugins['match-friends'] = (function() {
         var rowIdxEnd = trial.row_player_index_end;
         var colCounter = 0;
         for (var i = rowIdxBegin; i != rowIdxEnd; rowIdxBegin > rowIdxEnd ? --i : ++i, ++colCounter) {  // for each row
-            var row = [get_player_img_div(newIndexes[i])];
+            var row = [get_player_img_div(trial.converted_indexes[i])];
             if (colIdxBegin > colIdxEnd) {
                 for (var j = colIdxBegin; j != colIdxEnd + colCounter; --j) {
                     row.push('')
@@ -261,7 +255,6 @@ jsPsych.plugins['match-friends'] = (function() {
                     correct: are_friends(player1img, player2img) ? response === 'Y' : response === 'N'
                 });
             });
-            console.log(responses);
 
             var response_time = Date.now() - startTime;
             trial_data = {
