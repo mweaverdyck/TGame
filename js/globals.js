@@ -24,6 +24,11 @@ var totalEarning = 0;
 var experimentStartTime = 0;
 
 
+// Get a random trial to pay
+var randomPayingTrial = random_int(1,
+    BLOCK_1_NUM_PLAYERS * BLOCK_1_NUM_TRIALS_PER_PLAYER + BLOCK_2_NUM_PLAYERS * BLOCK_2_NUM_TRIALS_PER_PLAYER);
+var experimentPayment = -1;
+
 function random_int(min, max) {  // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -103,6 +108,7 @@ function after_last_trial(userId, experimentId) {
     update[path + '/duration'] = (Date.now() - experimentStartTime) / 1000; // in sec
     update[path + '/end_time'] = (new Date()).toUTCString();
     update[path + '/total_earning'] = totalEarning;
+    update[path + '/experiment_payment'] = experimentPayment;
 
     firebase.database().ref().update(update).then(function() {
         hookWindow = false;

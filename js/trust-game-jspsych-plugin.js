@@ -215,6 +215,11 @@ jsPsych.plugins['trust-game'] = (function() {
                 }));
 
                 $('#next').click(function() {
+                    --randomPayingTrial;
+                    if (randomPayingTrial === 0) {
+                        experimentPayment = trial.money - trial_data.response + trial_data.reciprocation;
+                        console.log(experimentPayment);
+                    }
                     // goto next trial
                     display_element.html('');
                     jsPsych.finishTrial(trial_data);
