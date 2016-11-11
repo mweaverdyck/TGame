@@ -5,9 +5,6 @@ $(function() {
     var experimentId = Date.now();
 
     players = shuffle_array(players);
-    for (var i = 0; i < players.length; ++i) {
-        players[i][1] = i;
-    }
 
     // Prevent closing window
     window.onbeforeunload = function() {
