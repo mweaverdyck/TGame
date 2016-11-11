@@ -31,7 +31,8 @@ p {
   padding: 0;
   border-radius: 7px;
 }
-#matrix td, th {
+#matrix td,
+#matrix th {
   width: 100px;
 }
 #matrix img {
