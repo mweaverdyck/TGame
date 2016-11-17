@@ -19,6 +19,7 @@ $(function() {
         userId = parameters.split("=")[1];  // get id from url parameter
     } else {
         $('body').html('');
+        return;
     }
 
 
