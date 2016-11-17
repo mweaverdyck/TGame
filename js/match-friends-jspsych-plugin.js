@@ -244,7 +244,6 @@ jsPsych.plugins['match-friends'] = (function() {
                 var response = $(this).text() === 'Friends' ? 'Y' : 'N';
 
                 responses.push({
-                    idx: [player1index, player2index],
                     player_1: player1img,
                     player_2: player2img,
                     player_1_trustworthy: is_trustworthy(player1index),

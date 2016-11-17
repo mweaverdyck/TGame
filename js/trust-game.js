@@ -38,6 +38,7 @@ $(function() {
 
         firebase.database().ref('/' + userId + '/' + experimentId).set({
             start_time: (new Date()).toUTCString(),
+            players: players,
             firebase_uid: firebaseUid
         });
     });
