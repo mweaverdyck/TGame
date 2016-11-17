@@ -191,11 +191,11 @@ $(function() {
             labels: [['Not at all', 'Definitely yes']],
             num_points: 7,
             on_finish: function(data) {
-                // TODO: i bug
+                var playerIndex = get_player_index(data.img);
                 data.response = parseInt(data.response) + 1;
                 data.block_index = 3;
-                data.trustworthy = is_trustworthy(i);
-                data.player_variance = get_reciprocation_variance(i),
+                data.trustworthy = is_trustworthy(playerIndex);
+                data.player_variance = get_reciprocation_variance(playerIndex),
                 write_trial_data(userId, experimentId, data);
             }
         });
@@ -220,6 +220,7 @@ $(function() {
         col_player_index_end: 8,
         row_player_index_begin: 0,
         row_player_index_end: 7,
+        on_finish: block_3_on_trial_finish
     }, {
         type: 'match-friends',
         converted_indexes: newIndexes,
@@ -227,6 +228,7 @@ $(function() {
         col_player_index_end: 15,
         row_player_index_begin: 6,
         row_player_index_end: -1,
+        on_finish: block_3_on_trial_finish
     }, {
         type: 'match-friends',
         converted_indexes: newIndexes,
@@ -234,6 +236,7 @@ $(function() {
         col_player_index_end: 0,
         row_player_index_begin: 0,
         row_player_index_end: 7,
+        on_finish: block_3_on_trial_finish
     }, {
         type: 'match-friends',
         converted_indexes: newIndexes,
@@ -241,6 +244,7 @@ $(function() {
         col_player_index_end: 7,
         row_player_index_begin: 7,
         row_player_index_end: 15,
+        on_finish: block_3_on_trial_finish
     }];
     block3 = block3.concat(playerMatchingTrials);
 
