@@ -191,6 +191,7 @@ $(function() {
             labels: [['Not at all', 'Definitely yes']],
             num_points: 7,
             on_finish: function(data) {
+                // TODO: i bug
                 data.response = parseInt(data.response) + 1;
                 data.block_index = 3;
                 data.trustworthy = is_trustworthy(i);
