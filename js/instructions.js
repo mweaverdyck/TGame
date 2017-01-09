@@ -55,7 +55,7 @@ var INSTR_BLOCK_1 = [
                      'portion of that amount at the end of your session.' + '</p>' +
                      '<p id="total-earning" class="fixed-position-upper-right">' + EARNING_TEXT + '0</p>' +
                      '<script> $("#total-earning").fadeIn(200).fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200); </script>',
-                     'If you understand these instructions, press right arrow to start the first block of games.' + '</p>'
+                     'If you understand these instructions, press the right arrow to start the first block of games. Otherwise, please ask the experimenter for clarification.' + '</p>'
                     ];
 
 var INSTR_FIND_PARTNER = 'Please wait while we look for your partners...';
