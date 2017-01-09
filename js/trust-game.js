@@ -205,7 +205,7 @@ $(function() {
 
     block3.push({
         type: 'instructions',
-        pages: ['<p>' + 'We\'ll test your knowledge on the relationships between your partners now. You \'ll see 4 matrices ' +
+        pages: ['<p>' + 'Next, we\'ll test your knowledge of the relationships between your partners. You \'ll see 4 matrices ' +
         'on the next pages. For each pair of players, please indicate whether they appeared as friends in your previous ' +
         'games. Press right arrow to start.' + '</p>']
     });

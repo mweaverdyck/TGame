@@ -38,11 +38,11 @@ var INSTR_GAME = [[
                     '<p>' + 'In Block 1, you’ve been assigned to play the <b>Investment Game</b> with other players.<br/><br/>' + 
                     'In each round of the Investment Game, you’ll be partnered with one person.' + '</p>'
                     ], [
-                    '<p>' + 'You\'ve been assigned as the first player.' + '</p>' +
+                    '<p>' + 'You\'ve been assigned the role of first player.' + '</p>' +
                     '<p>' + 'As the first player, you\'ll start each round with a sum of money. ' +
                     'You\'ll have the opportunity to invest your money by giving a portion of that to your partner -- you can choose ' +
                     'any amount from $0 to $' + MAX_MONEY + '. ' +
-                    'Any amount of money you choose to invest will then be <b>tripled</b> and delivered to your partner.<br/>' +
+                    'Any amount of money you choose to invest will then be <b>tripled</b> and delivered to your partner.<br/><br/>' +
                     'Your partner can then choose how much of the tripled sum to keep, and how much of it to give back to you.<br/><br/>' +
                     'If you choose not to invest anything, you’ll keep all of the money that you started with that round.' + '</p>',
                     '<p>' + 'To give you a sense of how to play the Investment Game, we’ll go through a couple of "practice rounds" now.' +
@@ -51,11 +51,11 @@ var INSTR_GAME = [[
 
 var INSTR_BLOCK_1 = [
                      '<p>' + 'Great, now we\'re ready to begin!' + '</p>',
-                     '<p>' + 'From now on, the money you earned will show in the upper right corner. Remember you will actually earn a ' +
+                     '<p>' + 'From now on, the money you earned will be displayed in the upper right corner. Remember, you will actually earn a ' +
                      'portion of that amount at the end of your session.' + '</p>' +
                      '<p id="total-earning" class="fixed-position-upper-right">' + EARNING_TEXT + '0</p>' +
                      '<script> $("#total-earning").fadeIn(200).fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200); </script>',
-                     'If you understand these instructions, press right arrow to start the first block of games.' + '</p>'
+                     'Press the right arrow key to start the first block of games.' + '</p>'
                     ];
 
 var INSTR_FIND_PARTNER = 'Please wait while we look for your partners...';
@@ -64,12 +64,12 @@ var INSTR_BLOCK_2 = [
                     '<p>' + 'You have now completed Block 1!' + '</p>',
                     '<p>' + 'In Block 2, you’ll be playing the Investment Game again.' + '</p>',
                     [
-                        '<p>' + 'You\'ve been assigned as the first player.' + '</p>',
+                        '<p>' + 'You\'ve been assigned the role of first player.' + '</p>',
                         '<p>' + 'In this block, you’ll be playing with a new set of partners. You might encounter your previous partners ' +
                         'later on today, but in Block 2, you’ll be playing with all new people.' + '</p>',
-                        '<p>' + 'If one of your new partners is a friend with someone you’ve played with before, you’ll be able to see that ' +
+                        '<p>' + 'Remember, if one of your new partners is a friend of someone who you’ve played with before, you’ll be able to see that ' +
                         'person’s face instead of a question mark.' + '</p>',
-                        '<p>' + 'Press right arrow to start the second block of games.' + '</p>'
+                        '<p>' + 'Press the right arrow key to start the second block of games.' + '</p>'
                     ]];
 
 var INSTR_BLOCK_3 = [

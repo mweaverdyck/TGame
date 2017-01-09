@@ -165,7 +165,7 @@ jsPsych.plugins['trust-game'] = (function() {
 
             // add new elements
             display_element.append('<p id="result-text" class="fixed-position-mid-below">' +
-                'You gave ' + trial.center_caption + ' <b>$' + response.toFixed(2) + '</b>, which were tripled before ' +
+                'You gave ' + trial.center_caption + ' <b>$' + response.toFixed(2) + '</b>, which was tripled before ' +
                 'being passed on.<br/>' + trial.center_caption + ' received <b>$' + trial_data.received.toFixed(2) +
                 '</b>.<br/></p>'
             );
