@@ -38,7 +38,7 @@ var INSTR_GAME = [[
                     '<p>' + 'In Block 1, you’ve been assigned to play the <b>Investment Game</b> with other players.<br/><br/>' + 
                     'In each round of the Investment Game, you’ll be partnered with one person.' + '</p>'
                     ], [
-                    '<p>' + 'You\'ve been assigned as the first player.' + '</p>' +
+                    '<p>' + 'You\'ve been assigned the role of first player.' + '</p>' +
                     '<p>' + 'As the first player, you\'ll start each round with a sum of money. ' +
                     'You\'ll have the opportunity to invest your money by giving a portion of that to your partner -- you can choose ' +
                     'any amount from $0 to $' + MAX_MONEY + '. ' +
@@ -55,7 +55,7 @@ var INSTR_BLOCK_1 = [
                      'portion of that amount at the end of your session.' + '</p>' +
                      '<p id="total-earning" class="fixed-position-upper-right">' + EARNING_TEXT + '0</p>' +
                      '<script> $("#total-earning").fadeIn(200).fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200); </script>',
-                     'If you understand these instructions, press the right arrow to start the first block of games. Otherwise, please ask the experimenter for clarification.' + '</p>'
+                     'If you understand these instructions, press the right arrow key to start the first block of games. Otherwise, please ask the experimenter for clarification.' + '</p>'
                     ];
 
 var INSTR_FIND_PARTNER = 'Please wait while we look for your partners...';
@@ -64,12 +64,12 @@ var INSTR_BLOCK_2 = [
                     '<p>' + 'You have now completed Block 1!' + '</p>',
                     '<p>' + 'In Block 2, you’ll be playing the Investment Game again.' + '</p>',
                     [
-                        '<p>' + 'You\'ve been assigned as the first player.' + '</p>',
+                        '<p>' + 'You\'ve been assigned the role of first player.' + '</p>',
                         '<p>' + 'In this block, you’ll be playing with a new set of partners. You might encounter your previous partners ' +
                         'later on today, but in Block 2, you’ll be playing with all new people.' + '</p>',
-                        '<p>' + 'If one of your new partners is a friend with someone you’ve played with before, you’ll be able to see that ' +
+                        '<p>' + 'Remember, if one of your new partners is a friend of someone who you’ve played with before, you’ll be able to see that ' +
                         'person’s face instead of a question mark.' + '</p>',
-                        '<p>' + 'Press right arrow to start the second block of games.' + '</p>'
+                        '<p>' + 'Press the right arrow key to start the second block of games.' + '</p>'
                     ]];
 
 var INSTR_BLOCK_3 = [
