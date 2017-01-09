@@ -42,7 +42,7 @@ var INSTR_GAME = [[
                     '<p>' + 'As the first player, you\'ll start each round with a sum of money. ' +
                     'You\'ll have the opportunity to invest your money by giving a portion of that to your partner -- you can choose ' +
                     'any amount from $0 to $' + MAX_MONEY + '. ' +
-                    'Any amount of money you choose to invest will then be <b>tripled</b> and delivered to your partner.<br/><br/>.' +
+                    'Any amount of money you choose to invest will then be <b>tripled</b> and delivered to your partner.<br/><br/>' +
                     'Your partner can then choose how much of the tripled sum to keep, and how much of it to give back to you.<br/><br/>' +
                     'If you choose not to invest anything, you’ll keep all of the money that you started with that round.' + '</p>',
                     '<p>' + 'To give you a sense of how to play the Investment Game, we’ll go through a couple of "practice rounds" now.' +
@@ -55,7 +55,7 @@ var INSTR_BLOCK_1 = [
                      'portion of that amount at the end of your session.' + '</p>' +
                      '<p id="total-earning" class="fixed-position-upper-right">' + EARNING_TEXT + '0</p>' +
                      '<script> $("#total-earning").fadeIn(200).fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200); </script>',
-                     'If you understand these instructions, press the right arrow key to start the first block of games. Otherwise, please ask the experimenter for clarification.' + '</p>'
+                     'Press the right arrow key to start the first block of games.' + '</p>'
                     ];
 
 var INSTR_FIND_PARTNER = 'Please wait while we look for your partners...';
