@@ -22,7 +22,7 @@ jsPsych.plugins['trust-game'] = (function() {
             display_element.append($('<p>', {
                 id: 'total-earning',
                 class: "fixed-position-upper-right",
-                text: EARNING_TEXT + totalEarning
+                text: EARNING_TEXT + totalEarning.toFixed(2)
             }));
         }
 
@@ -155,7 +155,7 @@ jsPsych.plugins['trust-game'] = (function() {
             // update earning
             if (trial.block_index !== 0) {
                 totalEarning += trial.money - response;
-                $('#total-earning').html(EARNING_TEXT + totalEarning);
+                $('#total-earning').html(EARNING_TEXT + totalEarning.toFixed(2));
             }
 
             // remove some elements
@@ -200,7 +200,7 @@ jsPsych.plugins['trust-game'] = (function() {
                 // update earning
                 if (trial.block_index !== 0) {
                     totalEarning += trial_data.reciprocation;
-                    $('#total-earning').html(EARNING_TEXT + totalEarning);
+                    $('#total-earning').html(EARNING_TEXT + totalEarning.toFixed(2));
                 }
 
                 // add new html elements
