@@ -263,7 +263,7 @@ $(function() {
     });
     block3.push({
         type: 'instructions',
-        pages: ['Thank you! You have now completed the session. Please notify the experimenter.']
+        pages: ['Thank you! You have now completed the session. Please leave this browser window open and notify the experimenter.']
     });
 
     // EXPERIMENT TIMELINE
