@@ -17,7 +17,8 @@ $(function() {
     var parameters = window.location.search.substring(1);
     if (parameters.length > 0) {
         userId = parameters.split("=")[1];  // get id from url parameter
-    } else {
+    }
+    if (parameters.length == 0 || userId.length == 0) {
         $('body').html('');
         return;
     }
