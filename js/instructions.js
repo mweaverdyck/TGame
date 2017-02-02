@@ -27,14 +27,14 @@ var INSTR_WEB = [
                     '<img src="img/unknown_friend.png" style="margin: 20px;">',
                     '<p>' + 'Therefore, when you haven\'t encountered any of your partner\'s friends before, you\'ll see something like this:' +
                     '</p>' +
-                    '<img src="img/player_example_2.png" class="player-example">'
+                    '<img src="img/player_example_2.png" class="player-example">',
+                    '<p>' + 'Today you’ll be playing 3 blocks of games. Each block will last 15-20 minutes.' + '</p>'
                 ];
 
 var INSTR_ASSIGN_GAME = 'Please wait while we assign games for you...';
 var INSTR_ASSIGN_ROLE = 'Please wait while we assign your role...';
 
 var INSTR_GAME = [[
-                    '<p>' + 'Today you’ll be playing 3 blocks of games. Each block will last 15-20 minutes.' + '</p>',
                     '<p>' + 'In Block 1, you’ve been assigned to play the <b>Investment Game</b> with other players.<br/><br/>' + 
                     'In each round of the Investment Game, you’ll be partnered with one person.' + '</p>'
                     ], [
