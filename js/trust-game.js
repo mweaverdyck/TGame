@@ -22,6 +22,16 @@ $(function() {
         $('body').html('');
         return;
     }
+    if (userId == 'shortversion') {
+        BLOCK_1_NUM_TRIALS_PER_PLAYER = 1;
+        BLOCK_2_NUM_TRIALS_PER_PLAYER = 1;
+        DEFAULT_RETURN_WAIT_TIME_MIN = 300;
+        DEFAULT_RETURN_WAIT_TIME_MAX = 800;
+        ASSIGNMENT_WAIT_TIME_MIN = 300;
+        ASSIGNMENT_WAIT_TIME_MAX = 800;
+        FIND_PARTNER_TIME_MIN = 300;
+        FIND_PARTNER_TIME_MAX = 800;
+    }
 
 
     // Initialize Firebase

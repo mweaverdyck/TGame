@@ -5,12 +5,12 @@ var INSTR_CONTINUE_OR_BACK = '<p class="fixed-position-below small grey">' + 'Pr
 var INSTR_WAIT = 'Waiting for the other players to get ready...';
 
 var INSTR_WEB = [
-                    '<p>' + 'Welcome to our social gaming website!' + '</p>' +
-                    '<p>' + 'This website is currently being tested at college campuses nationwide.' + '</p>',
+                    '<p>' + 'Welcome to our social gaming website!' + '</p>',
                     '<p>' + 'You are participating in a study that examines how various factors, like the amount of reward that’s at stake, ' +
                     'impact players\' enjoyment of online games.' + '</p>',
                     '<p>' + 'You\'ll be playing a series of simple games with other people on this website.' + '</p>',
-                    '<p>' + 'The players you\'ll be partnered with today are members of our website who regularly play a variety of games ' +
+                    '<p>' + 'We\'re currently testing out this website with collaborators at other colleges in the U.S.' + '</p>' +
+                    '<p>' + 'The players you\'ll be partnered with today are students at other colleges who regularly play a variety of games ' +
                     'with one another for fun and the chance to earn prizes (e.g., money).' + '</p>' +
                     '<p>' + 'Users of the site regularly have the chance to rate each other in terms of how much they prefer playing with ' +
                     'one another.' + '</p>',
@@ -62,7 +62,8 @@ var INSTR_FIND_PARTNER = 'Please wait while we look for your partners...';
 
 var INSTR_BLOCK_2 = [
                     '<p>' + 'You have now completed Block 1!' + '</p>',
-                    '<p>' + 'In Block 2, you’ll be playing the Investment Game again.' + '</p>',
+                    '<p>' + 'In Block 2, you’ve been assigned to play the <b>Investment Game</b> with other players.<br/><br/>' + 
+                    'In each round of the Investment Game, you’ll be partnered with one person.' + '</p>',
                     [
                         '<p>' + 'You\'ve been assigned the role of first player.' + '</p>',
                         '<p>' + 'In this block, you’ll be playing with a new set of partners. You might encounter your previous partners ' +
