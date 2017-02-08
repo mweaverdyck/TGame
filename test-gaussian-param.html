@@ -28,11 +28,13 @@
     <body>
         <div class="margin">
             Mean:
-            <input id="mean" type="text" value=0.5>
+            <input id="mean" type="text" value=0.05>
             Variance:
-            <input id="variance" type="text">
+            <input id="variance" type="text" value=0.12>
             Money received: $
-            <input id="money" type="text" value="30">
+            <input id="money" type="text" value=5>
+            Round to:
+            <input id="round" type="text" value=0.1>
             <button id="submit" type="button">Give me back random money for 30 times</button>
         </div>
         <div id="results" class="margin">
@@ -40,28 +42,32 @@
 
         <script type="text/javascript" src="js/gaussian.js"></script>
         <script type="text/javascript">
-            function do_it(mean, variance, money) {
-                if (isNaN(parseFloat(mean)) || !isFinite(mean) || isNaN(parseFloat(variance)) || !isFinite(variance) || isNaN(parseFloat(money)) || !isFinite(money) || variance == 0) {
+            function do_it(mean, variance, round, money) {
+                if (isNaN(parseFloat(mean)) || !isFinite(mean) || isNaN(parseFloat(variance)) || !isFinite(variance) || isNaN(parseFloat(round)) || !isFinite(round) || isNaN(parseFloat(money)) || !isFinite(money) || variance == 0) {
                     $('#results').append($('<p>', {
                         class: 'gray',
                         text: 'Yo there is something wrong with your input'
                     }));
                     return;
                 }
+                mean = parseFloat(mean);
+                round = parseFloat(round);
+                variance = parseFloat(variance);
+                money = parseFloat(money);
                 
                 $('#results').append($('<table>').append(
-                    '<th>mean = <span class="blue">' + mean + '</span>, variance = <span class="blue">' + variance + '</span>, SD = ' + Math.sqrt(variance) + ', money_received = ' + money
+                    '<th>mean = <span class="blue">' + mean + '</span>, variance = <span class="blue">' + variance + '</span>, round to <span class="blue">' + round + '</span>, SD = ' + Math.round(Math.sqrt(variance)*10000)/10000 + ', money_received = ' + money + '</th>'
                 ));
-                $('#results').append($('<table>', {
-                    class: 'margin-btm'
-                }).append($('<tr>', {
+                $('#results').append($('<table>').append($('<tr>', {
                     id: "nums"
                 })));
+                var num_zeros = 0;
                 for (var i = 0; i < 30; ++i) {
                     var distribution = gaussian(mean, variance);
-                    var result = Math.round(money * distribution.ppf(Math.random()));
-                    if (result < 0) {
+                    var result = Math.round(money * distribution.ppf(Math.random()) / round) * round;
+                    if (result <= 0) {
                         result = 0;
+                        ++num_zeros;
                     }
                     if (result > money) {
                         result = money;
@@ -69,17 +75,23 @@
                     $('#nums').append($('<th>', {
                         class: 'unbold',
                         width: 50,
-                        text: result
+                        text: result.toFixed(2)
                     }));
                 }
+                $('#results').append($('<table>', {
+                    class: 'margin-btm'
+                }).append(
+                    '<span class="blue">' + num_zeros + '</span> zeros in the above line'
+                ));
                 $('#nums').removeAttr('id');
             }
 
             $('#submit').click(function() {
                 var mean_ = $('#mean').val();
                 var variance_ = $('#variance').val();
+                var round_ = $('#round').val();
                 var money_ = $('#money').val();
-                do_it(mean_, variance_, money_);
+                do_it(mean_, variance_, round_, money_);
             });
 
             var parameters = window.location.search.substring(1);
@@ -88,12 +100,13 @@
                 auto = parameters.split("=")[1];  // get id from url parameter
             }
 
-            var means = [0, 0.05, 0.1, 0.45, 0.5, 0.55]
-            var vars = [0.004, 0.01, 0.03, 0.05, 0.07, 0.09]
+            var means = [0, 0.05, 0.1, 0.45, 0.5, 0.55];
+            var vars = [0.004, 0.01, 0.03, 0.05, 0.07, 0.09];
+            var round = 0.1;
             if (auto == 'true') {
                 for (var j = 0; j < vars.length; ++j) {
                     for (var i = 0; i < means.length; ++i) {
-                        do_it(means[i], vars[j], 30);
+                        do_it(means[i], vars[j], round, 30);
                     }
                 }
             }
