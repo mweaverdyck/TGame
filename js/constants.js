@@ -31,6 +31,8 @@ var players = [['img/player_img/AF-234.jpg', 'Jessica'],
                ['img/player_img/WM-214.jpg', 'Daniel']];
 
 var MAX_MONEY = 5;
+var MIN_SHARE = 1;
+var ROUNDING = 0.1;  // minimum increments of $
 
 var BLOCK_1_NUM_PLAYERS = 4;
 var BLOCK_2_NUM_PLAYERS = 12;

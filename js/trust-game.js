@@ -196,7 +196,7 @@ $(function() {
         block3.push({
             type: 'survey-likert',
             preamble: 'You may have the chance to be invited back to complete a cooperative puzzle-solving game with a partner. ' +
-                    'If this happens, we\'ll do our best to follow your preferences in assigning you a partner. Please rate how ' +
+                    'If this happens, we’ll do our best to follow your preferences in assigning you a partner. Please rate how ' +
                     'much you would like to be paired with each partner you played with today.',
             questions: [''],
             image: players[i][0],
@@ -216,8 +216,8 @@ $(function() {
 
     block3.push({
         type: 'instructions',
-        pages: ['<p>' + 'Next, we\'ll test your knowledge of the relationships between your partners. You \'ll see 4 matrices ' +
-        'on the next pages. For each pair of players, please indicate whether they appeared as friends in your previous ' +
+        pages: ['<p>' + 'Next, we’ll test your knowledge of the relationships between your partners. You’ll see 4 matrices ' +
+        'on the next pages. For each pair of players, please indicate whether they were friends in your previous ' +
         'games. Press right arrow to start.' + '</p>']
     });
     // reorder player indexes for friends matching

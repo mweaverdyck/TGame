@@ -84,7 +84,7 @@ jsPsych.plugins['trust-game'] = (function() {
             id: 'sliderdiv',
             class: "slider-div lower"
         });
-        sliderDiv.append('<span class="left-num"><b>$0</b></span>');
+        sliderDiv.append('<span class="left-num"><b>$' + MIN_SHARE + '</b></span>');
         sliderDiv.append($('<div>', {
                 class: "slider-inner-div"
             })
@@ -92,9 +92,9 @@ jsPsych.plugins['trust-game'] = (function() {
                 id: "slide",
                 'data-slider-id': "slider",
                 type: "text",
-                'data-slider-min': 0,
+                'data-slider-min': MIN_SHARE,
                 'data-slider-max': trial.money,
-                'data-slider-step': 0.5,
+                'data-slider-step': ROUNDING,
                 'data-slider-value': 0
         })));
         sliderDiv.append('<span class="right-num"><b>$' + trial.money + '</b></span>');
@@ -184,11 +184,11 @@ jsPsych.plugins['trust-game'] = (function() {
 
                 // reciprocate
                 if (trial.recip_dist_var === 0) {
-                    trial_data.reciprocation = Math.round(2 * trial_data.received * trial.recip_dist_mean)/2;
+                    trial_data.reciprocation = Math.round(trial_data.received * trial.recip_dist_mean / ROUNDING) * ROUNDING;
                 } else {
                     // get a random number from the distribution
                     var distribution = gaussian(trial.recip_dist_mean, trial.recip_dist_var);
-                    trial_data.reciprocation = Math.round(2 * trial_data.received * distribution.ppf(Math.random()))/2;
+                    trial_data.reciprocation = Math.round(trial_data.received * distribution.ppf(Math.random()) / ROUNDING) * ROUNDING;
                     if (trial_data.reciprocation < 0) {
                         trial_data.reciprocation = 0;
                     }

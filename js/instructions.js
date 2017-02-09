@@ -7,25 +7,25 @@ var INSTR_WAIT = 'Waiting for the other players to get ready...';
 var INSTR_WEB = [
                     '<p>' + 'Welcome to our social gaming website!' + '</p>',
                     '<p>' + 'You are participating in a study that examines how various factors, like the amount of reward that’s at stake, ' +
-                    'impact players\' enjoyment of online games.' + '</p>',
-                    '<p>' + 'You\'ll be playing a series of simple games with other people on this website.' + '</p>',
-                    '<p>' + 'We\'re currently testing out this website with collaborators at other colleges in the U.S.' + '</p>' +
-                    '<p>' + 'The players you\'ll be partnered with today are students at other colleges who regularly play a variety of games ' +
+                    'impact players’ enjoyment of online games.' + '</p>',
+                    '<p>' + 'You’ll be playing a series of simple games with other people on this website.' + '</p>',
+                    '<p>' + 'We’re currently testing out this website with collaborators at other colleges in the U.S.' + '</p>' +
+                    '<p>' + 'The players you’ll be partnered with today are students at other colleges who regularly play a variety of games ' +
                     'with one another for fun and the chance to earn prizes (e.g., money).' + '</p>' +
                     '<p>' + 'Users of the site regularly have the chance to rate each other in terms of how much they prefer playing with ' +
                     'one another.' + '</p>',
                     '<p>' + 'Players who consistently choose one another as their favorite partners to play with on the site are called ' +
-                    'one another\'s "Top Friends". When members of this website play with one another, their 3 Top Friends are displayed ' +
+                    'one another’s "Top Friends". When members of this website play with one another, their 3 Top Friends are displayed ' +
                     'below their own profile photo, as shown below:' + '</p>' +
                     '<img src="img/player_example_1.png" class="player-example">' +
-                    '<p class="small zero-space-top">The player images shown here are for illustration only. In the actual games, you\'ll ' +
-                    'see other players\' actual profile pictures instead of cartoon images. Since this is your first time using this ' +
-                    'website, you won\'t yet have any Top Friends displayed alongside your profile picture. </p>',
-                    '<p>' + 'Due to most users’ privacy settings, new users like you can only see those friends\' faces if you\'ve ' +
-                    'interacted with them before on the site. Players\' friends who you haven\'t encountered before will look like this:' +
+                    '<p class="small zero-space-top">The player images shown here are for illustration only. In the actual games, you’ll ' +
+                    'see other players’ actual profile pictures instead of cartoon images. Since this is your first time using this ' +
+                    'website, you won’t yet have any Top Friends displayed alongside your profile picture. </p>',
+                    '<p>' + 'Due to most users’ privacy settings, new users like you can only see those friends’ faces if you’ve ' +
+                    'interacted with them before on the site. Players’ friends who you haven’t encountered before will look like this:' +
                     '</p>' +
                     '<img src="img/unknown_friend.png" style="margin: 20px;">',
-                    '<p>' + 'Therefore, when you haven\'t encountered any of your partner\'s friends before, you\'ll see something like this:' +
+                    '<p>' + 'Therefore, when you haven’t encountered any of your partner’s friends before, you’ll see something like this:' +
                     '</p>' +
                     '<img src="img/player_example_2.png" class="player-example">',
                     '<p>' + 'Today you’ll be playing 3 blocks of games. Each block will last 15-20 minutes.' + '</p>'
@@ -35,22 +35,21 @@ var INSTR_ASSIGN_GAME = 'Please wait while we assign games for you...';
 var INSTR_ASSIGN_ROLE = 'Please wait while we assign your role...';
 
 var INSTR_GAME = [[
-                    '<p>' + 'In Block 1, you’ve been assigned to play the <b>Investment Game</b> with other players.<br/><br/>' + 
+                    '<p>' + 'In Block 1, you are assigned to play the <b>Investment Game</b> with other players.<br/><br/>' + 
                     'In each round of the Investment Game, you’ll be partnered with one person.' + '</p>'
                     ], [
-                    '<p>' + 'You\'ve been assigned the role of first player.' + '</p>' +
-                    '<p>' + 'As the first player, you\'ll start each round with a sum of money. ' +
-                    'You\'ll have the opportunity to invest your money by giving a portion of that to your partner -- you can choose ' +
-                    'any amount from $0 to $' + MAX_MONEY + '. ' +
+                    '<p>' + 'You’ve been assigned the role of first player.' + '</p>',
+                    '<p>' + 'As the first player, you’ll start each round with a sum of money. ' +
+                    'You’ll have the opportunity to invest your money by giving a portion of that to your partner -- you can choose ' +
+                    'any amount from $' + MIN_SHARE + ' to $' + MAX_MONEY + '. ' +
                     'Any amount of money you choose to invest will then be <b>tripled</b> and delivered to your partner.<br/><br/>' +
-                    'Your partner can then choose how much of the tripled sum to keep, and how much of it to give back to you.<br/><br/>' +
-                    'If you choose not to invest anything, you’ll keep all of the money that you started with that round.' + '</p>',
+                    'Your partner can then choose how much of the tripled sum to keep, and how much of it to give back to you.</p>',
                     '<p>' + 'To give you a sense of how to play the Investment Game, we’ll go through a couple of "practice rounds" now.' +
                     '</p>'
                 ]];
 
 var INSTR_BLOCK_1 = [
-                     '<p>' + 'Great, now we\'re ready to begin!' + '</p>',
+                     '<p>' + 'Great, now we’re ready to begin!' + '</p>',
                      '<p>' + 'From now on, the money you earned will be displayed in the upper right corner. Remember, you will actually earn a ' +
                      'portion of that amount at the end of your session.' + '</p>' +
                      '<p id="total-earning" class="fixed-position-upper-right">' + EARNING_TEXT + '0</p>' +
@@ -62,10 +61,10 @@ var INSTR_FIND_PARTNER = 'Please wait while we look for your partners...';
 
 var INSTR_BLOCK_2 = [
                     '<p>' + 'You have now completed Block 1!' + '</p>',
-                    '<p>' + 'In Block 2, you’ve been assigned to play the <b>Investment Game</b> with other players.<br/><br/>' + 
+                    '<p>' + 'In Block 2, you are assigned to play the <b>Investment Game</b> with other players.<br/><br/>' + 
                     'In each round of the Investment Game, you’ll be partnered with one person.' + '</p>',
                     [
-                        '<p>' + 'You\'ve been assigned the role of first player.' + '</p>',
+                        '<p>' + 'You’ve been assigned the role of first player.' + '</p>',
                         '<p>' + 'In this block, you’ll be playing with a new set of partners. You might encounter your previous partners ' +
                         'later on today, but in Block 2, you’ll be playing with all new people.' + '</p>',
                         '<p>' + 'Remember, if one of your new partners is a friend of someone who you’ve played with before, you’ll be able to see that ' +
