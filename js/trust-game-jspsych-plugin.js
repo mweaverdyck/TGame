@@ -164,11 +164,13 @@ jsPsych.plugins['trust-game'] = (function() {
             $("#sliderdiv").remove();
 
             // add new elements
-            display_element.append('<p id="result-text" class="fixed-position-mid-below">' +
-                'You gave ' + trial.center_caption + ' <b>$' + response.toFixed(2) + '</b>, which was tripled before ' +
-                'being passed on.<br/>' + trial.center_caption + ' received <b>$' + trial_data.received.toFixed(2) +
-                '</b>.<br/></p>'
-            );
+            var info_text = '<p id="result-text" class="fixed-position-mid-below">You gave ' + trial.center_caption +
+                            ' <b>$' + response.toFixed(2) + '</b>';
+            if (response == 0) {
+                info_text += ', which was tripled before being passed on.';
+            }
+            info_text += '<br/>' + trial.center_caption + ' received <b>$' + trial_data.received.toFixed(2) + '</b>.<br/></p>';
+            display_element.append(info_text);
             display_element.append($('<div>', {
                 id: 'progress-bar',
                 class: "progress-bar progress-bar-info progress-bar-striped active bar-div lower",
