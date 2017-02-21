@@ -1,8 +1,13 @@
 
 function on_ethnicity_change() {
     var selected = $('#ethnicity-select').val();
-    if ((selected == 8 || selected == 9)) {
+    if (selected == 4 || selected == 8 || selected == 9) {
         if ($('#ethnicity-text').length != 0) {
+            if (selected == 4) {
+                $('#ethnicity-text input').attr('placeholder','Please specify country');
+            } else {
+                $('#ethnicity-text input').attr('placeholder','Please specify');
+            }
             return;
         }
         $('#ethnicity-div').append($('<div>', {
@@ -14,6 +19,9 @@ function on_ethnicity_change() {
             placeholder: 'Please specify',
             required: true
         })));
+        if (selected == 4) {
+            $('#ethnicity-text input').attr('placeholder','Please specify country');
+        }
     } else {
         $('#ethnicity-text').remove();
     }
@@ -114,7 +122,7 @@ jsPsych.plugins['demography'] = (function() {
         }))
         .append($('<option>', {
             value: 4,
-            text: 'East or South Asian'
+            text: 'East, South or Central Asian'
         }))
         .append($('<option>', {
             value: 5,
