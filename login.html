@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Game Login</title>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link type="text/css" href="css/trust-game.css" rel="stylesheet"></link>
+    </head>
+    <style type="text/css">
+        #game-icon {
+            position: absolute;
+            width: 16%;
+            height: auto;
+            margin: auto;
+            left: 42%;
+            top: 10%;
+        }
+        #login-form {
+            position: absolute;
+            width: 30%;
+            top: 50%;
+            left: 35%;
+        }
+        #forgot {
+            font-size: 12px;
+            font-weight: 400;
+            float: right;
+            margin-top: 3px;
+        }
+        .login-btn {
+            position: absolute;
+            width: 40%;
+            left: 30%;
+            font-size: 17px;
+        }
+        #reset-info {
+            font-size: 16px;
+            font-weight: 400;
+            color: #4cae4c;
+            margin-top: 60px;
+        }
+        .bold {
+            font-weight: 500;
+        }
+        #selection {
+            position: absolute;
+            width: 30%;
+            left: 35%;
+            height: 20%;
+            top: 40%;
+        }
+    </style>
+    <body>
+        <div id='login'>
+            <img id="game-icon" src="img/gameicon.jpg">
+            <div id="login-form" class="survey" data-toggle="validator" role="form">
+                <form action="javascript:signin();" class="form-horizontal">
+                    <div id="username-group" class="form-group">
+                        <span id="username-text" class=" control-label" for="textinput">Username</span>
+                        <input id="username" type="text" class="form-control input-md" required>
+                        <!-- <div class="help-block">User does not exist</div> -->
+                    </div>
+
+                    <div id="password-group" class="form-group">
+                        <span class="control-label" for="textinput">Password</span>
+                        <input id="password" type="password" class="form-control input-md" required>
+                        <span id="forgot"><a href="#">Forgot password?</a></span>
+                    </div>
+
+                    <button id="submit" type="submit" class="btn btn-primary login-btn">Sign in</button>
+                    <button id="reset" type="submit" class="btn btn-primary login-btn">Reset password</button>
+                    <div id="reset-info">Check your email for a link to reset your password.</div>
+                </form>
+            </div>
+        </div>
+        <div id="selection">
+            <select class="form-control" style="font-size: 14px; line-height: 1.5">
+                <option>Online games</option>
+            </select>
+            <button id="start" class="btn btn-primary login-btn margin-top">Start</button>
+        </div>
+
+        <script type="text/javascript">
+            var userId = '';
+            $('#reset').hide();
+            $('#reset-info').hide();
+            $('#selection').hide();
+
+            function signin() {
+                $('#username-group').removeClass('bold has-error has-danger');
+                $('#password-group').removeClass('bold has-error has-danger');
+                setTimeout(function() {
+                    // error checking
+                    var username = $('#username').val();
+                    if (username != 'shortversion' && username != 'test' && username.substring(0, 4) != 'ucla') {
+                        $('#username-group').addClass('bold has-error has-danger');
+                        return;
+                    }
+                    if ($('#password').val() != 'password') {
+                        $('#username-group').addClass('bold has-error has-danger');
+                        $('#password-group').addClass('bold has-error has-danger');
+                        return;
+                    }
+                    userId = $('#username').val();
+                    $('#login').hide();
+                    $('#selection').show();
+                }, 200);
+            }
+            $('#forgot').click(function() {
+                $('#username-text').text('Email');
+                $('#password-group').hide();
+                $('#submit').hide();
+                $('#reset').show();
+            });
+            $('#reset').click(function() {
+                if ($('#username').val().length != 0) {
+                    $('#reset-info').show();
+                }
+            });
+            $('#start').click(function() {
+                window.location.href = 'index.html?id=' + userId;
+            });
+        </script>
+    </body>
+</html>
