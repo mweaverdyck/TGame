@@ -1,7 +1,6 @@
 # Investment Game
-Full version: https://metad.github.io/TGame/index.html?id=id
-
-Short version: https://metad.github.io/TGame/index.html?id=shortversion
+https://metad.github.io/TGame/login.html
+Use username "shortversion" for a short version, or "test" for a full version.
 
 ### TODO
 - Test in different browsers?
