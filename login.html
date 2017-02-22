@@ -104,9 +104,11 @@
                         $('#password-group').addClass('bold has-error has-danger');
                         return;
                     }
-                    userId = $('#username').val();
-                    $('#login').hide();
-                    $('#selection').show();
+                    setTimeout(function() {
+                        userId = $('#username').val();
+                        $('#login').hide();
+                        $('#selection').show();
+                    }, 300);
                 }, 200);
             }
             $('#forgot').click(function() {
