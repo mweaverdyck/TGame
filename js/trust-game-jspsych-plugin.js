@@ -147,7 +147,7 @@ jsPsych.plugins['trust-game'] = (function() {
                 if (trial.friends_imgs[i] !== 'unknown') {
                     trial_data.friends.push({
                         image: trial.friends_imgs[i],
-                        trustworthy: is_trustworthy(trial.friends_imgs[i])
+                        trustworthy: is_trustworthy(get_player_index(trial.friends_imgs[i]))
                     });
                 }
             }
