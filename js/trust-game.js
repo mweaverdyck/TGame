@@ -1,7 +1,7 @@
 $(function() {
 
     var timeline = [];
-    var userId = 'test';
+    var userId = 'fullversion';
     var experimentId = Date.now();
 
     players = shuffle_array(players);
